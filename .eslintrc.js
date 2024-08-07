@@ -2,21 +2,50 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
     '@react-native-community',
+    'eslint:recommended',
     'airbnb-typescript',
+    'plugin:react/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
     'prettier',
+    'plugin:react-hooks/recommended',
     'plugin:prettier/recommended'
   ],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname
   },
+  ignorePatterns: ['/*.*'],
+  env: {
+    browser: true,
+    jasmine: true,
+    jest: true,
+    node: true,
+    es2021: true
+  },
+  settings: {
+    'import/ignore': ['react-native'],
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/']
+      }
+    },
+    react: {
+      version: '^18.2.0'
+    }
+  },
+  globals: {
+    moment: true,
+    Audio: true,
+    Event: true,
+    Blob: true
+  },
   rules: {
-    semi: ['error', 'never'],
+    semi: ['error', 'off'],
     'no-unused-vars': 'off',
     'func-names': 'off',
     'prettier/prettier': [
