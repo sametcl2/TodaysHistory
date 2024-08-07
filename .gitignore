@@ -33,3 +33,9 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Environment
+.env*
+
+# Optional eslint cache
+.eslintcache
