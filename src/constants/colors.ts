@@ -1,24 +1,16 @@
 export const colors = {
   //Primary
 
-  primary: '#298321',
-  primaryDarkest: '#0c270a',
-  primaryDarker: '#144110',
-  primaryDark: '#21691a',
-  primaryLight: '#549c4d',
-  primaryLighter: '#94c190',
-  primaryLightest: '#eaf3e9',
-
-  blue: '#0000fc',
-  orange: '#f48136',
+  primary: '#eb4c2f',
+  secondary: '#212032',
 
   // Grays
   black: '#000000',
-  gray: '#727272',
+  gray: '#ebebeb',
   grayDarker: '#444444',
   grayDark: '#666666',
-  grayLight: '#888888',
-  grayLighter: '#dddddd',
+  grayLight: '#c4c5c9',
+  grayLighter: '#ffecf0',
   white: '#ffffff',
   lineThrough: '#676666',
 
