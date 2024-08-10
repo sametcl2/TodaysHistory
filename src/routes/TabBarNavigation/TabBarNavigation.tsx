@@ -23,14 +23,15 @@ const CustomTabBarButton = ({ onPress, style, children }: PropsWithChildren<Bott
   </TouchableOpacity>
 );
 
-const TabBarNavigation = () => {
+export const TabBarNavigation = () => {
   const styles = useTabBarNavigationStyles();
 
   return (
     <Tab.Navigator
       initialRouteName={TabBarRoutes.Home}
       screenOptions={{
-        tabBarShowLabel: false
+        tabBarShowLabel: false,
+        headerShown: false
       }}
     >
       <Tab.Screen
@@ -62,5 +63,3 @@ const TabBarNavigation = () => {
     </Tab.Navigator>
   );
 };
-
-export default TabBarNavigation;

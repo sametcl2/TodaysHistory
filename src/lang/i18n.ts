@@ -2,7 +2,7 @@ import { initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import { Platform, NativeModules } from 'react-native';
 import { SupportedLanguages } from 'constants/language';
-import en from './locales/en/translation.json';
+import en from 'assets/locales/en/translation.json';
 
 const getDeviceLang = () => {
   const appLanguage =

@@ -1,5 +1,5 @@
-import { Container } from 'components/Container';
 import { Text } from 'react-native';
+import { Container } from 'components/Container';
 
 const HomeScreen = () => {
   return (

@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import TabBarNavigation from 'routes/TabBarNavigation/TabBarNavigation';
+import { TabBarNavigation } from 'routes/TabBarNavigation';
 import { navigationRef } from 'routes/RootNavigation';
 import { Suspense } from 'react';
 import { Provider } from 'react-redux';
