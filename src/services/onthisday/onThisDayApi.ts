@@ -1,11 +1,11 @@
-import { OnThisDayAllTodayTypes } from 'types/api/onThisDayAllToday';
+import { GetOnThisDayAllTodayTypes } from 'types/api/onThisDayAllToday';
 import { onThisDayApi } from '.';
 
-type OnThisDayAllTodayReturnTypes = { month: string; day: string };
+type GetOnThisDayAllTodayReturnTypes = { month: string; day: string };
 
 const extendedApi = onThisDayApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllTypesToday: builder.query<OnThisDayAllTodayTypes, OnThisDayAllTodayReturnTypes>({
+    getAllTypesToday: builder.query<GetOnThisDayAllTodayTypes, GetOnThisDayAllTodayReturnTypes>({
       query: ({ month, day }) => `onthisday/all/${month}/${day}`
     })
   })

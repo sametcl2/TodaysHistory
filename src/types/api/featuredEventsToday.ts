@@ -1,4 +1,4 @@
-export interface FeaturedEventsTodayType {
+export interface GetFeaturedEventsTodayType {
   news: News[];
   onthisday: Onthisday[];
 }

@@ -1,4 +1,4 @@
-export interface OnThisDayAllTodayTypes {
+export interface GetOnThisDayAllTodayTypes {
   selected: Selected[];
   births: Birth[];
   deaths: Death[];
