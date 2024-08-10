@@ -1,5 +1,6 @@
 import { Text } from 'react-native';
 import { Container } from 'components/Container';
+import { useGetAllTypesTodayQuery } from 'services/onthisday/onThisDayApi';
 
 const HomeScreen = () => {
   return (

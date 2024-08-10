@@ -2,23 +2,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import i18next from 'i18next';
 import moment from 'moment';
 import { FeaturedEventsTodayType } from 'types/api/featuredEventsToday';
+import { featuredApi } from '.';
 
-const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
+type FeaturedEventsTodayReturnType = { year: string; month: string; day: string };
 
-export const featuredApi = createApi({
-  reducerPath: 'featuredApi',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+const extendedApi = featuredApi.injectEndpoints({
   endpoints: (builder) => ({
-    getFeaturedEventsToday: builder.query<FeaturedEventsTodayType, void>({
-      query: () => {
-        const language = i18next.language;
-        const year = moment().format('YYYY');
-        const month = moment().format('MM');
-        const day = moment().format('DD');
-        return `${language}/featured/${year}/${month}/${day}`;
-      }
+    getFeaturedEventsToday: builder.query<FeaturedEventsTodayType, FeaturedEventsTodayReturnType>({
+      query: ({ year, month, day }) => `featured/${year}/${month}/${day}`
     })
   })
 });
 
-export const { useGetFeaturedEventsTodayQuery } = featuredApi;
+export const { useGetFeaturedEventsTodayQuery } = extendedApi;

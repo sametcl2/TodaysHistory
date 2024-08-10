@@ -1,23 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import i18next from 'i18next';
-import moment from 'moment';
 import { OnThisDayAllTodayTypes } from 'types/api/onThisDayAllToday';
+import { onThisDayApi } from '.';
 
-const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
+type OnThisDayAllTodayReturnTypes = { month: string; day: string };
 
-export const onThisDayApi = createApi({
-  reducerPath: 'onThisDayApi',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+const extendedApi = onThisDayApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllTypesToday: builder.query<OnThisDayAllTodayTypes, void>({
-      query: () => {
-        const language = i18next.language;
-        const month = moment().format('MM');
-        const day = moment().format('DD');
-        return `${language}/onthisday/all/${month}/${day}`;
-      }
+    getAllTypesToday: builder.query<OnThisDayAllTodayTypes, OnThisDayAllTodayReturnTypes>({
+      query: ({ month, day }) => `onthisday/all/${month}/${day}`
     })
   })
 });
 
-export const { useGetAllTypesTodayQuery } = onThisDayApi;
+export const { useGetAllTypesTodayQuery } = extendedApi;

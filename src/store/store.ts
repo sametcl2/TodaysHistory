@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { featuredApi } from 'services/featured/featuredApi';
-import { onThisDayApi } from 'services/onthisday/onThisDayApi';
+import { featuredApi } from 'services/featured';
+import { onThisDayApi } from 'services/onthisday';
 
 export const store = configureStore({
   reducer: {
