@@ -20,6 +20,8 @@ export default function App() {
           <Provider store={store}>
             <NavigationContainer ref={navigationRef}>
               <AppInitializer />
+              {/* Place toast here: */}
+              {/* <Toast /> */}
             </NavigationContainer>
           </Provider>
         </ThemeProvider>
