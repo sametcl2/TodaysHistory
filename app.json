@@ -4,26 +4,39 @@
     "slug": "TodaysHistory",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./src/assets/icons/icon.png",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "platforms": ["android", "ios"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.TodaysHistory"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/icons/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.TodaysHistory"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/Poppins-Regular.ttf",
+            "./src/assets/fonts/Poppins-Medium.ttf",
+            "./src/assets/fonts/Poppins-SemiBold.ttf",
+            "./src/assets/fonts/Poppins-Bold.ttf"
+          ]
+        }
+      ],
+      ["expo-build-properties"],
+      "expo-localization"
+    ]
   }
 }
