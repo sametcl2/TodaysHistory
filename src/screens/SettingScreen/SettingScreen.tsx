@@ -1,12 +1,8 @@
-import { Container } from 'components/Container';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native'
+import { Container } from 'components/Container'
 
-const SettingScreen = () => {
-  return (
-    <Container>
-      <Text>Settings!</Text>
-    </Container>
-  );
-};
-
-export default SettingScreen;
+export const SettingScreen = () => (
+  <Container>
+    <Text>Settings!</Text>
+  </Container>
+)

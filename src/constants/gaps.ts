@@ -10,4 +10,4 @@ export const gaps = {
   xxlg: 36,
   xxxlg: 40,
   customGap: (index: number) => index * 4
-};
+}

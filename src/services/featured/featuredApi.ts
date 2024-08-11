@@ -1,7 +1,7 @@
-import { GetFeaturedEventsTodayType } from 'types/api/featuredEventsToday';
-import { featuredApi } from '.';
+import { GetFeaturedEventsTodayType } from 'types/featuredEventsToday'
+import { featuredApi } from '.'
 
-type GetFeaturedEventsTodayReturnType = { year: string; month: string; day: string };
+type GetFeaturedEventsTodayReturnType = { year: string; month: string; day: string }
 
 const extendedApi = featuredApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,6 +9,6 @@ const extendedApi = featuredApi.injectEndpoints({
       query: ({ year, month, day }) => `featured/${year}/${month}/${day}`
     })
   })
-});
+})
 
-export const { useGetFeaturedEventsTodayQuery } = extendedApi;
+export const { useGetFeaturedEventsTodayQuery } = extendedApi

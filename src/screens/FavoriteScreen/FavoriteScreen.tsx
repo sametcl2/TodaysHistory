@@ -1,12 +1,8 @@
-import { Container } from 'components/Container';
-import { Text } from 'react-native';
+import { Text } from 'react-native'
+import { Container } from 'components/Container'
 
-const FavoriteScreen = () => {
-  return (
-    <Container>
-      <Text>FavoriteScreen</Text>
-    </Container>
-  );
-};
-
-export default FavoriteScreen;
+export const FavoriteScreen = () => (
+  <Container>
+    <Text>FavoriteScreen</Text>
+  </Container>
+)

@@ -1,4 +1,4 @@
-import { createStyles } from 'theme';
+import { createStyles } from 'theme'
 
 export const useLoadingStyles = createStyles(({ gaps }) => ({
   loadingContainer: {
@@ -7,4 +7,4 @@ export const useLoadingStyles = createStyles(({ gaps }) => ({
     justifyContent: 'center',
     marginBottom: gaps.xxlg
   }
-}));
+}))

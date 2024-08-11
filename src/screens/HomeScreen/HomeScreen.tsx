@@ -1,13 +1,8 @@
-import { Text } from 'react-native';
-import { Container } from 'components/Container';
-import { useGetAllTypesTodayQuery } from 'services/onthisday/onThisDayApi';
+import { Text } from 'react-native'
+import { Container } from 'components/Container'
 
-const HomeScreen = () => {
-  return (
-    <Container>
-      <Text>Home!</Text>
-    </Container>
-  );
-};
-
-export default HomeScreen;
+export const HomeScreen = () => (
+  <Container>
+    <Text>Home!</Text>
+  </Container>
+)

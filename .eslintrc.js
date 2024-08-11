@@ -1,4 +1,3 @@
-/* eslint-env node */
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -14,10 +13,6 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended'
   ],
-  parserOptions: {
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname
-  },
   ignorePatterns: ['/*.*'],
   env: {
     browser: true,
@@ -25,6 +20,9 @@ module.exports = {
     jest: true,
     node: true,
     es2021: true
+  },
+  parserOptions: {
+    project: './tsconfig.json',
   },
   settings: {
     'import/ignore': ['react-native'],
@@ -45,7 +43,7 @@ module.exports = {
     Blob: true
   },
   rules: {
-    semi: ['error', 'off'],
+    semi: ['error', 'never'],
     'no-unused-vars': 'off',
     'func-names': 'off',
     'prettier/prettier': [
@@ -90,11 +88,17 @@ module.exports = {
     'no-shadow': 'off',
     'arrow-body-style': ['error', 'as-needed'],
     'consistent-return': 'off',
-    'react/no-unstable-nested-components': ['off', { allowAsProps: true }],
+    "react/no-unstable-nested-components": [
+      "off",
+      { "allowAsProps": true }
+    ],
     '@typescript-eslint/no-shadow': ['off'],
     '@typescript-eslint/semi': 'off',
     '@typescript-eslint/comma-dangle': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { args: 'after-used', argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { args: 'after-used', argsIgnorePattern: '^_' }
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
     '@typescript-eslint/naming-convention': [
@@ -115,4 +119,4 @@ module.exports = {
       }
     ]
   }
-};
+}

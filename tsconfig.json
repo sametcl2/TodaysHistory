@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "baseUrl": "src"
   },
-  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.js"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["ios", "node_modules", "android"]
 }

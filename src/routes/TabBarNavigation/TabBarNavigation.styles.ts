@@ -1,4 +1,4 @@
-import { createStyles } from 'theme';
+import { createStyles } from 'theme'
 
 export const useTabBarNavigationStyles = createStyles(({ colors }) => ({
   customButton: {
@@ -16,4 +16,4 @@ export const useTabBarNavigationStyles = createStyles(({ colors }) => ({
     shadowRadius: 5,
     elevation: 5
   }
-}));
+}))
