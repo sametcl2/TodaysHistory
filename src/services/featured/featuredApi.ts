@@ -1,4 +1,7 @@
 import { GetFeaturedEventsTodayType } from 'types/featuredEventsToday'
+import { showToast } from 'store/toast'
+import i18n from 'lang/i18n'
+import { ToastType } from 'constants/toast'
 import { featuredApi } from '.'
 
 type GetFeaturedEventsTodayReturnType = { year: string; month: string; day: string }
@@ -7,23 +10,27 @@ const extendedApi = featuredApi.injectEndpoints({
   endpoints: (builder) => ({
     getFeaturedEventsToday: builder.query<GetFeaturedEventsTodayType, GetFeaturedEventsTodayReturnType>({
       query: ({ year, month, day }) => `featured/${year}/${month}/${day}`,
-      async onQueryStarted(_, { queryFulfilled, dispatch: _dispatch }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         queryFulfilled
           .then(() => {
-            // Dispatch to toast slice inside handleCreateToast (store.dispatch)
-            // handleCreateToast({
-            //   type: 'success',
-            //   title: i18n.t('success'),
-            //   subtitle: i18n.t('messages.getFeaturedEventsToday.success')
-            // })
+            dispatch(
+              showToast({
+                title: i18n.t('http.success'),
+                subTitle: i18n.t('messages.getFeatured.success'),
+                showToast: true,
+                type: ToastType.SUCCESS
+              })
+            )
           })
           .catch((_error) => {
-            // Dispatch to toast slice
-            // handleCreateToast({
-            //   type: 'error',
-            //   title: error,
-            //   subtitle: i18n.t('messages.getFeaturedEventsToday.error')
-            // })
+            dispatch(
+              showToast({
+                title: i18n.t('http.success'),
+                subTitle: i18n.t('messages.getFeatured.fail'),
+                showToast: true,
+                type: ToastType.ERROR
+              })
+            )
           })
       }
     })

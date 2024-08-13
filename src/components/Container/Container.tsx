@@ -35,7 +35,7 @@ export const Container: React.FC<PropsWithChildren<AppScreenContainerProps>> = (
       )
 
     return containerElement
-  }, [])
+  }, [contentContainerStyles, scrollViewProps, scrollable, styles.container, styles.scrollContent])
 
   return (
     <SafeAreaView style={[styles.container, containerStyles]} {...safeAreaProps}>

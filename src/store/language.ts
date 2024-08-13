@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'store'
 import { SupportedLanguages } from 'constants/language'

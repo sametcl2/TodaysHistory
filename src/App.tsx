@@ -9,6 +9,7 @@ import { Loading } from 'components/elements/Loading/Loading'
 import { theme } from 'theme'
 import { initI18N } from 'lang/i18n'
 import { AppInitializer } from 'components/AppInitiliazer'
+import { Toast } from 'components/elements/Toast'
 
 initI18N()
 
@@ -20,8 +21,7 @@ export default function App() {
           <Provider store={store}>
             <NavigationContainer ref={navigationRef}>
               <AppInitializer />
-              {/* Place toast here: */}
-              {/* <Toast /> */}
+              <Toast />
             </NavigationContainer>
           </Provider>
         </ThemeProvider>

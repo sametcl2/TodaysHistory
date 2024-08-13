@@ -1,11 +1,14 @@
+/* eslint-disable import/no-cycle */
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { featuredApi } from 'services/featured'
 import { onThisDayApi } from 'services/onthisday'
+import toast from './toast'
 import language from './language'
 
 const combinedReducer = combineReducers({
   language,
+  toast,
   [featuredApi.reducerPath]: featuredApi.reducer,
   [onThisDayApi.reducerPath]: onThisDayApi.reducer
 })

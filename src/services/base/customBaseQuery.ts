@@ -16,7 +16,7 @@ export const customBaseQuery = (customBaseUrl?: string) => {
     }
 
     const result = await fetchBaseQuery({
-      baseUrl: customBaseUrl ?? `${baseUrl}${language}/`
+      baseUrl: customBaseUrl ?? `${baseUrl}/${language}/`
     })(args, api, extraOptions)
 
     return result
