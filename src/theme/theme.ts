@@ -1,8 +1,8 @@
-import { createTheme } from '@rneui/themed';
-import { colors } from 'constants/colors';
-import { gaps } from 'constants/gaps';
-import { typography } from './typography';
-import { Dimensions, PixelRatio } from 'react-native';
+import { createTheme } from '@rneui/themed'
+import { Dimensions, PixelRatio } from 'react-native'
+import { colors } from 'constants/colors'
+import { gaps } from 'constants/gaps'
+import { typography } from './typography'
 
 export const theme = createTheme({
   colors,
@@ -14,4 +14,4 @@ export const theme = createTheme({
     screen: Dimensions.get('screen')
   },
   fontScale: Math.min(PixelRatio.getFontScale(), 2)
-});
+})

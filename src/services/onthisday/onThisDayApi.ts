@@ -1,23 +1,36 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import i18next from 'i18next';
-import moment from 'moment';
-import { OnThisDayAllTodayTypes } from 'types/api/onThisDayAllToday';
+import { GetOnThisDayAllTodayTypes } from 'types/onThisDayAllToday'
+import { ToastType } from 'constants/toast'
+import i18n from 'lang/i18n'
+import { handleCreateToast } from 'utils/toast'
+import { onThisDayApi } from '.'
 
-const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
+type GetOnThisDayAllTodayReturnTypes = { month: string; day: string }
 
-export const onThisDayApi = createApi({
-  reducerPath: 'onThisDayApi',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+const extendedApi = onThisDayApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllTypesToday: builder.query<OnThisDayAllTodayTypes, void>({
-      query: () => {
-        const language = i18next.language;
-        const month = moment().format('MM');
-        const day = moment().format('DD');
-        return `${language}/onthisday/all/${month}/${day}`;
+    getAllTypesToday: builder.query<GetOnThisDayAllTodayTypes, GetOnThisDayAllTodayReturnTypes>({
+      query: ({ month, day }) => `onthisday/all/${month}/${day}`,
+      async onQueryStarted(_, { queryFulfilled }) {
+        queryFulfilled
+          .then(() => {
+            handleCreateToast({
+              title: i18n.t('http.success'),
+              subTitle: i18n.t('messages.getOnThisDayAll.success'),
+              show: true,
+              type: ToastType.Success
+            })
+          })
+          .catch((_error) => {
+            handleCreateToast({
+              title: i18n.t('http.error'),
+              subTitle: i18n.t('messages.getOnThisDayAll.fail'),
+              show: true,
+              type: ToastType.Error
+            })
+          })
       }
     })
   })
-});
+})
 
-export const { useGetAllTypesTodayQuery } = onThisDayApi;
+export const { useGetAllTypesTodayQuery } = extendedApi

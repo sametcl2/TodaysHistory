@@ -1,4 +1,4 @@
-import { isAndroid } from 'utils/platform';
+import { isAndroid } from 'utils/platform'
 
 export const typography = {
   font: {
@@ -44,4 +44,4 @@ export const typography = {
       sm: 13
     }
   }
-};
+}

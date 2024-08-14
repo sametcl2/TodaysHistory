@@ -1,12 +1,16 @@
-import { Text } from 'react-native';
-import { Container } from 'components/Container';
+import { Text } from 'react-native'
+import { Container } from 'components/Container'
+import { useGetAllTypesTodayQuery } from 'services/onthisday/onThisDayApi'
+import { Loader } from 'components/Loader/Loader'
 
-const HomeScreen = () => {
+export const HomeScreen = () => {
+  const { isError, error, isFetching, refetch } = useGetAllTypesTodayQuery({ day: '02', month: '04' })
+
   return (
     <Container>
-      <Text>Home!</Text>
+      <Loader isError={isError} error={error} isFetching={isFetching} refetch={refetch}>
+        <Text>Home!</Text>
+      </Loader>
     </Container>
-  );
-};
-
-export default HomeScreen;
+  )
+}

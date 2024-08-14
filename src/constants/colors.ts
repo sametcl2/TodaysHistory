@@ -40,4 +40,4 @@ export const colors = {
 
   // Typogrphy
   textSecondary: '#697488'
-};
+}

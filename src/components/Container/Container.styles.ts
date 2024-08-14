@@ -1,4 +1,4 @@
-import { createStyles } from 'theme';
+import { createStyles } from 'theme'
 
 export const useContainerStyles = createStyles(({ gaps }) => ({
   container: {
@@ -8,4 +8,4 @@ export const useContainerStyles = createStyles(({ gaps }) => ({
   scrollContent: {
     flex: 1
   }
-}));
+}))

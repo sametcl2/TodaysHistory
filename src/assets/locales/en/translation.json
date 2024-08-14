@@ -1,3 +1,17 @@
 {
-  "hello": "hello"
+  "http": {
+    "error": "Error",
+    "success": "Success"
+  },
+  "messages": {
+    "getFeatured": {
+      "fail": "Error occured while fetching featured data",
+      "success": "Featured data fetched succesfully"
+    },
+    "getOnThisDayAll": {
+      "fail": "Error occured while fething all on this day",
+      "success": "All on this day datas fetched succesfully"
+    }
+  },
+  "refetch": ""
 }
