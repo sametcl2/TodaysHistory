@@ -1,14 +1,14 @@
-export interface GetFeaturedEventsTodayType {
+export type GetFeaturedEventsTodayType = {
   news: News[]
   onthisday: Onthisday[]
 }
 
-export interface News {
+type News = {
   links: Link[]
   story: string
 }
 
-export interface Link {
+type Link = {
   type: string
   title: string
   displaytitle: string
@@ -32,69 +32,62 @@ export interface Link {
   normalizedtitle: string
 }
 
-export interface Namespace {
+type Namespace = {
   id: number
   text: string
 }
 
-export interface Titles {
+type Titles = {
   canonical: string
   normalized: string
   display: string
 }
 
-export interface Thumbnail {
+type Thumbnail = {
   source: string
   width: number
   height: number
 }
 
-export interface Originalimage {
+type Originalimage = {
   source: string
   width: number
   height: number
 }
 
-export interface Coordinates {
+type Coordinates = {
   lat: number
   lon: number
 }
 
-export interface ContentUrls {
-  desktop: Desktop
-  mobile: Mobile
+type ContentUrls = {
+  desktop: UrlType
+  mobile: UrlType
 }
 
-export interface Desktop {
+type UrlType = {
   page: string
   revisions: string
   edit: string
   talk: string
 }
 
-export interface Mobile {
-  page: string
-  revisions: string
-  edit: string
-  talk: string
-}
-
-export interface Onthisday {
+type Onthisday = {
   text: string
   pages: Page[]
   year: number
 }
 
-export interface Page {
+type Page = {
   type: string
   title: string
   displaytitle: string
-  namespace: Namespace2
+  namespace: Namespace
   wikibase_item: string
-  titles: Titles2
+  titles: Titles
   pageid: number
-  thumbnail?: Thumbnail2
-  originalimage?: Originalimage2
+  thumbnail?: Thumbnail
+  originalimage?: Originalimage
   lang: string
   dir: string
   revision: string
@@ -102,56 +95,9 @@ export interface Page {
   timestamp: string
   description?: string
   description_source?: string
-  content_urls: ContentUrls2
+  content_urls: ContentUrls
   extract: string
   extract_html: string
   normalizedtitle: string
-  coordinates?: Coordinates2
-}
-
-export interface Namespace2 {
-  id: number
-  text: string
-}
-
-export interface Titles2 {
-  canonical: string
-  normalized: string
-  display: string
-}
-
-export interface Thumbnail2 {
-  source: string
-  width: number
-  height: number
-}
-
-export interface Originalimage2 {
-  source: string
-  width: number
-  height: number
-}
-
-export interface ContentUrls2 {
-  desktop: Desktop2
-  mobile: Mobile2
-}
-
-export interface Desktop2 {
-  page: string
-  revisions: string
-  edit: string
-  talk: string
-}
-
-export interface Mobile2 {
-  page: string
-  revisions: string
-  edit: string
-  talk: string
-}
-
-export interface Coordinates2 {
-  lat: number
-  lon: number
+  coordinates?: Coordinates
 }

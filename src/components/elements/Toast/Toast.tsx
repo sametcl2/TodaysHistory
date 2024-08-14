@@ -1,5 +1,5 @@
 import { Text } from 'react-native'
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
+import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated'
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'store'
@@ -10,26 +10,28 @@ export const Toast = () => {
   const toast = useSelector(selectToast)
   const dispatch = useDispatch()
 
-  const { title, subTitle, showToast, type } = toast
+  const { title, subTitle, show, type } = toast
 
   const styles = useToastStyles({ type })
-  const positionY = useSharedValue(-100)
 
   useEffect(() => {
-    if (showToast) {
-      positionY.value = withSpring(positionY.value + 150)
-      setTimeout(() => {
+    if (show) {
+      const timeout = setTimeout(() => {
         dispatch(hideToast())
       }, 2000)
-    }
-  }, [dispatch, positionY, showToast])
 
-  if (!showToast) {
-    positionY.value = withSpring(-100)
+      return () => {
+        clearTimeout(timeout)
+      }
+    }
+  }, [dispatch, show])
+
+  if (!show) {
+    return null
   }
 
   return (
-    <Animated.View style={[styles.commonToastStyle, { top: positionY }]}>
+    <Animated.View entering={FadeInDown} exiting={FadeOutUp} style={styles.commonToastStyle}>
       <Text>{title}</Text>
       <Text>{subTitle}</Text>
     </Animated.View>

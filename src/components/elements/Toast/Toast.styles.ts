@@ -15,9 +15,10 @@ export const useToastStyles = createStyles(({ colors, gaps }, { type }) => ({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     position: 'absolute',
+    top: 90,
     right: 0,
     left: 0,
     zIndex: 100,
-    backgroundColor: type === ToastType.SUCCESS ? colors.gray : colors.errorBG
+    backgroundColor: type === ToastType.Success ? colors.gray : colors.errorBG
   }
 }))

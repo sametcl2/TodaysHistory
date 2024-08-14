@@ -6,14 +6,14 @@ import { RootState } from './store'
 type initialStateType = {
   title: string
   subTitle: string
-  showToast: boolean
+  show: boolean
   type: ToastType | null
 }
 
 export const initialState: initialStateType = {
   title: '',
   subTitle: '',
-  showToast: false,
+  show: false,
   type: null
 }
 
@@ -24,13 +24,13 @@ const toast = createSlice({
     showToast: (state, { payload }) => {
       state.title = payload.title
       state.subTitle = payload.subTitle
-      state.showToast = payload.showToast
+      state.show = payload.show
       state.type = payload.type
     },
     hideToast: (state) => {
       state.title = ''
       state.subTitle = ''
-      state.showToast = false
+      state.show = false
       state.type = null
     }
   }
