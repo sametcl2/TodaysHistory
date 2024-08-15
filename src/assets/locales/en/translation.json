@@ -13,5 +13,8 @@
       "success": "All on this day datas fetched succesfully"
     }
   },
+  "general": {
+    "welcome": "Welcome"
+  },
   "refetch": ""
 }

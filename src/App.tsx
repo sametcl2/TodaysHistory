@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from '@rneui/themed'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { navigationRef } from 'routes/RootNavigation'
 import { store } from 'store/store'
 import { theme } from 'theme'
@@ -14,14 +15,16 @@ initI18N()
 export default function App() {
   return (
     <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <NavigationContainer ref={navigationRef}>
-            <AppInitializer />
-            <Toast />
-          </NavigationContainer>
-        </Provider>
-      </ThemeProvider>
+      <GestureHandlerRootView>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <NavigationContainer ref={navigationRef}>
+              <AppInitializer />
+              <Toast />
+            </NavigationContainer>
+          </Provider>
+        </ThemeProvider>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   )
 }
