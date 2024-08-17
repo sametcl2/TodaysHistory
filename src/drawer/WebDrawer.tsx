@@ -1,6 +1,7 @@
 import { forwardRef, PropsWithChildren } from 'react'
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import { useTheme } from '@rneui/themed'
+import { Container } from 'components/Container'
 
 type HomeDrawerTypes = {
   snapPoints: string[]
@@ -23,7 +24,9 @@ export const HomeDrawer = forwardRef(({ children, snapPoints }: PropsWithChildre
       handleIndicatorStyle={{ display: 'none' }}
       backgroundStyle={{ backgroundColor: colors.drawer }}
     >
-      <BottomSheetView>{children}</BottomSheetView>
+      <Container scrollable>
+        <BottomSheetView>{children}</BottomSheetView>
+      </Container>
     </BottomSheet>
   )
 })

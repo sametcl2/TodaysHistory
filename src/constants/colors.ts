@@ -7,8 +7,8 @@ export const colors = {
   // Grays
   black: '#000000',
   gray: '#ebebeb',
+  grayDark: '#414b56',
   grayDarker: '#444444',
-  grayDark: '#666666',
   grayLight: '#c4c5c9',
   grayLighter: '#ffecf0',
   white: '#ffffff',
@@ -29,6 +29,7 @@ export const colors = {
 
   //Backgrounds
   background: '#1e1d2f',
+  backgroundLight: '#24233c',
 
   // Typogrphy
   textWhite: '#fdfdfd',

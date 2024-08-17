@@ -1,11 +1,15 @@
 import { createStyles } from 'theme'
 import { HEIGHT } from 'utils/scale'
 
-export const useHomeScreenStyle = createStyles(() => ({
+export const useHomeScreenStyle = createStyles(({ colors }) => ({
   header: {
-    height: HEIGHT / 3,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-evenly',
+    backgroundColor: colors.background,
+    height: 300
+  },
+  content: {
+    backgroundColor: 'red'
   }
 }))
