@@ -14,16 +14,12 @@ import { HEIGHT } from 'utils/scale'
 import { Typography } from 'components/elements/Typography'
 import { DatePicker } from 'components/DatePicker'
 import { Loader } from 'components/Loader'
+import { getDate } from 'utils/date'
 import { useHomeScreenStyle } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
-  const {
-    data: allTypesData,
-    isError,
-    error,
-    isFetching,
-    refetch
-  } = useGetAllTypesTodayQuery({ day: '02', month: '04' })
+  const { day, month, formatted } = getDate()
+  const { data: allTypesData, isError, error, isFetching, refetch } = useGetAllTypesTodayQuery({ day, month })
 
   const styles = useHomeScreenStyle()
 
@@ -56,7 +52,7 @@ export const HomeScreen = () => {
       <Animated.View style={[styles.header, headerStyle]}>
         <View style={{ alignItems: 'center' }}>
           <Header textStyle={fadeOutStyle} />
-          <Date staticTextStyle={fadeOutStyle} dateTextStyle={dateTextStyle} />
+          <Date date={formatted} staticTextStyle={fadeOutStyle} dateTextStyle={dateTextStyle} />
         </View>
         <DatePicker animatedStyle={fadeOutStyle} />
       </Animated.View>

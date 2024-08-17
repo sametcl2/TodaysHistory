@@ -39,7 +39,7 @@ export const Container: React.FC<PropsWithChildren<AppScreenContainerProps>> = (
 
   return (
     <SafeAreaView style={[styles.container, containerStyles]} {...safeAreaProps}>
-      <StatusBar style='light' {...statusBarProps} />
+      <StatusBar style='auto' {...statusBarProps} />
       <ContainerComponent>{children}</ContainerComponent>
     </SafeAreaView>
   )

@@ -1,5 +1,4 @@
 import { createStyles } from 'theme'
-import { HEIGHT } from 'utils/scale'
 
 export const useHomeScreenStyle = createStyles(({ colors }) => ({
   header: {
