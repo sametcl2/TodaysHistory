@@ -7,5 +7,6 @@ export const useWebDrawerStyles = createStyles(() => ({
   header: {
     justifyContent: 'space-between',
     alignItems: 'center'
-  }
+  },
+  webView: { marginTop: -55 }
 }))

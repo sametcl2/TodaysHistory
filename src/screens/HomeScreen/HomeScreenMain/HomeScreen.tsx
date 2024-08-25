@@ -79,7 +79,8 @@ export const HomeScreen = () => {
           <Header textStyle={fadeOutStyle} />
           <Date date={formatted} staticTextStyle={fadeOutStyle} dateTextStyle={dateTextStyle} />
         </View>
-        <DatePicker animatedStyle={fadeOutStyle} setDate={() => setDate('')} /> {/* SET CUSTOM DATE, WIP */}
+        {/* SET CUSTOM DATE, WIP */}
+        <DatePicker animatedStyle={fadeOutStyle} setDate={() => setDate()} />
       </Animated.View>
       <Animated.ScrollView
         scrollEventThrottle={16}

@@ -1,5 +1,5 @@
-import { forwardRef, useState } from 'react'
-import BottomSheet from '@gorhom/bottom-sheet'
+import { forwardRef, useCallback, useState } from 'react'
+import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet'
 import { WebView } from 'react-native-webview'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -13,6 +13,13 @@ export const WebDrawer = forwardRef<BottomSheet>((_, ref) => {
   const pages = useSelector(currentPages)
   const styles = useWebDrawerStyles()
 
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop {...props} opacity={1} pressBehavior='close' appearsOnIndex={0} disappearsOnIndex={-1} />
+    ),
+    []
+  )
+
   const handlePrevPage = () => {
     setPageIndex(pageIndex !== 0 ? pageIndex - 1 : pageIndex)
   }
@@ -22,7 +29,7 @@ export const WebDrawer = forwardRef<BottomSheet>((_, ref) => {
   }
 
   return (
-    <BottomSheet ref={ref} index={0} snapPoints={['90%']} enablePanDownToClose>
+    <BottomSheet ref={ref} index={-1} snapPoints={['80%']} backdropComponent={renderBackdrop} enablePanDownToClose>
       {pages.length > 0 && (
         <View style={styles.container}>
           <View style={styles.header}>
@@ -38,7 +45,7 @@ export const WebDrawer = forwardRef<BottomSheet>((_, ref) => {
               </TouchableOpacity>
             )}
           </View>
-          <WebView source={{ uri: pages[pageIndex].url }} />
+          <WebView source={{ uri: pages[pageIndex].url }} style={styles.webView} />
         </View>
       )}
     </BottomSheet>
