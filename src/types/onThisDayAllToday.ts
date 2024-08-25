@@ -6,13 +6,13 @@ export type GetOnThisDayAllTodayTypes = {
   holidays: Holiday[]
 }
 
-type Selected = {
+export type Selected = {
   text: string
   pages: Page[]
   year: number
 }
 
-type Page = {
+export type Page = {
   type: string
   title: string
   displaytitle: string

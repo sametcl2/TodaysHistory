@@ -2,6 +2,7 @@ import { StatusBar, StatusBarProps } from 'expo-status-bar'
 import { PropsWithChildren, useMemo } from 'react'
 import { ScrollView, ScrollViewProps, StyleProp, View, ViewStyle } from 'react-native'
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context'
+import { useTheme } from '@rneui/themed'
 import { useContainerStyles } from './Container.styles'
 
 type AppScreenContainerProps = {
@@ -24,6 +25,10 @@ export const Container: React.FC<PropsWithChildren<AppScreenContainerProps>> = (
 }) => {
   const styles = useContainerStyles()
 
+  const {
+    theme: { colors }
+  } = useTheme()
+
   const ContainerComponent = useMemo(() => {
     const containerElement: React.FC<PropsWithChildren> = ({ children }) =>
       scrollable ? (
@@ -39,7 +44,7 @@ export const Container: React.FC<PropsWithChildren<AppScreenContainerProps>> = (
 
   return (
     <SafeAreaView style={[styles.container, containerStyles]} {...safeAreaProps}>
-      <StatusBar style='auto' {...statusBarProps} />
+      <StatusBar translucent style='auto' {...statusBarProps} backgroundColor={colors.primary} />
       <ContainerComponent>{children}</ContainerComponent>
     </SafeAreaView>
   )

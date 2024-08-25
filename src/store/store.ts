@@ -5,10 +5,12 @@ import { featuredApi } from 'services/featured'
 import { onThisDayApi } from 'services/onthisday'
 import toast from './toast'
 import language from './language'
+import data from './data'
 
 const combinedReducer = combineReducers({
   language,
   toast,
+  data,
   [featuredApi.reducerPath]: featuredApi.reducer,
   [onThisDayApi.reducerPath]: onThisDayApi.reducer
 })

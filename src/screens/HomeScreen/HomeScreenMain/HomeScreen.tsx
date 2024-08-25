@@ -6,6 +6,8 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue
 } from 'react-native-reanimated'
+import { useRef, useState } from 'react'
+import BottomSheet from '@gorhom/bottom-sheet'
 import { Container } from 'components/Container'
 import { useGetAllTypesTodayQuery } from 'services/onthisday/onThisDayApi'
 import { Header } from 'components/Header'
@@ -14,14 +16,30 @@ import { HEIGHT } from 'utils/scale'
 import { Typography } from 'components/elements/Typography'
 import { DatePicker } from 'components/DatePicker'
 import { Loader } from 'components/Loader'
-import { getDate } from 'utils/date'
+import { Cart } from 'components/Cart'
+import { WebDrawer } from 'drawer/WebDrawer'
+import { useDispatch } from 'store'
+import { setCurrentPages } from 'store/data'
+import { Page } from 'types/onThisDayAllToday'
 import { useHomeScreenStyle } from './HomeScreen.styles'
+import { useGetTodaysDate } from './HomeScreen.hooks'
 
 export const HomeScreen = () => {
-  const { day, month, formatted } = getDate()
-  const { data: allTypesData, isError, error, isFetching, refetch } = useGetAllTypesTodayQuery({ day, month })
+  const { currentDay, currentMonth, formatted } = useGetTodaysDate()
+  const [date, setDate] = useState({ day: currentDay, month: currentMonth })
 
+  const {
+    data: allTypesData,
+    isError,
+    error,
+    isFetching,
+    refetch
+  } = useGetAllTypesTodayQuery({ day: date.day, month: date.month })
+
+  const bottomSheetRef = useRef<BottomSheet>(null)
   const styles = useHomeScreenStyle()
+
+  const dispatch = useDispatch()
 
   const scrollY = useSharedValue(0)
 
@@ -47,6 +65,13 @@ export const HomeScreen = () => {
     }
   })
 
+  const onPress = (pages: Page[]) => {
+    const urls: { url: string; title: string }[] = []
+    pages.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
+    dispatch(setCurrentPages(urls))
+    bottomSheetRef.current?.expand()
+  }
+
   return (
     <SafeAreaView>
       <Animated.View style={[styles.header, headerStyle]}>
@@ -54,7 +79,7 @@ export const HomeScreen = () => {
           <Header textStyle={fadeOutStyle} />
           <Date date={formatted} staticTextStyle={fadeOutStyle} dateTextStyle={dateTextStyle} />
         </View>
-        <DatePicker animatedStyle={fadeOutStyle} />
+        <DatePicker animatedStyle={fadeOutStyle} setDate={() => setDate('')} /> {/* SET CUSTOM DATE, WIP */}
       </Animated.View>
       <Animated.ScrollView
         scrollEventThrottle={16}
@@ -64,27 +89,14 @@ export const HomeScreen = () => {
       >
         <Loader error={error} isError={isError} isFetching={isFetching} refetch={refetch}>
           <Container>
+            <Typography variant='h4Bold'>Selected Events</Typography>
             {allTypesData?.selected.map((item, index) => (
-              <View key={index} style={{ borderWidth: 1, marginBottom: 10 }}>
-                <Typography variant='body'>{item.text}</Typography>
-                <Typography variant='label'>{item.year}</Typography>
-              </View>
+              <Cart key={index} item={item} onPress={() => onPress(item.pages)} />
             ))}
           </Container>
         </Loader>
       </Animated.ScrollView>
+      <WebDrawer ref={bottomSheetRef} />
     </SafeAreaView>
   )
-}
-
-{
-  /* {viewAll ? (
-  <AllDataView />
-) : (
-  <SelectedListView
-    data={allTypesData?.selected}
-    loaderProps={{ isError, error, isFetching, refetch }}
-    handleViewAll={handleViewAll}
-  />
-)} */
 }

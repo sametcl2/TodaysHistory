@@ -5,7 +5,7 @@ export const useHomeScreenStyle = createStyles(({ colors }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    backgroundColor: colors.background,
+    backgroundColor: colors.primary,
     height: 300
   },
   content: {

@@ -6,7 +6,9 @@ import { Container } from 'components/Container'
 import { Loading } from 'components/elements/Loading'
 import { LoaderPropsTypes } from 'types/loader'
 
-export const Loader = ({ error, isError, isFetching, refetch, children }: PropsWithChildren<LoaderPropsTypes>) => {
+type LoaderProps = PropsWithChildren<LoaderPropsTypes>
+
+export const Loader = ({ error, isError, isFetching, refetch, children }: LoaderProps) => {
   const { t } = useTranslation()
 
   const refetchQuery = () => {
