@@ -28,4 +28,4 @@ const extendedApi = onThisDayApi.injectEndpoints({
   })
 })
 
-export const { useGetAllEventsTodayQuery } = extendedApi
+export const { useGetAllEventsTodayQuery, useLazyGetAllEventsTodayQuery } = extendedApi

@@ -6,7 +6,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue
 } from 'react-native-reanimated'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BottomSheet, { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { Container } from 'components/Container'
 import { Header } from 'components/Header'
@@ -21,20 +21,18 @@ import { useDispatch } from 'store'
 import { setCurrentPages } from 'store/data'
 import { useGetTodaysDate } from 'hooks/useGetTodaysDate'
 import { PageType } from 'types/events'
-import { useGetAllEventsTodayQuery } from 'services/onThisDay/getAllEventsToday'
+import { useGetAllEventsTodayQuery, useLazyGetAllEventsTodayQuery } from 'services/onThisDay/getAllEventsToday'
 import { useHomeScreenStyle } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
   const { currentDay, currentMonth, formatted } = useGetTodaysDate()
   const [date, setDate] = useState({ day: currentDay, month: currentMonth })
 
-  const {
-    data: allTypesData,
-    isError,
-    error,
-    isFetching,
-    refetch
-  } = useGetAllEventsTodayQuery({ day: date.day, month: date.month })
+  const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()
+
+  useEffect(() => {
+    fetchAllEvents({ day: date.day, month: date.month })
+  }, [date])
 
   const bottomSheetRef = useRef<BottomSheetModal>(null)
   const styles = useHomeScreenStyle()
@@ -88,7 +86,12 @@ export const HomeScreen = () => {
         style={{ height: HEIGHT }}
         showsVerticalScrollIndicator={false}
       >
-        <Loader error={error} isError={isError} isFetching={isFetching} refetch={refetch}>
+        <Loader
+          error={error}
+          isError={isError}
+          isFetching={isFetching}
+          refetch={() => fetchAllEvents({ day: date.day, month: date.month })}
+        >
           <Container>
             <Typography variant='h4Bold'>Selected Events</Typography>
             {allTypesData?.selected.map((item, index) => (
