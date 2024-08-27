@@ -1,4 +1,3 @@
-import { ToastType } from 'constants/toast'
 import { createStyles } from 'theme'
 
 export const useToastStyles = createStyles(({ colors, gaps }, { type }) => ({
@@ -19,6 +18,6 @@ export const useToastStyles = createStyles(({ colors, gaps }, { type }) => ({
     right: 0,
     left: 0,
     zIndex: 100,
-    backgroundColor: type === ToastType.Success ? colors.gray : colors.errorBG
+    backgroundColor: type === 'success' ? colors.gray : colors.errorBG
   }
 }))
