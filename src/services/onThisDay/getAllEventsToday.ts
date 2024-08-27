@@ -3,23 +3,23 @@ import i18n from 'lang/i18n'
 import { handleCreateToast } from 'utils/toast'
 import { onThisDayApi } from '.'
 
-type GetOnThisDayAllTodayResponseType = {
+type GetAllEventsTodayResponseType = {
   month: string
   day: string
 }
 
-type GetOnThisDayAllTodayRequestType = OnThisDayAllTodayType
+type GetAllEventsTodayRequestType = OnThisDayAllTodayType
 
 const extendedApi = onThisDayApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllTypesToday: builder.query<GetOnThisDayAllTodayRequestType, GetOnThisDayAllTodayResponseType>({
+    getAllEventsToday: builder.query<GetAllEventsTodayRequestType, GetAllEventsTodayResponseType>({
       query: ({ month, day }) => `onthisday/all/${month}/${day}`,
       async onQueryStarted(_, { queryFulfilled }) {
         queryFulfilled
           .then(() => {
             handleCreateToast({
               title: i18n.t('http.success'),
-              subTitle: i18n.t('messages.getAllTypesToday.success'),
+              subTitle: i18n.t('messages.getAllEventsToday.success'),
               show: true,
               type: 'success'
             })
@@ -27,7 +27,7 @@ const extendedApi = onThisDayApi.injectEndpoints({
           .catch((_error) => {
             handleCreateToast({
               title: i18n.t('http.error'),
-              subTitle: i18n.t('messages.getAllTypesToday.error'),
+              subTitle: i18n.t('messages.getAllEventsToday.error'),
               show: true,
               type: 'error'
             })
@@ -37,4 +37,4 @@ const extendedApi = onThisDayApi.injectEndpoints({
   })
 })
 
-export const { useGetAllTypesTodayQuery } = extendedApi
+export const { useGetAllEventsTodayQuery } = extendedApi

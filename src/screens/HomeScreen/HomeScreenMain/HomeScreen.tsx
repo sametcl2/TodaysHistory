@@ -19,9 +19,9 @@ import { Cart } from 'components/Cart'
 import { WebDrawer } from 'drawer/WebDrawer'
 import { useDispatch } from 'store'
 import { setCurrentPages } from 'store/data'
-import { useGetAllTypesTodayQuery } from 'services/onThisDay/getAllTypesToday'
 import { useGetTodaysDate } from 'hooks/useGetTodaysDate'
 import { PageType } from 'types/events'
+import { useGetAllEventsTodayQuery } from 'services/onThisDay/getAllEventsToday'
 import { useHomeScreenStyle } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
@@ -34,7 +34,7 @@ export const HomeScreen = () => {
     error,
     isFetching,
     refetch
-  } = useGetAllTypesTodayQuery({ day: date.day, month: date.month })
+  } = useGetAllEventsTodayQuery({ day: date.day, month: date.month })
 
   const bottomSheetRef = useRef<BottomSheet>(null)
   const styles = useHomeScreenStyle()

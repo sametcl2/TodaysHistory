@@ -4,14 +4,14 @@ import { ToastTypes } from 'types/toast'
 // eslint-disable-next-line import/no-cycle
 import { RootState } from './store'
 
-type initialStateType = {
+type InitialStateType = {
   title: string
   subTitle: string
   show: boolean
   type?: ToastTypes
 }
 
-export const initialState: initialStateType = {
+export const initialState: InitialStateType = {
   title: '',
   subTitle: '',
   show: false,
