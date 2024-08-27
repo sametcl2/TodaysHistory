@@ -16,7 +16,7 @@ const extendedApi = featuredApi.injectEndpoints({
             dispatch(
               showToast({
                 title: i18n.t('http.success'),
-                subTitle: i18n.t('messages.getFeatured.success'),
+                subTitle: i18n.t('messages.getFeaturedEventsToday.success'),
                 showToast: true,
                 type: ToastType.Success
               })
@@ -26,7 +26,7 @@ const extendedApi = featuredApi.injectEndpoints({
             dispatch(
               showToast({
                 title: i18n.t('http.success'),
-                subTitle: i18n.t('messages.getFeatured.fail'),
+                subTitle: i18n.t('messages.getFeaturedEventsToday.error'),
                 showToast: true,
                 type: ToastType.Error
               })

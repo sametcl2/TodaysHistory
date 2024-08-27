@@ -15,7 +15,7 @@ const extendedApi = onThisDayApi.injectEndpoints({
           .then(() => {
             handleCreateToast({
               title: i18n.t('http.success'),
-              subTitle: i18n.t('messages.getOnThisDayAll.success'),
+              subTitle: i18n.t('messages.getAllTypesToday.success'),
               show: true,
               type: ToastType.Success
             })
@@ -23,7 +23,7 @@ const extendedApi = onThisDayApi.injectEndpoints({
           .catch((_error) => {
             handleCreateToast({
               title: i18n.t('http.error'),
-              subTitle: i18n.t('messages.getOnThisDayAll.fail'),
+              subTitle: i18n.t('messages.getAllTypesToday.error'),
               show: true,
               type: ToastType.Error
             })

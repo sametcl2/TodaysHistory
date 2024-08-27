@@ -2,7 +2,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { featuredApi } from 'services/featured'
-import { onThisDayApi } from 'services/onthisday'
+import { onThisDayApi } from 'services/onThisDay'
 import toast from './toast'
 import language from './language'
 import data from './data'

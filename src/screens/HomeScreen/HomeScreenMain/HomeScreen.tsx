@@ -9,7 +9,6 @@ import Animated, {
 import { useRef, useState } from 'react'
 import BottomSheet from '@gorhom/bottom-sheet'
 import { Container } from 'components/Container'
-import { useGetAllTypesTodayQuery } from 'services/onthisday/onThisDayApi'
 import { Header } from 'components/Header'
 import { Date } from 'components/Date'
 import { HEIGHT } from 'utils/scale'
@@ -21,8 +20,9 @@ import { WebDrawer } from 'drawer/WebDrawer'
 import { useDispatch } from 'store'
 import { setCurrentPages } from 'store/data'
 import { Page } from 'types/onThisDayAllToday'
+import { useGetAllTypesTodayQuery } from 'services/onThisDay/getAllTypesToday'
+import { useGetTodaysDate } from 'hooks/useGetTodaysDate'
 import { useHomeScreenStyle } from './HomeScreen.styles'
-import { useGetTodaysDate } from './HomeScreen.hooks'
 
 export const HomeScreen = () => {
   const { currentDay, currentMonth, formatted } = useGetTodaysDate()

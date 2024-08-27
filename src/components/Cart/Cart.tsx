@@ -2,7 +2,7 @@ import { Image, TouchableOpacity, View } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { Typography } from 'components/elements/Typography'
 import { Selected } from 'types/onThisDayAllToday'
-import { useGetThumbnail } from './Cart.hooks'
+import { useGetThumbnail } from 'hooks/useGetThumbnail'
 import { useCartStyle } from './Cart.styles'
 
 type CartTypes = {
