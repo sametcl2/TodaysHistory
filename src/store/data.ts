@@ -24,4 +24,4 @@ export const { setCurrentPages } = data.actions
 
 export default data.reducer
 
-export const currentPages = (state: RootState) => state.data.currentPages
+export const selectCurrentPages = (state: RootState) => state.data.currentPages

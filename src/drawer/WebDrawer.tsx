@@ -4,18 +4,18 @@ import { WebView } from 'react-native-webview'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useSelector } from 'store'
-import { currentPages } from 'store/data'
+import { selectCurrentPages } from 'store/data'
 import { Typography } from 'components/elements/Typography'
 import { useWebDrawerStyles } from './WebDrawer.styles'
 
 export const WebDrawer = forwardRef<BottomSheetModal>((_, ref) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
-  const pages = useSelector(currentPages)
+  const pages = useSelector(selectCurrentPages)
   const styles = useWebDrawerStyles()
 
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
-      <BottomSheetBackdrop {...props} opacity={1} pressBehavior='close' appearsOnIndex={0} disappearsOnIndex={-1} />
+      <BottomSheetBackdrop {...props} opacity={0.7} pressBehavior='close' appearsOnIndex={0} disappearsOnIndex={-1} />
     ),
     []
   )
