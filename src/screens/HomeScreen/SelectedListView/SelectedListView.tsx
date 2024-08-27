@@ -1,18 +1,16 @@
 import { Button, View } from 'react-native'
-import { useTheme } from '@rneui/themed'
-import { Loader } from 'components/Loader'
-import { Container } from 'components/Container'
-import { GetOnThisDayAllTodayTypes } from 'types/onThisDayAllToday'
-import { LoaderPropsTypes } from 'types/loader'
 import { Typography } from 'components/elements/Typography'
+import { Loader } from 'components/Loader'
+import { LoaderPropsTypes } from 'types/loader'
+import { OnThisDayAllTodayType } from 'types/onThisDayAllToday'
 
-type SelectedViewListTypes = {
-  data: GetOnThisDayAllTodayTypes
+type SelectedListViewProps = {
+  data: OnThisDayAllTodayType
   loaderProps: LoaderPropsTypes
   handleViewAll: () => void
 }
 
-export const SelectedListView = ({ data, loaderProps, handleViewAll }: SelectedViewListTypes) => {
+export const SelectedListView: React.FC<SelectedListViewProps> = ({ data, loaderProps, handleViewAll }) => {
   const { error, isError, isFetching, refetch } = loaderProps
 
   return (

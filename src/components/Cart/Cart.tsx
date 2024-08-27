@@ -1,16 +1,16 @@
 import { Image, TouchableOpacity, View } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { Typography } from 'components/elements/Typography'
-import { Selected } from 'types/onThisDayAllToday'
+import { SelectedType } from 'types/onThisDayAllToday'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
 import { useCartStyle } from './Cart.styles'
 
-type CartTypes = {
-  item: Selected
+type CartTypesProps = {
+  item: SelectedType
   onPress: () => void
 }
 
-export const Cart = ({ item, onPress }: CartTypes) => {
+export const Cart: React.FC<CartTypesProps> = ({ item, onPress }) => {
   const uri = useGetThumbnail(item)
 
   const styles = useCartStyle()

@@ -5,16 +5,16 @@ import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context'
 import { useTheme } from '@rneui/themed'
 import { useContainerStyles } from './Container.styles'
 
-type AppScreenContainerProps = {
+type AppScreenContainerProps = PropsWithChildren<{
   scrollable?: boolean
   safeAreaProps?: SafeAreaViewProps
   statusBarProps?: StatusBarProps
   scrollViewProps?: ScrollViewProps
   containerStyles?: StyleProp<ViewStyle>
   contentContainerStyles?: StyleProp<ViewStyle>
-}
+}>
 
-export const Container: React.FC<PropsWithChildren<AppScreenContainerProps>> = ({
+export const Container: React.FC<AppScreenContainerProps> = ({
   scrollable,
   safeAreaProps,
   statusBarProps,
