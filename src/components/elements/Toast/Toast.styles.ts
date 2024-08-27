@@ -1,6 +1,7 @@
 import { createStyles } from 'theme'
+import { ToastTypes } from 'types/toast'
 
-export const useToastStyles = createStyles(({ colors, gaps }, { type }) => ({
+export const useToastStyles = createStyles(({ colors, gaps }, { type }: { type: ToastTypes }) => ({
   commonToastStyle: {
     height: 72,
     borderRadius: 8,
