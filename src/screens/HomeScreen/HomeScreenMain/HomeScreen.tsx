@@ -7,7 +7,7 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { useRef, useState } from 'react'
-import BottomSheet from '@gorhom/bottom-sheet'
+import BottomSheet, { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { Container } from 'components/Container'
 import { Header } from 'components/Header'
 import { Date } from 'components/Date'
@@ -15,7 +15,7 @@ import { HEIGHT } from 'utils/scale'
 import { Typography } from 'components/elements/Typography'
 import { DatePicker } from 'components/DatePicker'
 import { Loader } from 'components/Loader'
-import { Cart } from 'components/Cart'
+import { EventCard } from 'components/EventCard'
 import { WebDrawer } from 'drawer/WebDrawer'
 import { useDispatch } from 'store'
 import { setCurrentPages } from 'store/data'
@@ -36,7 +36,7 @@ export const HomeScreen = () => {
     refetch
   } = useGetAllEventsTodayQuery({ day: date.day, month: date.month })
 
-  const bottomSheetRef = useRef<BottomSheet>(null)
+  const bottomSheetRef = useRef<BottomSheetModal>(null)
   const styles = useHomeScreenStyle()
 
   const dispatch = useDispatch()
@@ -69,7 +69,7 @@ export const HomeScreen = () => {
     const urls: { url: string; title: string }[] = []
     pages.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
     dispatch(setCurrentPages(urls))
-    bottomSheetRef.current?.expand()
+    bottomSheetRef.current?.present()
   }
 
   return (
@@ -92,7 +92,7 @@ export const HomeScreen = () => {
           <Container>
             <Typography variant='h4Bold'>Selected Events</Typography>
             {allTypesData?.selected.map((item, index) => (
-              <Cart key={index} item={item} onPress={() => onPress(item.pages)} />
+              <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />
             ))}
           </Container>
         </Loader>

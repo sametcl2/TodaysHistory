@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useState } from 'react'
-import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet'
+import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet'
 import { WebView } from 'react-native-webview'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -8,7 +8,7 @@ import { currentPages } from 'store/data'
 import { Typography } from 'components/elements/Typography'
 import { useWebDrawerStyles } from './WebDrawer.styles'
 
-export const WebDrawer = forwardRef<BottomSheet>((_, ref) => {
+export const WebDrawer = forwardRef<BottomSheetModal>((_, ref) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
   const pages = useSelector(currentPages)
   const styles = useWebDrawerStyles()
@@ -29,7 +29,7 @@ export const WebDrawer = forwardRef<BottomSheet>((_, ref) => {
   }
 
   return (
-    <BottomSheet ref={ref} index={-1} snapPoints={['80%']} backdropComponent={renderBackdrop} enablePanDownToClose>
+    <BottomSheetModal ref={ref} snapPoints={['85%', '100%']} backdropComponent={renderBackdrop} enablePanDownToClose>
       {pages.length > 0 && (
         <View style={styles.container}>
           <View style={styles.header}>
@@ -48,6 +48,6 @@ export const WebDrawer = forwardRef<BottomSheet>((_, ref) => {
           <WebView source={{ uri: pages[pageIndex].url }} style={styles.webView} />
         </View>
       )}
-    </BottomSheet>
+    </BottomSheetModal>
   )
 })

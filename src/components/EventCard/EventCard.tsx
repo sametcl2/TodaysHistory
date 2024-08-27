@@ -3,20 +3,20 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { Typography } from 'components/elements/Typography'
 import { SelectedType } from 'types/onThisDayAllToday'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
-import { useCartStyle } from './Cart.styles'
+import { useEventCardStyle } from './EventCard.styles'
 
-type CartTypesProps = {
+type EventCardProps = {
   item: SelectedType
   onPress: () => void
 }
 
-export const Cart: React.FC<CartTypesProps> = ({ item, onPress }) => {
+export const EventCard: React.FC<EventCardProps> = ({ item, onPress }) => {
   const uri = useGetThumbnail(item)
 
-  const styles = useCartStyle()
+  const styles = useEventCardStyle()
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.cart}>
+    <TouchableOpacity onPress={onPress} style={styles.card}>
       <View>
         <Image source={{ uri }} resizeMode='cover' style={styles.image} />
         <View style={{ padding: 12 }}>

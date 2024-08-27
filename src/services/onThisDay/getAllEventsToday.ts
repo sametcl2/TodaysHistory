@@ -15,23 +15,14 @@ const extendedApi = onThisDayApi.injectEndpoints({
     getAllEventsToday: builder.query<GetAllEventsTodayRequestType, GetAllEventsTodayResponseType>({
       query: ({ month, day }) => `onthisday/all/${month}/${day}`,
       async onQueryStarted(_, { queryFulfilled }) {
-        queryFulfilled
-          .then(() => {
-            handleCreateToast({
-              title: i18n.t('http.success'),
-              subTitle: i18n.t('messages.getAllEventsToday.success'),
-              show: true,
-              type: 'success'
-            })
+        queryFulfilled.catch((_error) => {
+          handleCreateToast({
+            title: i18n.t('http.error'),
+            subTitle: i18n.t('messages.getAllEventsToday.error'),
+            show: true,
+            type: 'error'
           })
-          .catch((_error) => {
-            handleCreateToast({
-              title: i18n.t('http.error'),
-              subTitle: i18n.t('messages.getAllEventsToday.error'),
-              show: true,
-              type: 'error'
-            })
-          })
+        })
       }
     })
   })

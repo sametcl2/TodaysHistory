@@ -1,7 +1,7 @@
 import { createStyles } from 'theme'
 
-export const useCartStyle = createStyles(() => ({
-  cart: {
+export const useEventCardStyle = createStyles(() => ({
+  card: {
     height: 'auto',
     backgroundColor: '#0f2515',
     marginBottom: 20,
