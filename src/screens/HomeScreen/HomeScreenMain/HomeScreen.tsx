@@ -19,9 +19,9 @@ import { Cart } from 'components/Cart'
 import { WebDrawer } from 'drawer/WebDrawer'
 import { useDispatch } from 'store'
 import { setCurrentPages } from 'store/data'
-import { Page } from 'types/onThisDayAllToday'
 import { useGetAllTypesTodayQuery } from 'services/onThisDay/getAllTypesToday'
 import { useGetTodaysDate } from 'hooks/useGetTodaysDate'
+import { PageType } from 'types/events'
 import { useHomeScreenStyle } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
@@ -65,7 +65,7 @@ export const HomeScreen = () => {
     }
   })
 
-  const onPress = (pages: Page[]) => {
+  const onPress = (pages: PageType[]) => {
     const urls: { url: string; title: string }[] = []
     pages.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
     dispatch(setCurrentPages(urls))

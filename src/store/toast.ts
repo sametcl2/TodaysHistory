@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { ToastType } from 'constants/toast'
+
+import { ToastTypes } from 'types/toast'
 // eslint-disable-next-line import/no-cycle
 import { RootState } from './store'
 
@@ -7,14 +8,14 @@ type initialStateType = {
   title: string
   subTitle: string
   show: boolean
-  type: ToastType | null
+  type?: ToastTypes
 }
 
 export const initialState: initialStateType = {
   title: '',
   subTitle: '',
   show: false,
-  type: null
+  type: undefined
 }
 
 const toast = createSlice({
@@ -31,7 +32,7 @@ const toast = createSlice({
       state.title = ''
       state.subTitle = ''
       state.show = false
-      state.type = null
+      state.type = undefined
     }
   }
 })
