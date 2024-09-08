@@ -1,10 +1,17 @@
 import { DateTimePickerEvent } from '@react-native-community/datetimepicker'
 import moment from 'moment'
+import { Pressable, View } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
+import { useTheme } from '@rneui/themed'
 import { DatePicker } from 'components/elements/DatePicker'
 import { useDispatch, useSelector } from 'store'
 import { selectCurrentDate, setCurrentDate } from 'store/date'
 
 export const GlobalDatePicker = () => {
+  const {
+    theme: { colors }
+  } = useTheme()
+
   const dispatch = useDispatch()
 
   const selectedDate = useSelector(selectCurrentDate)
@@ -15,12 +22,30 @@ export const GlobalDatePicker = () => {
     }
   }
 
+  const handlePrevious = () => {
+    const nextDay = moment(selectedDate.currentDate).subtract(1, 'day')
+    dispatch(setCurrentDate({ currentDate: nextDay.toDate() }))
+  }
+
+  const handleNext = () => {
+    const nextDay = moment(selectedDate.currentDate).add(1, 'day')
+    dispatch(setCurrentDate({ currentDate: nextDay.toDate() }))
+  }
+
   return (
-    <DatePicker
-      value={selectedDate.currentDate}
-      onChange={handleDateChange}
-      themeVariant='dark'
-      locale={moment.locale()}
-    />
+    <View style={{ flexDirection: 'row' }}>
+      <Pressable onPress={handlePrevious}>
+        <MaterialIcons name='chevron-left' size={36} color={colors.primary} />
+      </Pressable>
+      <DatePicker
+        value={selectedDate.currentDate}
+        onChange={handleDateChange}
+        themeVariant='dark'
+        locale={moment.locale()}
+      />
+      <Pressable onPress={handleNext}>
+        <MaterialIcons name='chevron-right' size={36} color={colors.primary} />
+      </Pressable>
+    </View>
   )
 }
