@@ -1,24 +1,31 @@
-import { forwardRef, useCallback, useState } from 'react'
-import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet'
-import { WebView } from 'react-native-webview'
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
+import { useEffect, useRef, useState } from 'react'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { WebView } from 'react-native-webview'
+import { Typography } from 'components/elements/Typography'
+import { BottomSheetDrawer } from 'components/BottomSheetDrawer'
 import { useSelector } from 'store'
 import { selectCurrentPages } from 'store/data'
-import { Typography } from 'components/elements/Typography'
 import { useWebDrawerStyles } from './WebDrawer.styles'
 
-export const WebDrawer = forwardRef<BottomSheetModal>((_, ref) => {
+type WebDrawerProps = {
+  isOpen: boolean
+  onDismiss: (isOpen: false) => void
+}
+
+export const WebDrawer: React.FC<WebDrawerProps> = ({ isOpen, onDismiss }) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
   const pages = useSelector(selectCurrentPages)
   const styles = useWebDrawerStyles()
 
-  const renderBackdrop = useCallback(
-    (props: BottomSheetBackdropProps) => (
-      <BottomSheetBackdrop {...props} opacity={0.7} pressBehavior='close' appearsOnIndex={0} disappearsOnIndex={-1} />
-    ),
-    []
-  )
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
+
+  useEffect(() => {
+    if (isOpen) {
+      bottomSheetModalRef.current?.present()
+    }
+  }, [isOpen])
 
   const handlePrevPage = () => {
     setPageIndex(pageIndex !== 0 ? pageIndex - 1 : pageIndex)
@@ -28,10 +35,21 @@ export const WebDrawer = forwardRef<BottomSheetModal>((_, ref) => {
     setPageIndex(pageIndex < pages.length - 1 ? pageIndex + 1 : pageIndex)
   }
 
+  const handleDismiss = () => {
+    onDismiss(false)
+  }
+
   return (
-    <BottomSheetModal ref={ref} snapPoints={['85%', '100%']} backdropComponent={renderBackdrop} enablePanDownToClose>
-      {pages.length > 0 && (
-        <View style={styles.container}>
+    <BottomSheetDrawer
+      ref={bottomSheetModalRef}
+      name={`WebDrawer-${pageIndex}`}
+      onDismiss={handleDismiss}
+      enableDismissOnClose
+      snapPoints={['90%']}
+      enableDynamicSizing={false}
+      contentContainerStyle={styles.drawerContentContainer}
+      additionalTopElement={
+        <View style={styles.titleContainer}>
           <View style={styles.header}>
             <Typography variant='h2'>Related Readings</Typography>
             {pageIndex !== 0 && (
@@ -45,9 +63,10 @@ export const WebDrawer = forwardRef<BottomSheetModal>((_, ref) => {
               </TouchableOpacity>
             )}
           </View>
-          <WebView source={{ uri: pages[pageIndex].url }} style={styles.webView} />
         </View>
-      )}
-    </BottomSheetModal>
+      }
+    >
+      <WebView source={{ uri: pages[pageIndex].url }} style={styles.webView} />
+    </BottomSheetDrawer>
   )
-})
+}

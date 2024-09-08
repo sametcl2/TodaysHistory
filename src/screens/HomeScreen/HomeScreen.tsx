@@ -1,5 +1,4 @@
-import { BottomSheetModal } from '@gorhom/bottom-sheet'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { Container } from 'components/Container'
 import { EventCard } from 'components/EventCard'
@@ -11,8 +10,8 @@ import { useDispatch, useSelector } from 'store'
 import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
 import { PageType } from 'types/events'
-import { ViewTypes, ViewTypeSelector } from './ViewTypeSelector'
 import { useHomeScreenStyles } from './HomeScreen.styles'
+import { ViewTypes, ViewTypeSelector } from './ViewTypeSelector'
 
 export const HomeScreen = () => {
   const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()
@@ -22,14 +21,14 @@ export const HomeScreen = () => {
 
   const [viewType, setViewType] = useState(ViewTypes.List)
 
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false)
+
   useEffect(() => {
     if (day && month) {
       fetchAllEvents({ day, month })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day, month])
-
-  const bottomSheetRef = useRef<BottomSheetModal>(null)
 
   const dispatch = useDispatch()
 
@@ -45,7 +44,7 @@ export const HomeScreen = () => {
     const urls: { url: string; title: string }[] = []
     pages.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
     dispatch(setCurrentPages(urls))
-    bottomSheetRef.current?.present()
+    setIsDrawerVisible(true)
   }
 
   const handleViewTypeChange = (selectedType: ViewTypes) => {
@@ -75,7 +74,7 @@ export const HomeScreen = () => {
           />
         </Container>
       </Loader>
-      <WebDrawer ref={bottomSheetRef} />
+      <WebDrawer isOpen={isDrawerVisible} onDismiss={setIsDrawerVisible} />
     </>
   )
 }

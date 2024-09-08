@@ -8,5 +8,13 @@ export const useWebDrawerStyles = createStyles(() => ({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  webView: { marginTop: -55 }
+  titleContainer: {
+    flexDirection: 'row'
+  },
+  drawerContentContainer: {
+    paddingHorizontal: 0
+  },
+  webView: {
+    marginTop: -55
+  }
 }))
