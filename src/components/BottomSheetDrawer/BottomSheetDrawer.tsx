@@ -48,7 +48,7 @@ import { useBottomSheetStyles } from './BottomSheetDrawer.styles'
 
 export type BottomSheetDrawerMethods = import('@gorhom/bottom-sheet/lib/typescript/types').BottomSheetModalMethods
 
-const BACKDROP_OPACITY = 0.4
+const BACKDROP_OPACITY = 0.7
 const DEFAULT_BACKDROP_APPEARANCE_INDEX = 0
 const DEFAULT_BACKDROP_DISAPPEARANCE_INDEX = -1
 

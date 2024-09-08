@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { WebView } from 'react-native-webview'
+import { MaterialIcons } from '@expo/vector-icons'
+import { useTheme } from '@rneui/themed'
 import { Typography } from 'components/elements/Typography'
 import { BottomSheetDrawer } from 'components/BottomSheetDrawer'
 import { useSelector } from 'store'
@@ -15,6 +17,10 @@ type WebDrawerProps = {
 }
 
 export const WebDrawer: React.FC<WebDrawerProps> = ({ isOpen, onDismiss }) => {
+  const {
+    theme: { colors }
+  } = useTheme()
+
   const [pageIndex, setPageIndex] = useState<number>(0)
   const pages = useSelector(selectCurrentPages)
   const styles = useWebDrawerStyles()
@@ -42,27 +48,33 @@ export const WebDrawer: React.FC<WebDrawerProps> = ({ isOpen, onDismiss }) => {
   return (
     <BottomSheetDrawer
       ref={bottomSheetModalRef}
-      name={`WebDrawer-${pageIndex}`}
+      name='WebDrawer'
       onDismiss={handleDismiss}
       enableDismissOnClose
-      snapPoints={['90%']}
+      snapPoints={['95%', '100%']}
       enableDynamicSizing={false}
+      hasCloseButton={false}
       contentContainerStyle={styles.drawerContentContainer}
       additionalTopElement={
-        <View style={styles.titleContainer}>
-          <View style={styles.header}>
-            <Typography variant='h2'>Related Readings</Typography>
-            {pageIndex !== 0 && (
-              <TouchableOpacity onPress={handlePrevPage}>
-                <Typography variant='link'>Prev reading: {pages[pageIndex - 1].title}</Typography>
-              </TouchableOpacity>
-            )}
-            {pageIndex < pages.length - 1 && (
-              <TouchableOpacity onPress={handleNextPage}>
-                <Typography variant='link'>Next reading: {pages[pageIndex + 1].title}</Typography>
-              </TouchableOpacity>
-            )}
-          </View>
+        <View style={styles.header}>
+          {pageIndex !== 0 ? (
+            <TouchableOpacity onPress={handlePrevPage} style={styles.button}>
+              <MaterialIcons name='chevron-left' size={32} color={colors.white} />
+              <Typography variant='bodySmall' color='textWhite' numberOfLines={2} ellipsizeMode='tail'>
+                {pages[pageIndex - 1].title}
+              </Typography>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.prevPlaceholder} />
+          )}
+          {pageIndex < pages.length - 1 && (
+            <TouchableOpacity onPress={handleNextPage} style={styles.button}>
+              <Typography variant='bodySmall' color='textWhite'>
+                {pages[pageIndex + 1].title}
+              </Typography>
+              <MaterialIcons name='chevron-right' size={32} color={colors.white} />
+            </TouchableOpacity>
+          )}
         </View>
       }
     >

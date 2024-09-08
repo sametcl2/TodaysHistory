@@ -49,7 +49,8 @@ export const useBottomSheetStyles = createStyles(({ gaps, colors, fontScale }, p
     height: '100%'
   },
   additionalTopElement: {
-    paddingLeft: 24,
+    paddingLeft: 12,
+    paddingRight: props.hasCloseButton ? 0 : 12,
     top: -12,
     flex: 1
   },
