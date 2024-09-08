@@ -12,10 +12,13 @@ import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
 import { PageType } from 'types/events'
 import { ViewTypes, ViewTypeSelector } from './ViewTypeSelector'
+import { useHomeScreenStyles } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
   const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()
   const { month, day } = useSelector(selectCurrentDate)
+
+  const styles = useHomeScreenStyles()
 
   const [viewType, setViewType] = useState(ViewTypes.List)
 
@@ -64,7 +67,7 @@ export const HomeScreen = () => {
             key={viewType}
             scrollEventThrottle={16}
             onScroll={scrollHandler}
-            style={{ flex: 1 }}
+            style={styles.cardList}
             numColumns={viewType === ViewTypes.Grid ? 2 : 1}
             showsVerticalScrollIndicator={false}
             data={allTypesData?.selected}

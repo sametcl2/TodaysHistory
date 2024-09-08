@@ -52,17 +52,17 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
   }))
 
   return (
-    <Animated.View style={[styles.header, headerStyle]}>
+    <Animated.View style={headerStyle}>
       {/* <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}> */}
       <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}>
-        <View style={{ alignItems: 'center' }}>
+        <View style={styles.innerContainer}>
           <Animated.View style={fadeOutStyle}>
             <Typography variant='bodyBoldLarge' color={'textWhite'}>
               {t('general.welcome')}
             </Typography>
           </Animated.View>
-          <View style={[{ flexDirection: 'row' }]}>
-            <Animated.View style={[fadeOutStyle, { marginRight: 6 }]}>
+          <View style={styles.textContainer}>
+            <Animated.View style={[fadeOutStyle, styles.todayTitle]}>
               <Typography variant='h3Bold' color='textWhite'>
                 Today is
               </Typography>

@@ -1,7 +1,6 @@
-export const useGetThumbnail = (data) => {
-  if (data?.thumbnail) {
-    return data.thumbnail.source
-  }
+import { SelectedType } from 'types/onThisDayAllToday'
+
+export const useGetThumbnail = (data: SelectedType) => {
   const { pages } = data
   const thumbnail = pages.map((item) => {
     if (item.thumbnail) {

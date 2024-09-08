@@ -2,6 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useTheme } from '@rneui/themed'
 import { View, Pressable } from 'react-native'
 import { Typography } from 'components/elements/Typography'
+import { useViewTypeSelectorStyles } from './ViewTypeSelector.styles'
 
 export enum ViewTypes {
   Grid = 'Grid',
@@ -18,14 +19,16 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, on
     theme: { colors }
   } = useTheme()
 
+  const styles = useViewTypeSelectorStyles()
+
   const handleViewTypeChange = (selectedType: ViewTypes) => {
     onChange(selectedType)
   }
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', top: -40, marginBottom: -20 }}>
+    <View style={styles.container}>
       <Typography variant='h4Bold'>Selected Events</Typography>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.buttonsContainer}>
         <Pressable onPress={() => handleViewTypeChange(ViewTypes.Grid)}>
           <MaterialIcons
             name='grid-view'
@@ -33,7 +36,7 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, on
             color={viewType === ViewTypes.Grid ? colors.teal : colors.grayDark}
           />
         </Pressable>
-        <Pressable onPress={() => handleViewTypeChange(ViewTypes.List)} style={{ marginLeft: 8 }}>
+        <Pressable onPress={() => handleViewTypeChange(ViewTypes.List)} style={styles.buttonLast}>
           <MaterialIcons
             name='list-alt'
             size={24}

@@ -1,9 +1,9 @@
 import { createStyles } from 'theme'
 
 export const useHomeScreenHeaderStyle = createStyles(() => ({
-  header: {
-    // height: 300,
-  },
+  innerContainer: { alignItems: 'center' },
+  textContainer: { flexDirection: 'row' },
+  todayTitle: { marginRight: 6 },
   gradient: {
     flex: 1,
     paddingTop: 50,

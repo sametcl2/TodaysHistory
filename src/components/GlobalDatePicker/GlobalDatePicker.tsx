@@ -6,11 +6,14 @@ import { useTheme } from '@rneui/themed'
 import { DatePicker } from 'components/elements/DatePicker'
 import { useDispatch, useSelector } from 'store'
 import { selectCurrentDate, setCurrentDate } from 'store/date'
+import { useGlobalDatePickerStyles } from './GlobalDatePicker.styles'
 
 export const GlobalDatePicker = () => {
   const {
     theme: { colors }
   } = useTheme()
+
+  const styles = useGlobalDatePickerStyles()
 
   const dispatch = useDispatch()
 
@@ -33,7 +36,7 @@ export const GlobalDatePicker = () => {
   }
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={styles.container}>
       <Pressable onPress={handlePrevious}>
         <MaterialIcons name='chevron-left' size={36} color={colors.primary} />
       </Pressable>
