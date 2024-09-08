@@ -5,5 +5,5 @@ export type LoaderPropsTypes = {
   error: FetchBaseQueryError | SerializedError | unknown
   isError: boolean
   isFetching: boolean
-  refetch: () => void
+  onRefetch: () => void
 }

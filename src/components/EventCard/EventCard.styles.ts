@@ -1,11 +1,14 @@
 import { createStyles } from 'theme'
 
-export const useEventCardStyle = createStyles(() => ({
+export const useEventCardStyle = createStyles(({ colors }) => ({
   card: {
     height: 220,
     marginBottom: 20,
     borderRadius: 12,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    marginHorizontal: 4,
+    flex: 1,
+    backgroundColor: colors.grayLight
   },
   image: {
     height: 220,

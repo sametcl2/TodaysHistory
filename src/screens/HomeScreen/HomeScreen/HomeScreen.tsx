@@ -1,8 +1,7 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { Container } from 'components/Container'
-import { Typography } from 'components/elements/Typography'
 import { EventCard } from 'components/EventCard'
 import { HomeScreenHeader } from 'components/HomeScreenHeader'
 import { Loader } from 'components/Loader'
@@ -12,11 +11,13 @@ import { useDispatch, useSelector } from 'store'
 import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
 import { PageType } from 'types/events'
-import { HEIGHT } from 'utils/scale'
+import { ViewTypes, ViewTypeSelector } from './ViewTypeSelector'
 
 export const HomeScreen = () => {
   const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()
   const { month, day } = useSelector(selectCurrentDate)
+
+  const [viewType, setViewType] = useState(ViewTypes.List)
 
   useEffect(() => {
     if (day && month) {
@@ -44,29 +45,33 @@ export const HomeScreen = () => {
     bottomSheetRef.current?.present()
   }
 
+  const handleViewTypeChange = (selectedType: ViewTypes) => {
+    setViewType(selectedType)
+  }
+
   return (
     <>
       <HomeScreenHeader scrollY={scrollY} />
-      <Animated.ScrollView
-        scrollEventThrottle={16}
-        onScroll={scrollHandler}
-        style={{ height: HEIGHT }}
-        showsVerticalScrollIndicator={false}
+      <Loader
+        error={error}
+        isError={isError}
+        isFetching={isFetching}
+        onRefetch={() => fetchAllEvents({ day: day!, month: month! })}
       >
-        <Loader
-          error={error}
-          isError={isError}
-          isFetching={isFetching}
-          refetch={() => fetchAllEvents({ day: day!, month: month! })}
-        >
-          <Container>
-            <Typography variant='h4Bold'>Selected Events</Typography>
-            {allTypesData?.selected.map((item, index) => (
-              <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />
-            ))}
-          </Container>
-        </Loader>
-      </Animated.ScrollView>
+        <Container>
+          <ViewTypeSelector viewType={viewType} onChange={handleViewTypeChange} />
+          <Animated.FlatList
+            key={viewType}
+            scrollEventThrottle={16}
+            onScroll={scrollHandler}
+            style={{ flex: 1 }}
+            numColumns={viewType === ViewTypes.Grid ? 2 : 1}
+            showsVerticalScrollIndicator={false}
+            data={allTypesData?.selected}
+            renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
+          />
+        </Container>
+      </Loader>
       <WebDrawer ref={bottomSheetRef} />
     </>
   )

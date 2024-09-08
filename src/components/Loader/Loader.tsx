@@ -8,11 +8,11 @@ import { LoaderPropsTypes } from 'types/loader'
 
 type LoaderProps = PropsWithChildren<LoaderPropsTypes>
 
-export const Loader: React.FC<LoaderProps> = ({ error, isError, isFetching, refetch, children }) => {
+export const Loader: React.FC<LoaderProps> = ({ error, isError, isFetching, onRefetch, children }) => {
   const { t } = useTranslation()
 
   const refetchQuery = () => {
-    refetch()
+    onRefetch()
   }
 
   if (isFetching) {

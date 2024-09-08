@@ -1,12 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated'
+import Animated, {
+  Extrapolation,
+  interpolate,
+  interpolateColor,
+  SharedValue,
+  useAnimatedStyle
+} from 'react-native-reanimated'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useTheme } from '@rneui/themed'
 import { GlobalDatePicker } from 'components/GlobalDatePicker'
 import { Typography } from 'components/elements/Typography'
 import { useSelector } from 'store'
 import { selectCurrentDate } from 'store/date'
-import { HEIGHT } from 'utils/scale'
 import { useHomeScreenHeaderStyle } from './HomeScreenHeader.styles'
 
 type HomeScreenHeaderProps = {
@@ -15,18 +21,32 @@ type HomeScreenHeaderProps = {
 
 export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) => {
   const { t } = useTranslation()
+
+  const {
+    theme: { colors }
+  } = useTheme()
+
   const { displayValue } = useSelector(selectCurrentDate)
 
   const styles = useHomeScreenHeaderStyle()
 
+  const fadeOutStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.value, [0, 40], [1, 0], Extrapolation.CLAMP)
+  }))
+
   const headerStyle = useAnimatedStyle(() => ({
-    height: interpolate(scrollY.value, [0, 20], [HEIGHT / 4, HEIGHT / 8], Extrapolation.CLAMP)
+    height: interpolate(scrollY.value, [0, 40], [200, 100], Extrapolation.CLAMP)
+  }))
+
+  const animatedDateStyle = useAnimatedStyle(() => ({
+    color: interpolateColor(scrollY.value, [0, 40], ['rgb(255,255,255)', colors.primary]),
+    fontSize: 24
   }))
 
   const dateTextStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateX: interpolate(scrollY.value, [0, 15], [0, -45], Extrapolation.CLAMP)
+        translateX: interpolate(scrollY.value, [0, 40], [0, -45], Extrapolation.CLAMP)
       }
     ]
   }))
@@ -36,25 +56,27 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
       {/* <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}> */}
       <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}>
         <View style={{ alignItems: 'center' }}>
-          <Animated.View style={dateTextStyle}>
+          <Animated.View style={fadeOutStyle}>
             <Typography variant='bodyBoldLarge' color={'textWhite'}>
               {t('general.welcome')}
             </Typography>
           </Animated.View>
           <View style={[{ flexDirection: 'row' }]}>
-            <Animated.View style={[{ marginRight: 6 }]}>
+            <Animated.View style={[fadeOutStyle, { marginRight: 6 }]}>
               <Typography variant='h3Bold' color='textWhite'>
                 Today is
               </Typography>
             </Animated.View>
             <Animated.View style={dateTextStyle}>
-              <Typography variant='h3Bold' color='textWhite'>
+              <Typography variant='h3Bold' color='textWhite' isAnimated style={[animatedDateStyle]}>
                 {displayValue}
               </Typography>
             </Animated.View>
           </View>
         </View>
-        <GlobalDatePicker scrollY={scrollY} />
+        <Animated.View style={fadeOutStyle}>
+          <GlobalDatePicker />
+        </Animated.View>
       </LinearGradient>
     </Animated.View>
   )
