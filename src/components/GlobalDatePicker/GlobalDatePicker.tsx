@@ -23,12 +23,12 @@ export const GlobalDatePicker = () => {
   }
 
   const handlePrevious = () => {
-    const nextDay = moment(selectedDate.currentDate).subtract(1, 'day')
-    dispatch(setCurrentDate({ currentDate: nextDay.toDate() }))
+    const previousDay = moment(selectedDate.currentDate).startOf('day').subtract(1, 'day')
+    dispatch(setCurrentDate({ currentDate: previousDay.toDate() }))
   }
 
   const handleNext = () => {
-    const nextDay = moment(selectedDate.currentDate).add(1, 'day')
+    const nextDay = moment(selectedDate.currentDate).startOf('day').add(1, 'day')
     dispatch(setCurrentDate({ currentDate: nextDay.toDate() }))
   }
 
@@ -37,12 +37,7 @@ export const GlobalDatePicker = () => {
       <Pressable onPress={handlePrevious}>
         <MaterialIcons name='chevron-left' size={36} color={colors.primary} />
       </Pressable>
-      <DatePicker
-        value={selectedDate.currentDate}
-        onChange={handleDateChange}
-        themeVariant='dark'
-        locale={moment.locale()}
-      />
+      <DatePicker value={selectedDate.currentDate} onChange={handleDateChange} themeVariant='dark' />
       <Pressable onPress={handleNext}>
         <MaterialIcons name='chevron-right' size={36} color={colors.primary} />
       </Pressable>
