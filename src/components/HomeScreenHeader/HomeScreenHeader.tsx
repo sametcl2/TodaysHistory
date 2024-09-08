@@ -1,14 +1,17 @@
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, {
-  Extrapolation,
   interpolate,
   interpolateColor,
+  runOnJS,
   SharedValue,
-  useAnimatedStyle
+  useAnimatedReaction,
+  useAnimatedStyle,
+  withTiming
 } from 'react-native-reanimated'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useTheme } from '@rneui/themed'
+import { useState } from 'react'
 import { GlobalDatePicker } from 'components/GlobalDatePicker'
 import { Typography } from 'components/elements/Typography'
 import { useSelector } from 'store'
@@ -26,33 +29,58 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
     theme: { colors }
   } = useTheme()
 
+  const [isVisible, setIsVisible] = useState(true)
+
+  useAnimatedReaction(
+    () => scrollY.value,
+    (currentValue) => {
+      if (currentValue > 60) {
+        runOnJS(setIsVisible)(false)
+      } else {
+        runOnJS(setIsVisible)(true)
+      }
+    }
+  )
+
   const { displayValue } = useSelector(selectCurrentDate)
 
   const styles = useHomeScreenHeaderStyle()
 
-  const fadeOutStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(scrollY.value, [0, 60], [1, 0], Extrapolation.CLAMP)
-  }))
+  const fadeOutStyle = useAnimatedStyle(
+    () => ({
+      opacity: withTiming(interpolate(isVisible ? 1 : 0, [0, 1], [0, 1]))
+    }),
+    [isVisible]
+  )
 
-  const headerStyle = useAnimatedStyle(() => ({
-    height: interpolate(scrollY.value, [0, 60], [200, 100], Extrapolation.CLAMP)
-  }))
+  const headerStyle = useAnimatedStyle(
+    () => ({
+      height: withTiming(interpolate(isVisible ? 1 : 0, [0, 1], [100, 200]))
+    }),
+    [isVisible]
+  )
 
-  const animatedDateStyle = useAnimatedStyle(() => ({
-    color: interpolateColor(scrollY.value, [0, 60], ['rgb(255,255,255)', colors.primary]),
-    fontSize: 24
-  }))
+  const animatedDateStyle = useAnimatedStyle(
+    () => ({
+      color: withTiming(interpolateColor(isVisible ? 1 : 0, [0, 1], [colors.primary, 'rgb(255,255,255)'])),
+      fontSize: 24
+    }),
+    [isVisible]
+  )
 
-  const dateTextStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateX: interpolate(scrollY.value, [0, 60], [0, -45], Extrapolation.CLAMP)
-      }
-    ]
-  }))
+  const dateTextStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateX: withTiming(interpolate(isVisible ? 1 : 0, [0, 1], [-45, 0]))
+        }
+      ]
+    }),
+    [isVisible]
+  )
 
   return (
-    <Animated.View style={headerStyle}>
+    <Animated.View style={headerStyle} onTouchStart={() => setIsVisible(true)}>
       {/* <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}> */}
       <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}>
         <View style={styles.innerContainer}>
