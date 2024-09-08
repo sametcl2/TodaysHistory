@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated'
+import { LinearGradient } from 'expo-linear-gradient'
 import { GlobalDatePicker } from 'components/GlobalDatePicker'
 import { Typography } from 'components/elements/Typography'
 import { useSelector } from 'store'
@@ -32,26 +33,28 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
 
   return (
     <Animated.View style={[styles.header, headerStyle]}>
-      <View style={{ alignItems: 'center' }}>
-        <Animated.View style={dateTextStyle}>
-          <Typography variant='bodyBoldLarge' color={'textWhite'}>
-            {t('general.welcome')}
-          </Typography>
-        </Animated.View>
-        <View style={[{ flexDirection: 'row' }]}>
-          <Animated.View style={[{ marginRight: 6 }]}>
-            <Typography variant='h3Bold' color='textWhite'>
-              Today is
-            </Typography>
-          </Animated.View>
+      <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}>
+        <View style={{ alignItems: 'center' }}>
           <Animated.View style={dateTextStyle}>
-            <Typography variant='h3Bold' color='textWhite'>
-              {displayValue}
+            <Typography variant='bodyBoldLarge' color={'textWhite'}>
+              {t('general.welcome')}
             </Typography>
           </Animated.View>
+          <View style={[{ flexDirection: 'row' }]}>
+            <Animated.View style={[{ marginRight: 6 }]}>
+              <Typography variant='h3Bold' color='textWhite'>
+                Today is
+              </Typography>
+            </Animated.View>
+            <Animated.View style={dateTextStyle}>
+              <Typography variant='h3Bold' color='textWhite'>
+                {displayValue}
+              </Typography>
+            </Animated.View>
+          </View>
         </View>
-      </View>
-      <GlobalDatePicker scrollY={scrollY} />
+        <GlobalDatePicker scrollY={scrollY} />
+      </LinearGradient>
     </Animated.View>
   )
 }
