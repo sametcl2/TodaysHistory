@@ -1,24 +1,18 @@
 import { useTranslation } from 'react-i18next'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query/react'
 import { PropsWithChildren } from 'react'
 import { Button } from '@rneui/themed'
 import { Text } from 'react-native'
-import { SerializedError } from '@reduxjs/toolkit'
 import { Container } from 'components/Container'
 import { Loading } from 'components/elements/Loading'
+import { LoaderPropsTypes } from 'types/loader'
 
-type LoaderProps = {
-  error: FetchBaseQueryError | SerializedError | unknown
-  isError: boolean
-  isFetching: boolean
-  refetch: () => void
-}
+type LoaderProps = PropsWithChildren<LoaderPropsTypes>
 
-export const Loader = ({ error, isError, isFetching, refetch, children }: PropsWithChildren<LoaderProps>) => {
+export const Loader: React.FC<LoaderProps> = ({ error, isError, isFetching, onRefetch, children }) => {
   const { t } = useTranslation()
 
   const refetchQuery = () => {
-    refetch()
+    onRefetch()
   }
 
   if (isFetching) {

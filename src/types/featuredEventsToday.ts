@@ -1,23 +1,33 @@
+import {
+  ContentUrlsType,
+  CoordinatesType,
+  NamespaceType,
+  OriginalimageType,
+  PageType,
+  ThumbnailType,
+  TitlesType
+} from './events'
+
 export type GetFeaturedEventsTodayType = {
-  news: News[]
-  onthisday: Onthisday[]
+  news: NewsType[]
+  onthisday: OnThisDayType[]
 }
 
-type News = {
-  links: Link[]
+type NewsType = {
+  links: LinkType[]
   story: string
 }
 
-type Link = {
+type LinkType = {
   type: string
   title: string
   displaytitle: string
-  namespace: Namespace
+  namespace: NamespaceType
   wikibase_item: string
-  titles: Titles
+  titles: TitlesType
   pageid: number
-  thumbnail?: Thumbnail
-  originalimage?: Originalimage
+  thumbnail?: ThumbnailType
+  originalimage?: OriginalimageType
   lang: string
   dir: string
   revision: string
@@ -25,79 +35,15 @@ type Link = {
   timestamp: string
   description: string
   description_source: string
-  coordinates?: Coordinates
-  content_urls: ContentUrls
+  coordinates?: CoordinatesType
+  content_urls: ContentUrlsType
   extract: string
   extract_html: string
   normalizedtitle: string
 }
 
-type Namespace = {
-  id: number
+type OnThisDayType = {
   text: string
-}
-
-type Titles = {
-  canonical: string
-  normalized: string
-  display: string
-}
-
-type Thumbnail = {
-  source: string
-  width: number
-  height: number
-}
-
-type Originalimage = {
-  source: string
-  width: number
-  height: number
-}
-
-type Coordinates = {
-  lat: number
-  lon: number
-}
-
-type ContentUrls = {
-  desktop: UrlType
-  mobile: UrlType
-}
-
-type UrlType = {
-  page: string
-  revisions: string
-  edit: string
-  talk: string
-}
-
-type Onthisday = {
-  text: string
-  pages: Page[]
+  pages: PageType[]
   year: number
-}
-
-type Page = {
-  type: string
-  title: string
-  displaytitle: string
-  namespace: Namespace
-  wikibase_item: string
-  titles: Titles
-  pageid: number
-  thumbnail?: Thumbnail
-  originalimage?: Originalimage
-  lang: string
-  dir: string
-  revision: string
-  tid: string
-  timestamp: string
-  description?: string
-  description_source?: string
-  content_urls: ContentUrls
-  extract: string
-  extract_html: string
-  normalizedtitle: string
-  coordinates?: Coordinates
 }

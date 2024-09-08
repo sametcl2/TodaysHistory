@@ -44,7 +44,7 @@ type VariantStyles = {
 const typographyVariantsStyles = {
   h1: {
     size: 'heading.lg',
-    font: 'medium',
+    font: 'bold',
     lineHeight: 'heading.lg'
   },
   h2: {
@@ -54,7 +54,7 @@ const typographyVariantsStyles = {
   },
   h2Bold: {
     size: 'heading.md',
-    font: 'medium',
+    font: 'bold',
     lineHeight: 'heading.md'
   },
   h3: {
@@ -64,7 +64,7 @@ const typographyVariantsStyles = {
   },
   h3Bold: {
     size: 'heading.sm',
-    font: 'medium',
+    font: 'bold',
     lineHeight: 'heading.sm'
   },
   h4: {
@@ -74,7 +74,7 @@ const typographyVariantsStyles = {
   },
   h4Bold: {
     size: 'heading.xs',
-    font: 'medium',
+    font: 'bold',
     lineHeight: 'heading.xs'
   },
   h5: {

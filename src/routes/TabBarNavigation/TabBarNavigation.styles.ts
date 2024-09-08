@@ -6,13 +6,13 @@ export const useTabBarNavigationStyles = createStyles(({ colors }) => ({
     height: 80,
     borderRadius: 40,
     top: -40,
-    backgroundColor: colors.primary,
-    shadowColor: colors.gray5,
+    backgroundColor: colors.teal,
+    shadowColor: colors.grayDark,
     shadowOffset: {
       width: 0,
       height: 8
     },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 5
   }

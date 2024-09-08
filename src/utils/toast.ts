@@ -1,12 +1,12 @@
-import { ToastType } from 'constants/toast'
 import store from 'store'
 import { showToast } from 'store/toast'
+import { ToastTypes } from 'types/toast'
 
 type CreateToastType = {
   title: string
   subTitle: string
   show: boolean
-  type: ToastType
+  type: ToastTypes
 }
 
 export const handleCreateToast = ({ title, subTitle, show, type }: CreateToastType) => {
