@@ -39,7 +39,7 @@ export const TabBarNavigation = () => {
         component={FavoriteScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <MaterialIcons name='favorite' size={28} color={focused ? colors.primary : colors.grayLight} />
+            <MaterialIcons name='favorite' size={28} color={focused ? colors.teal : colors.grayLight} />
           )
         }}
       />
@@ -56,7 +56,7 @@ export const TabBarNavigation = () => {
         component={SettingScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Feather name='settings' size={28} color={focused ? colors.primary : colors.grayLight} />
+            <Feather name='settings' size={28} color={focused ? colors.teal : colors.grayLight} />
           )
         }}
       />

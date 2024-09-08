@@ -1,6 +1,6 @@
 import { createStyles } from 'theme'
 
-export const useHomeScreenHeaderStyle = createStyles(({ colors }) => ({
+export const useHomeScreenHeaderStyle = createStyles(() => ({
   header: {
     height: 300
   },

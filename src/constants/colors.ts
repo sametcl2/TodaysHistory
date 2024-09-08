@@ -4,6 +4,8 @@ export const colors = {
   primary: '#2866c9',
   secondary: '#ffd35c',
 
+  teal: '#008080',
+
   // Grays
   black: '#000000',
   gray: '#ebebeb',
