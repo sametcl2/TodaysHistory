@@ -6,11 +6,13 @@ import { onThisDayApi } from 'services/onThisDay'
 import toast from './toast'
 import language from './language'
 import data from './data'
+import date from './date'
 
 const combinedReducer = combineReducers({
   language,
   toast,
   data,
+  date,
   [featuredApi.reducerPath]: featuredApi.reducer,
   [onThisDayApi.reducerPath]: onThisDayApi.reducer
 })
