@@ -2,11 +2,27 @@ import { createStyles } from 'theme'
 
 export const useEventCardStyle = createStyles(() => ({
   card: {
-    height: 'auto',
-    backgroundColor: '#0f2515',
+    height: 220,
     marginBottom: 20,
-    borderRadius: 12
+    borderRadius: 12,
+    overflow: 'hidden'
   },
-  image: { height: 130, width: '100%', borderTopLeftRadius: 12, borderTopRightRadius: 12 },
-  year: { position: 'absolute', right: 8, bottom: 8 }
+  image: {
+    height: 220,
+    width: '100%'
+  },
+  textContainer: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    maxHeight: 120,
+    backgroundColor: 'rgba(8, 51, 97, 0.8)',
+    padding: 12
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8
+  }
 }))
