@@ -74,7 +74,7 @@ export const HomeScreen = () => {
           />
         </Container>
       </Loader>
-      <WebDrawer isOpen={isDrawerVisible} onDismiss={setIsDrawerVisible} />
+      {isDrawerVisible && <WebDrawer isOpen={isDrawerVisible} onDismiss={setIsDrawerVisible} />}
     </>
   )
 }
