@@ -23,7 +23,7 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, on
   }
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', top: -40 }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', top: -40, marginBottom: -20 }}>
       <Typography variant='h4Bold'>Selected Events</Typography>
       <View style={{ flexDirection: 'row' }}>
         <Pressable onPress={() => handleViewTypeChange(ViewTypes.Grid)}>
