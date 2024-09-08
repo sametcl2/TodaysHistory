@@ -70,6 +70,7 @@ export const HomeScreen = () => {
             numColumns={viewType === ViewTypes.Grid ? 2 : 1}
             showsVerticalScrollIndicator={false}
             data={allTypesData?.selected}
+            initialNumToRender={16}
             renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
           />
         </Container>
