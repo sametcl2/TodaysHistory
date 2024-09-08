@@ -39,7 +39,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
   }))
 
   const animatedDateStyle = useAnimatedStyle(() => ({
-    color: interpolateColor(scrollY.value, [0, 60], ['rgb(255,255,255)', colors.teal]),
+    color: interpolateColor(scrollY.value, [0, 60], ['rgb(255,255,255)', colors.primary]),
     fontSize: 24
   }))
 
