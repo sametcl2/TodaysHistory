@@ -23,21 +23,21 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, on
   }
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', top: -40 }}>
       <Typography variant='h4Bold'>Selected Events</Typography>
       <View style={{ flexDirection: 'row' }}>
         <Pressable onPress={() => handleViewTypeChange(ViewTypes.Grid)}>
           <MaterialIcons
             name='grid-view'
             size={24}
-            color={viewType === ViewTypes.Grid ? colors.primary : colors.grayDark}
+            color={viewType === ViewTypes.Grid ? colors.teal : colors.grayDark}
           />
         </Pressable>
         <Pressable onPress={() => handleViewTypeChange(ViewTypes.List)} style={{ marginLeft: 8 }}>
           <MaterialIcons
             name='list-alt'
             size={24}
-            color={viewType === ViewTypes.List ? colors.primary : colors.grayDark}
+            color={viewType === ViewTypes.List ? colors.teal : colors.grayDark}
           />
         </Pressable>
       </View>

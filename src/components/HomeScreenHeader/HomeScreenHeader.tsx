@@ -31,22 +31,22 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
   const styles = useHomeScreenHeaderStyle()
 
   const fadeOutStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(scrollY.value, [0, 40], [1, 0], Extrapolation.CLAMP)
+    opacity: interpolate(scrollY.value, [0, 60], [1, 0], Extrapolation.CLAMP)
   }))
 
   const headerStyle = useAnimatedStyle(() => ({
-    height: interpolate(scrollY.value, [0, 40], [200, 100], Extrapolation.CLAMP)
+    height: interpolate(scrollY.value, [0, 60], [200, 100], Extrapolation.CLAMP)
   }))
 
   const animatedDateStyle = useAnimatedStyle(() => ({
-    color: interpolateColor(scrollY.value, [0, 40], ['rgb(255,255,255)', colors.primary]),
+    color: interpolateColor(scrollY.value, [0, 60], ['rgb(255,255,255)', colors.teal]),
     fontSize: 24
   }))
 
   const dateTextStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateX: interpolate(scrollY.value, [0, 40], [0, -45], Extrapolation.CLAMP)
+        translateX: interpolate(scrollY.value, [0, 60], [0, -45], Extrapolation.CLAMP)
       }
     ]
   }))
