@@ -34,6 +34,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
   return (
     <Animated.View style={[styles.header, headerStyle]}>
       <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}>
+        {/* <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}> */}
         <View style={{ alignItems: 'center' }}>
           <Animated.View style={dateTextStyle}>
             <Typography variant='bodyBoldLarge' color={'textWhite'}>
