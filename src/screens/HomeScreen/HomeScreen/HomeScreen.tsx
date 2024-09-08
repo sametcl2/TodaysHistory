@@ -1,6 +1,5 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useEffect, useRef } from 'react'
-import { SafeAreaView } from 'react-native'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { Container } from 'components/Container'
 import { Typography } from 'components/elements/Typography'
@@ -46,7 +45,7 @@ export const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView>
+    <>
       <HomeScreenHeader scrollY={scrollY} />
       <Animated.ScrollView
         scrollEventThrottle={16}
@@ -69,6 +68,6 @@ export const HomeScreen = () => {
         </Loader>
       </Animated.ScrollView>
       <WebDrawer ref={bottomSheetRef} />
-    </SafeAreaView>
+    </>
   )
 }

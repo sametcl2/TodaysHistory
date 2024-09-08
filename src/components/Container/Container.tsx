@@ -44,7 +44,7 @@ export const Container: React.FC<AppScreenContainerProps> = ({
 
   return (
     <SafeAreaView style={[styles.container, containerStyles]} {...safeAreaProps}>
-      <StatusBar translucent style='auto' {...statusBarProps} backgroundColor={colors.primary} />
+      <StatusBar translucent style='light' {...statusBarProps} backgroundColor={colors.primary} />
       <ContainerComponent>{children}</ContainerComponent>
     </SafeAreaView>
   )

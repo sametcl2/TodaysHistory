@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next'
-import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated'
 import { View } from 'react-native'
+import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated'
+import { GlobalDatePicker } from 'components/GlobalDatePicker'
 import { Typography } from 'components/elements/Typography'
 import { useSelector } from 'store'
 import { selectCurrentDate } from 'store/date'
 import { HEIGHT } from 'utils/scale'
-import { GlobalDatePicker } from 'components/GlobalDatePicker'
 import { useHomeScreenHeaderStyle } from './HomeScreenHeader.styles'
 
 type HomeScreenHeaderProps = {
@@ -19,7 +19,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
   const styles = useHomeScreenHeaderStyle()
 
   const headerStyle = useAnimatedStyle(() => ({
-    height: interpolate(scrollY.value, [0, 20], [HEIGHT / 4, HEIGHT / 10], Extrapolation.CLAMP)
+    height: interpolate(scrollY.value, [0, 20], [HEIGHT / 4, HEIGHT / 8], Extrapolation.CLAMP)
   }))
 
   const dateTextStyle = useAnimatedStyle(() => ({

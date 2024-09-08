@@ -1,7 +1,7 @@
 export const colors = {
   //Primary
 
-  primary: '#0f2515',
+  primary: '#008080',
   secondary: '#ffd35c',
 
   // Grays
