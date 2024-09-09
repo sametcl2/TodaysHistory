@@ -3,4 +3,7 @@ export type FavoriteType = {
   url: string
   thumbnail?: string
   text: string
+  day: string
+  month: string
+  year: number
 }

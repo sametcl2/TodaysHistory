@@ -3,7 +3,7 @@ import { Typography } from 'components/elements/Typography'
 import { ToggleFavoriteButton } from 'components/ToggleFavoriteButton'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
 import { SelectedType } from 'types/onThisDayAllToday'
-import { useEventCardStyle } from './EventCard.styles'
+import { useEventCardStyles } from './EventCard.styles'
 
 type EventCardProps = {
   item: SelectedType
@@ -13,7 +13,7 @@ type EventCardProps = {
 export const EventCard: React.FC<EventCardProps> = ({ item, onPress }) => {
   const uri = useGetThumbnail(item)
 
-  const styles = useEventCardStyle()
+  const styles = useEventCardStyles()
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.card}>

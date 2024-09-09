@@ -1,6 +1,6 @@
 import { createStyles } from 'theme'
 
-export const useEventCardStyles = createStyles(({ colors }) => ({
+export const useFavoriteCardStyles = createStyles(({ colors, gaps }) => ({
   card: {
     height: 220,
     marginBottom: 20,
@@ -27,5 +27,12 @@ export const useEventCardStyles = createStyles(({ colors }) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8
+  },
+  dateContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  dateItem: {
+    marginLeft: gaps.xxs
   }
 }))

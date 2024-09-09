@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'store'
 import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
 import { PageType } from 'types/events'
+import { ViewTypes, ViewTypeSelector } from 'components/ViewTypeSelector'
 import { useHomeScreenStyles } from './HomeScreen.styles'
-import { ViewTypes, ViewTypeSelector } from './ViewTypeSelector'
 
 export const HomeScreen = () => {
   const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()

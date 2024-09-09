@@ -8,42 +8,50 @@ import { selectCurrentFavorites } from 'store/favorites'
 import { FavoriteType } from 'types/favorite'
 import { SelectedType } from 'types/onThisDayAllToday'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
+import { selectCurrentDate } from 'store/date'
 
 type ToggleFavoriteButtonProps = {
-  item: SelectedType
+  item?: SelectedType
+  favoriteItem?: FavoriteType
 }
 
-export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item }) => {
+export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item, favoriteItem }) => {
   const {
     theme: { colors }
   } = useTheme()
   const currentFavorites = useSelector(selectCurrentFavorites)
+
+  const { day, month } = useSelector(selectCurrentDate)
 
   const thumbnail = useGetThumbnail(item)
 
   const { addToFavorites, removeFromFavorites, isLoading } = useAddRemoveFavorites()
 
   const formattedForFavorite: FavoriteType = useMemo(
-    () => ({
-      id: item.pages[0].tid,
-      thumbnail,
-      text: item.text,
-      url: ''
-    }),
-    [item.pages, item.text, thumbnail]
+    () =>
+      favoriteItem ?? {
+        id: item?.pages[0].tid ?? '',
+        thumbnail,
+        text: item?.text ?? '',
+        url: '',
+        day: day!,
+        month: month!,
+        year: item?.year ?? 0
+      },
+    [day, favoriteItem, item, month, thumbnail]
   )
 
   const isInFavorites = useMemo(
-    () => currentFavorites.some((fav) => fav.id === item.pages[0].tid),
-    [currentFavorites, item.pages]
+    () => !!favoriteItem || currentFavorites.some((fav) => fav.id === item?.pages[0].tid),
+    [currentFavorites, favoriteItem, item?.pages]
   )
 
   const handleAddToFavorites = () => {
-    addToFavorites(formattedForFavorite)
+    addToFavorites(favoriteItem ?? formattedForFavorite)
   }
 
   const handleRemoveFromFavorites = () => {
-    removeFromFavorites(formattedForFavorite)
+    removeFromFavorites(favoriteItem ?? formattedForFavorite)
   }
 
   if (isLoading) {
