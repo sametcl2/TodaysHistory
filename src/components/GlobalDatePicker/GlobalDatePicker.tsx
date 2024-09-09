@@ -38,11 +38,11 @@ export const GlobalDatePicker = () => {
   return (
     <View style={styles.container}>
       <Pressable onPress={handlePrevious}>
-        <MaterialIcons name='chevron-left' size={36} color={colors.primary} />
+        <MaterialIcons name='chevron-left' size={36} color={colors.teal} />
       </Pressable>
       <DatePicker value={selectedDate.currentDate} onChange={handleDateChange} themeVariant='dark' />
       <Pressable onPress={handleNext}>
-        <MaterialIcons name='chevron-right' size={36} color={colors.primary} />
+        <MaterialIcons name='chevron-right' size={36} color={colors.teal} />
       </Pressable>
     </View>
   )
