@@ -30,11 +30,9 @@ export const useAddRemoveFavorites = () => {
   const removeFromFavorites = async (favItem: FavoriteType) => {
     setIsLoading(true)
     try {
-      const newData = currentFavorites.filter((item) => item.id !== favItem.id)
-      if (newData.length) {
-        await saveToLocalStorage(LocalStorageKeys.Favorites, newData)
-        dispatch(setCurrentFavorites(newData))
-      }
+      const newData = [...currentFavorites].filter((item) => item.id !== favItem.id)
+      await saveToLocalStorage(LocalStorageKeys.Favorites, newData)
+      dispatch(setCurrentFavorites(newData))
     } finally {
       setIsLoading(false)
     }

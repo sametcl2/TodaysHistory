@@ -9,11 +9,11 @@ import { FavoriteType } from 'types/favorite'
 import { SelectedType } from 'types/onThisDayAllToday'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
 
-type ToggleFavoritesButtonProps = {
+type ToggleFavoriteButtonProps = {
   item: SelectedType
 }
 
-export const ToggleFavoritesButton: React.FC<ToggleFavoritesButtonProps> = ({ item }) => {
+export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item }) => {
   const {
     theme: { colors }
   } = useTheme()
@@ -23,7 +23,7 @@ export const ToggleFavoritesButton: React.FC<ToggleFavoritesButtonProps> = ({ it
 
   const { addToFavorites, removeFromFavorites, isLoading } = useAddRemoveFavorites()
 
-  const favoriteData: FavoriteType = useMemo(
+  const formattedForFavorite: FavoriteType = useMemo(
     () => ({
       id: item.pages[0].tid,
       thumbnail,
@@ -39,11 +39,11 @@ export const ToggleFavoritesButton: React.FC<ToggleFavoritesButtonProps> = ({ it
   )
 
   const handleAddToFavorites = () => {
-    addToFavorites(favoriteData)
+    addToFavorites(formattedForFavorite)
   }
 
   const handleRemoveFromFavorites = () => {
-    removeFromFavorites(favoriteData)
+    removeFromFavorites(formattedForFavorite)
   }
 
   if (isLoading) {
