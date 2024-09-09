@@ -1,9 +1,15 @@
 import { createStyles } from 'theme'
 
-export const useHomeScreenHeaderStyle = createStyles(() => ({
-  innerContainer: { alignItems: 'center' },
-  textContainer: { flexDirection: 'row' },
-  todayTitle: { marginRight: 6 },
+export const useHomeScreenHeaderStyles = createStyles(() => ({
+  innerContainer: {
+    alignItems: 'center'
+  },
+  textContainer: {
+    flexDirection: 'row'
+  },
+  todayTitle: {
+    marginRight: 6
+  },
   gradient: {
     flex: 1,
     paddingTop: 50,

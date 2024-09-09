@@ -14,6 +14,10 @@
     }
   },
   "refetch": "Retry",
+  "screenTitles": {
+    "favorites": "Favorites",
+    "selectedEvents": "Selected Events"
+  },
   "todayPrefix": "Today is",
   "welcome": "Welcome"
 }

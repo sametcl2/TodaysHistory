@@ -1,3 +1,4 @@
 export enum LocalStorageKeys {
-  Language = 'language'
+  Language = 'language',
+  Favorites = 'favorites'
 }

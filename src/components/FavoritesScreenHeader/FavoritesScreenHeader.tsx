@@ -1,3 +1,6 @@
+import { useTheme } from '@rneui/themed'
+import { LinearGradient } from 'expo-linear-gradient'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, {
@@ -9,26 +12,21 @@ import Animated, {
   useAnimatedStyle,
   withTiming
 } from 'react-native-reanimated'
-import { LinearGradient } from 'expo-linear-gradient'
-import { useTheme } from '@rneui/themed'
-import { useState } from 'react'
-import { GlobalDatePicker } from 'components/GlobalDatePicker'
 import { Typography } from 'components/elements/Typography'
 import { useSelector } from 'store'
 import { selectCurrentDate } from 'store/date'
-import { useHomeScreenHeaderStyles } from './HomeScreenHeader.styles'
+import { useFavoritesScreenHeaderStyles } from './FavoritesScreenHeader.styles'
 
-type HomeScreenHeaderProps = {
+type FavoritesScreenHeaderProps = {
   scrollY: SharedValue<number>
 }
 
-export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) => {
+export const FavoritesScreenHeader: React.FC<FavoritesScreenHeaderProps> = ({ scrollY }) => {
   const { t } = useTranslation()
 
   const {
     theme: { colors }
   } = useTheme()
-  const styles = useHomeScreenHeaderStyles()
 
   const [isVisible, setIsVisible] = useState(true)
 
@@ -44,6 +42,8 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
   )
 
   const { displayValue } = useSelector(selectCurrentDate)
+
+  const styles = useFavoritesScreenHeaderStyles()
 
   const fadeOutStyle = useAnimatedStyle(
     () => ({
@@ -85,7 +85,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
         <View style={styles.innerContainer}>
           <Animated.View style={fadeOutStyle}>
             <Typography variant='bodyBoldLarge' color={'textWhite'}>
-              {t('welcome')}
+              {t('screenTitles.favorites')}
             </Typography>
           </Animated.View>
           <View style={styles.textContainer}>
@@ -101,9 +101,6 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
             </Animated.View>
           </View>
         </View>
-        <Animated.View style={fadeOutStyle}>
-          <GlobalDatePicker />
-        </Animated.View>
       </LinearGradient>
     </Animated.View>
   )

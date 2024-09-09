@@ -4,6 +4,7 @@ import { Container } from 'components/Container'
 import { Loading } from 'components/elements/Loading'
 import { SupportedLanguages } from 'constants/language'
 import { LocalStorageKeys } from 'constants/storage'
+import { useLoadFavorites } from 'hooks/useLoadFavorites'
 import { TabBarNavigation } from 'routes/TabBarNavigation'
 import { useDispatch } from 'store'
 import { setCurrentLanguage } from 'store/language'
@@ -16,6 +17,8 @@ export const AppInitializer = () => {
   const styles = useAppInitializerStyles()
 
   const dispatch = useDispatch()
+
+  const { isLoading: isFavoritesLoading } = useLoadFavorites()
 
   const [isLanguageLoading, setIsLanguageLoading] = useState(true)
 
@@ -39,7 +42,7 @@ export const AppInitializer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (isLanguageLoading) {
+  if (isLanguageLoading || isFavoritesLoading) {
     return (
       <Container contentContainerStyles={styles.contentContainer}>
         <Loading />

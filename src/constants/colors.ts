@@ -5,6 +5,7 @@ export const colors = {
   secondary: '#ffd35c',
 
   teal: '#008080',
+  yellow: '#ffd35c',
 
   // Grays
   black: '#000000',

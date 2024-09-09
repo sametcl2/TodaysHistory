@@ -4,7 +4,7 @@ import { BottomTabBarButtonProps, createBottomTabNavigator } from '@react-naviga
 import { PropsWithChildren } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { colors } from 'constants/colors'
-import { FavoriteScreen } from 'screens/FavoriteScreen'
+import { FavoritesScreen } from 'screens/FavoritesScreen'
 import { HomeScreen } from 'screens/HomeScreen'
 import { SettingScreen } from 'screens/SettingScreen'
 import { useTabBarNavigationStyles } from './TabBarNavigation.styles'
@@ -36,7 +36,7 @@ export const TabBarNavigation = () => {
     >
       <Tab.Screen
         name={TabBarRoutes.Favorites}
-        component={FavoriteScreen}
+        component={FavoritesScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialIcons name='favorite' size={28} color={focused ? colors.teal : colors.grayLight} />

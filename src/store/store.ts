@@ -7,12 +7,14 @@ import toast from './toast'
 import language from './language'
 import data from './data'
 import date from './date'
+import favorites from './favorites'
 
 const combinedReducer = combineReducers({
   language,
   toast,
   data,
   date,
+  favorites,
   [featuredApi.reducerPath]: featuredApi.reducer,
   [onThisDayApi.reducerPath]: onThisDayApi.reducer
 })
