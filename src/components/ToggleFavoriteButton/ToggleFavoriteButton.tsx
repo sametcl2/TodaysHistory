@@ -37,7 +37,8 @@ export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item
         url: '',
         day: day!,
         month: month!,
-        year: item?.year ?? 0
+        year: item?.year ?? 0,
+        pages: item?.pages
       },
     [day, favoriteItem, item, month, thumbnail]
   )

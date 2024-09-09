@@ -1,3 +1,5 @@
+import { PageType } from './events'
+
 export type FavoriteType = {
   id: string
   url: string
@@ -6,4 +8,5 @@ export type FavoriteType = {
   day: string
   month: string
   year: number
+  pages?: PageType[]
 }
