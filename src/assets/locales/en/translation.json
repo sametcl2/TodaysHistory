@@ -1,20 +1,19 @@
 {
+  "error": "Error",
   "http": {
     "error": "Error",
     "success": "Success"
   },
   "messages": {
-    "getFeatured": {
-      "fail": "Error occured while fetching featured data",
-      "success": "Featured data fetched succesfully"
+    "getAllEventsToday": {
+      "error": "Error getting events."
     },
-    "getOnThisDayAll": {
-      "fail": "Error occured while fething all on this day",
-      "success": "All on this day datas fetched succesfully"
+    "getFeaturedEventsToday": {
+      "error": "Error getting events.",
+      "success": ""
     }
   },
-  "general": {
-    "welcome": "Welcome"
-  },
-  "refetch": ""
+  "refetch": "Retry",
+  "todayPrefix": "Today is",
+  "welcome": "Welcome"
 }

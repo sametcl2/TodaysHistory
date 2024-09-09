@@ -1,15 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import { PropsWithChildren } from 'react'
 import { Button } from '@rneui/themed'
-import { Text } from 'react-native'
 import { Container } from 'components/Container'
 import { Loading } from 'components/elements/Loading'
 import { LoaderPropsTypes } from 'types/loader'
+import { Typography } from 'components/elements/Typography'
+import { useLoaderStyles } from './Loader.styles'
 
 type LoaderProps = PropsWithChildren<LoaderPropsTypes>
 
 export const Loader: React.FC<LoaderProps> = ({ error, isError, isFetching, onRefetch, children }) => {
   const { t } = useTranslation()
+
+  const styles = useLoaderStyles()
 
   const refetchQuery = () => {
     onRefetch()
@@ -20,11 +23,18 @@ export const Loader: React.FC<LoaderProps> = ({ error, isError, isFetching, onRe
   }
 
   if (isError && error) {
-    const errMsg = JSON.stringify(error)
     return (
       <Container>
-        <Text>{errMsg}</Text>
-        <Button onPress={refetchQuery}>{t('refetch')}</Button>
+        <Typography variant='bodyLarge' align='center' style={styles.errorMessage}>
+          {t('error')}
+        </Typography>
+        <Typography variant='body' align='center' style={styles.errorMessage}>
+          {/* @ts-ignore */}
+          {error.data?.title}
+        </Typography>
+        <Button containerStyle={styles.button} onPress={refetchQuery}>
+          {t('refetch')}
+        </Button>
       </Container>
     )
   }

@@ -86,13 +86,13 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
         <View style={styles.innerContainer}>
           <Animated.View style={fadeOutStyle}>
             <Typography variant='bodyBoldLarge' color={'textWhite'}>
-              {t('general.welcome')}
+              {t('welcome')}
             </Typography>
           </Animated.View>
           <View style={styles.textContainer}>
             <Animated.View style={[fadeOutStyle, styles.todayTitle]}>
               <Typography variant='h3Bold' color='textWhite'>
-                Today is
+                {t('todayPrefix')}
               </Typography>
             </Animated.View>
             <Animated.View style={dateTextStyle}>
