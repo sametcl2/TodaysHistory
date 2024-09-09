@@ -1,0 +1,1 @@
+export { FavoritesScreenHeader } from './FavoritesScreenHeader'
