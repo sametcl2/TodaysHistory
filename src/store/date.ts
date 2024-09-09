@@ -4,8 +4,8 @@ import { RootState } from './store'
 
 const today = moment()
 
-const day = today.format('D')
-const month = today.format('M')
+const day = today.date().toString()
+const month = (today.month() + 1).toString()
 const displayValue = today.format('MMMM Do')
 
 type InitialDateType = {
@@ -27,11 +27,11 @@ const date = createSlice({
   initialState,
   reducers: {
     setCurrentDate: (state, { payload }: PayloadAction<InitialDateType>) => {
-      const selectedDate = moment(state.currentDate)
+      const selectedDate = moment(payload.currentDate)
       const displayValue = selectedDate.format('MMMM Do')
-      state.currentDate = payload.currentDate
-      state.day = selectedDate.format('D')
-      state.month = selectedDate.format('M')
+      state.currentDate = selectedDate.toDate()
+      state.day = selectedDate.date().toString()
+      state.month = (selectedDate.month() + 1).toString()
       state.displayValue = displayValue
     }
   }

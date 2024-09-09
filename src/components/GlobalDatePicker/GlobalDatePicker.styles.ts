@@ -1,5 +1,9 @@
 import { createStyles } from 'theme'
 
 export const useGlobalDatePickerStyles = createStyles(() => ({
-  container: { flexDirection: 'row' }
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 }))
