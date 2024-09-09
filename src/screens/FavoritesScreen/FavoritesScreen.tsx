@@ -3,14 +3,21 @@ import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native
 import { useTranslation } from 'react-i18next'
 import { Container } from 'components/Container'
 import { ViewTypes, ViewTypeSelector } from 'components/ViewTypeSelector'
-import { useSelector } from 'store'
+import { useDispatch, useSelector } from 'store'
 import { selectCurrentFavorites } from 'store/favorites'
 import { FavoritesScreenHeader } from 'components/FavoritesScreenHeader'
+import { WebDrawer } from 'drawer/WebDrawer'
+import { setCurrentPages } from 'store/data'
+import { PageType } from 'types/events'
 import { FavoriteCard } from './FavoriteCard'
 import { useFavoritesScreenStyles } from './FavoritesScreen.styles'
 
 export const FavoritesScreen = () => {
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false)
+
   const { t } = useTranslation()
+
+  const dispatch = useDispatch()
 
   const styles = useFavoritesScreenStyles()
 
@@ -30,6 +37,13 @@ export const FavoritesScreen = () => {
     setViewType(selectedType)
   }
 
+  const onPress = (pages?: PageType[]) => {
+    const urls: { url: string; title: string }[] = []
+    pages?.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
+    dispatch(setCurrentPages(urls))
+    setIsDrawerVisible(true)
+  }
+
   return (
     <>
       <FavoritesScreenHeader scrollY={scrollY} />
@@ -44,9 +58,10 @@ export const FavoritesScreen = () => {
           showsVerticalScrollIndicator={false}
           data={favorites}
           initialNumToRender={16}
-          renderItem={({ item, index }) => <FavoriteCard key={index} item={item} onPress={() => {}} />}
+          renderItem={({ item, index }) => <FavoriteCard key={index} item={item} onPress={() => onPress(item.pages)} />}
         />
       </Container>
+      {isDrawerVisible && <WebDrawer isOpen={isDrawerVisible} onDismiss={setIsDrawerVisible} />}
     </>
   )
 }
