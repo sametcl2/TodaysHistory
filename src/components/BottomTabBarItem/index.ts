@@ -1,0 +1,1 @@
+export { BottomTabBarItem } from './BottomTabBarItem'
