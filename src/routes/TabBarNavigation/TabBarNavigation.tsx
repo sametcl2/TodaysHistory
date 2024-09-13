@@ -1,19 +1,15 @@
 import Feather from '@expo/vector-icons/Feather'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import { BottomTabBarButtonProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { PropsWithChildren } from 'react'
+import { BottomTabBarButtonProps, BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { PropsWithChildren, useCallback } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { colors } from 'constants/colors'
 import { FavoritesScreen } from 'screens/FavoritesScreen'
 import { HomeScreen } from 'screens/HomeScreen'
 import { SettingScreen } from 'screens/SettingScreen'
+import { BottomTabBar } from 'components/BottomTabBar'
 import { useTabBarNavigationStyles } from './TabBarNavigation.styles'
-
-export enum TabBarRoutes {
-  Home = 'Home',
-  Favorites = 'Favorite',
-  Settings = 'Setting'
-}
+import { bottomTabBarItemOptions, TabBarNavigatorRoutes } from './tabBarRoutes'
 
 const Tab = createBottomTabNavigator()
 
@@ -23,19 +19,23 @@ const CustomTabBarButton = ({ onPress, style, children }: PropsWithChildren<Bott
   </TouchableOpacity>
 )
 
+const screenOptions = {
+  tabBarShowLabel: false,
+  headerShown: false
+}
+
 export const TabBarNavigation = () => {
   const styles = useTabBarNavigationStyles()
 
+  const TabBar = useCallback(
+    (props: BottomTabBarProps) => <BottomTabBar items={Object.values(bottomTabBarItemOptions)} {...props} />,
+    []
+  )
+
   return (
-    <Tab.Navigator
-      initialRouteName={TabBarRoutes.Home}
-      screenOptions={{
-        tabBarShowLabel: false,
-        headerShown: false
-      }}
-    >
+    <Tab.Navigator tabBar={TabBar} initialRouteName={TabBarNavigatorRoutes.Home} screenOptions={screenOptions}>
       <Tab.Screen
-        name={TabBarRoutes.Favorites}
+        name={TabBarNavigatorRoutes.Favorites}
         component={FavoritesScreen}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -44,7 +44,7 @@ export const TabBarNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={TabBarRoutes.Home}
+        name={TabBarNavigatorRoutes.Home}
         component={HomeScreen}
         options={{
           tabBarButton: (props) => <CustomTabBarButton {...props} style={styles.customButton} />,
@@ -52,7 +52,7 @@ export const TabBarNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={TabBarRoutes.Settings}
+        name={TabBarNavigatorRoutes.Settings}
         component={SettingScreen}
         options={{
           tabBarIcon: ({ focused }) => (

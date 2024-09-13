@@ -7,3 +7,5 @@ export const get = (object: Record<string, unknown>, path: string | Record<strin
   }
   return path.reduce((xs: { [x: string]: unknown }, x: string | number) => (xs && xs[x] ? xs[x] : defval), object)
 }
+
+export const t = (s: string) => s
