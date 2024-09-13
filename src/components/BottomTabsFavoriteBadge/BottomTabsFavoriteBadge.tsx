@@ -4,16 +4,17 @@ import Animated, { CurvedTransition, FadeInUp, FadeOutDown } from 'react-native-
 
 import { Badge } from '@rneui/themed'
 
-import { useBottomTabBarBadgeStyles } from './BottomTabBarBadge.styles'
+import { useSelector } from 'store'
+import { selectCurrentFavorites } from 'store/favorites'
+import { useBottomTabsFavoriteBadgeStyles } from './BottomTabsFavoriteBadge.styles'
 
 const BADGE_ANIMATION_DURATION = 200
 
-export type BottomTabBarBadgeComponentProps = {
-  count: number
-}
+export const BottomTabsFavoriteBadgeComponent = () => {
+  const styles = useBottomTabsFavoriteBadgeStyles()
 
-export const BottomTabBarBadgeComponent: React.FC<BottomTabBarBadgeComponentProps> = ({ count }) => {
-  const styles = useBottomTabBarBadgeStyles()
+  const currentFavorites = useSelector(selectCurrentFavorites)
+  const count = currentFavorites.length
 
   const show = count > 0
 
@@ -44,4 +45,4 @@ export const BottomTabBarBadgeComponent: React.FC<BottomTabBarBadgeComponentProp
   )
 }
 
-export const BottomTabBarBadge = memo(BottomTabBarBadgeComponent)
+export const BottomTabsFavoriteBadge = memo(BottomTabsFavoriteBadgeComponent)

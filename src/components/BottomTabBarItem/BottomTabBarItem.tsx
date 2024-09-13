@@ -81,7 +81,7 @@ const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }
       <Animated.View style={[animatedStyles]}>
         <Animated.View style={[styles.icon]}>{renderIcon(item.icon)}</Animated.View>
       </Animated.View>
-      {/* {!!item.hasBadge && <BottomTabBarBadge count={2} />} */}
+      {!isActive && item.badge}
     </Pressable>
   )
 }

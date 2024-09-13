@@ -1,6 +1,7 @@
 import { Feather, MaterialIcons } from '@expo/vector-icons'
 import { NavigatorScreenParams, RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { BottomTabsFavoriteBadge } from 'components/BottomTabsFavoriteBadge'
 import { BottomTabBarItemType } from 'types/bottomTabs'
 import { t } from 'utils/common'
 
@@ -21,7 +22,8 @@ export const bottomTabBarItemOptions: Record<TabBarNavigatorRoutes, BottomTabBar
     id: TabBarNavigatorRoutes.Favorites,
     title: t('bottomTabs.analysis'),
     routeName: TabBarNavigatorRoutes.Favorites,
-    icon: <MaterialIcons name='favorite' size={28} />
+    icon: <MaterialIcons name='favorite' size={28} />,
+    badge: <BottomTabsFavoriteBadge />
   },
   [TabBarNavigatorRoutes.Home]: {
     id: TabBarNavigatorRoutes.Home,

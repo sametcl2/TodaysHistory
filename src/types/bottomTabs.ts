@@ -6,6 +6,7 @@ export type BottomTabBarItemType<T extends string> = {
   icon: JSX.Element
   routeName: T
   isTabBarHidden?: boolean
+  badge?: JSX.Element
   params?: Record<string, unknown>
   onPress?: () => void
 }

@@ -1,22 +1,22 @@
 import { createStyles } from 'theme'
 
-export const useBottomTabBarBadgeStyles = createStyles(({ colors }) => ({
+export const useBottomTabsFavoriteBadgeStyles = createStyles(({ colors }) => ({
   badge: {
     position: 'absolute',
-    transform: [{ translateX: 12 }, { translateY: 6 }]
+    transform: [{ translateX: 18 }, { translateY: -8 }]
   },
   container: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.teal,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 18,
-    width: 18,
-    height: 18,
+    width: 24,
+    height: 24,
     overflow: 'visible'
   },
   text: {
-    fontSize: 10,
+    fontSize: 12,
     textAlign: 'center',
     color: colors.white,
     fontWeight: '500'

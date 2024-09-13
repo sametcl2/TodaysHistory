@@ -4,7 +4,7 @@ import { isAndroid } from 'utils/platform'
 export const useBottomTabBarStyles = createStyles(({ gaps, colors }) => ({
   container: {
     position: 'absolute',
-    height: 110,
+    height: 80,
     bottom: 0,
     borderTopWidth: isAndroid ? 1 : undefined,
     borderTopColor: isAndroid ? colors.grayLighter : undefined,
