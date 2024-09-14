@@ -94,7 +94,7 @@ const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }
       </Animated.View>
       {isActive && (
         <Animated.View entering={FadeInUp} exiting={FadeOutUp} layout={CurvedTransition}>
-          <Typography variant='bodyBold' color='grayLight'>
+          <Typography variant='bodyBold' color='teal'>
             {t(item.title)}
           </Typography>
         </Animated.View>
