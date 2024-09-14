@@ -15,13 +15,14 @@ import Animated, {
 import { Typography } from 'components/elements/Typography'
 import { useSelector } from 'store'
 import { selectCurrentDate } from 'store/date'
-import { useFavoritesScreenHeaderStyles } from './FavoritesScreenHeader.styles'
+import { useFavoritesScreenHeaderStyles } from './AppScreenHeader.styles'
 
-type FavoritesScreenHeaderProps = {
+type AppScreenHeaderProps = {
   scrollY: SharedValue<number>
+  title: string
 }
 
-export const FavoritesScreenHeader: React.FC<FavoritesScreenHeaderProps> = ({ scrollY }) => {
+export const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({ title, scrollY }) => {
   const { t } = useTranslation()
 
   const {
@@ -85,7 +86,7 @@ export const FavoritesScreenHeader: React.FC<FavoritesScreenHeaderProps> = ({ sc
         <View style={styles.innerContainer}>
           <Animated.View style={fadeOutStyle}>
             <Typography variant='bodyBoldLarge' color={'textWhite'}>
-              {t('screenTitles.favorites')}
+              {title}
             </Typography>
           </Animated.View>
           <View style={styles.textContainer}>

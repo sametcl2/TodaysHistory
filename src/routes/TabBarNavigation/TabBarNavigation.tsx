@@ -1,9 +1,9 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useCallback } from 'react'
+import { SettingsScreen } from 'screens/SettingsScreen'
 import { BottomTabBar } from 'components/BottomTabBar'
 import { FavoritesScreen } from 'screens/FavoritesScreen'
 import { HomeScreen } from 'screens/HomeScreen'
-import { SettingScreen } from 'screens/SettingScreen'
 import { bottomTabBarItemOptions, TabBarNavigatorRoutes } from './tabBarRoutes'
 
 const Tab = createBottomTabNavigator()
@@ -23,7 +23,7 @@ export const TabBarNavigation = () => {
     <Tab.Navigator tabBar={TabBar} initialRouteName={TabBarNavigatorRoutes.Home} screenOptions={screenOptions}>
       <Tab.Screen name={TabBarNavigatorRoutes.Favorites} component={FavoritesScreen} />
       <Tab.Screen name={TabBarNavigatorRoutes.Home} component={HomeScreen} />
-      <Tab.Screen name={TabBarNavigatorRoutes.Settings} component={SettingScreen} />
+      <Tab.Screen name={TabBarNavigatorRoutes.Settings} component={SettingsScreen} />
     </Tab.Navigator>
   )
 }

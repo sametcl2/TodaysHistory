@@ -14,9 +14,10 @@ type ViewTypeSelectorProps = {
   viewType: ViewTypes
   onChange: (selectedType: ViewTypes) => void
   title?: string
+  hideViewType?: boolean
 }
 
-export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, onChange, title }) => {
+export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, onChange, title, hideViewType }) => {
   const { t } = useTranslation()
 
   const {
@@ -32,22 +33,24 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, on
   return (
     <View style={styles.container}>
       <Typography variant='h4Bold'>{title ?? t('screenTitles.selectedEvents')}</Typography>
-      <View style={styles.buttonsContainer}>
-        <Pressable onPress={() => handleViewTypeChange(ViewTypes.Grid)}>
-          <MaterialIcons
-            name='grid-view'
-            size={24}
-            color={viewType === ViewTypes.Grid ? colors.teal : colors.grayDark}
-          />
-        </Pressable>
-        <Pressable onPress={() => handleViewTypeChange(ViewTypes.List)} style={styles.buttonLast}>
-          <MaterialIcons
-            name='list-alt'
-            size={24}
-            color={viewType === ViewTypes.List ? colors.teal : colors.grayDark}
-          />
-        </Pressable>
-      </View>
+      {!hideViewType && (
+        <View style={styles.buttonsContainer}>
+          <Pressable onPress={() => handleViewTypeChange(ViewTypes.Grid)}>
+            <MaterialIcons
+              name='grid-view'
+              size={24}
+              color={viewType === ViewTypes.Grid ? colors.teal : colors.grayDark}
+            />
+          </Pressable>
+          <Pressable onPress={() => handleViewTypeChange(ViewTypes.List)} style={styles.buttonLast}>
+            <MaterialIcons
+              name='list-alt'
+              size={24}
+              color={viewType === ViewTypes.List ? colors.teal : colors.grayDark}
+            />
+          </Pressable>
+        </View>
+      )}
     </View>
   )
 }

@@ -5,7 +5,7 @@ import { Container } from 'components/Container'
 import { ViewTypes, ViewTypeSelector } from 'components/ViewTypeSelector'
 import { useDispatch, useSelector } from 'store'
 import { selectCurrentFavorites } from 'store/favorites'
-import { FavoritesScreenHeader } from 'components/FavoritesScreenHeader'
+import { AppScreenHeader } from 'components/AppScreenHeader'
 import { WebDrawer } from 'drawer/WebDrawer'
 import { setCurrentPages } from 'store/data'
 import { PageType } from 'types/events'
@@ -46,7 +46,7 @@ export const FavoritesScreen = () => {
 
   return (
     <>
-      <FavoritesScreenHeader scrollY={scrollY} />
+      <AppScreenHeader scrollY={scrollY} title={t('screenTitles.favorites')} />
       <Container>
         <ViewTypeSelector viewType={viewType} onChange={handleViewTypeChange} title={t('screenTitles.favorites')} />
         <Animated.FlatList
