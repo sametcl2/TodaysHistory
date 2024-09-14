@@ -20,7 +20,7 @@ export type TabBarNavigationParamsList = {
 export const bottomTabBarItemOptions: Record<TabBarNavigatorRoutes, BottomTabBarItemType<TabBarNavigatorRoutes>> = {
   [TabBarNavigatorRoutes.Favorites]: {
     id: TabBarNavigatorRoutes.Favorites,
-    title: t('bottomTabs.analysis'),
+    title: t('bottomTabs.favorites'),
     routeName: TabBarNavigatorRoutes.Favorites,
     icon: <MaterialIcons name='favorite' size={28} />,
     badge: <BottomTabsFavoriteBadge />
@@ -33,7 +33,7 @@ export const bottomTabBarItemOptions: Record<TabBarNavigatorRoutes, BottomTabBar
   },
   [TabBarNavigatorRoutes.Settings]: {
     id: TabBarNavigatorRoutes.Settings,
-    title: t('bottomTabs.statistics'),
+    title: t('bottomTabs.settings'),
     routeName: TabBarNavigatorRoutes.Settings,
     icon: <Feather name='settings' size={28} />
   }

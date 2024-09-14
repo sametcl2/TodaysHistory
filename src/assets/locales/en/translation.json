@@ -1,4 +1,9 @@
 {
+  "bottomTabs": {
+    "favorites": "Favorites",
+    "home": "Home",
+    "settings": "Settings"
+  },
   "error": "Error",
   "http": {
     "error": "Error",
