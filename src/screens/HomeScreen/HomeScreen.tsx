@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
+import { RefreshControl } from 'react-native-gesture-handler'
+import { useTheme } from '@rneui/themed'
+import { useTranslation } from 'react-i18next'
 import { Container } from 'components/Container'
 import { EventCard } from 'components/EventCard'
 import { HomeScreenHeader } from 'components/HomeScreenHeader'
@@ -14,6 +17,12 @@ import { ViewTypes, ViewTypeSelector } from 'components/ViewTypeSelector'
 import { useHomeScreenStyles } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
+  const { t } = useTranslation()
+
+  const {
+    theme: { colors }
+  } = useTheme()
+
   const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()
   const { month, day } = useSelector(selectCurrentDate)
 
@@ -22,6 +31,8 @@ export const HomeScreen = () => {
   const [viewType, setViewType] = useState(ViewTypes.List)
 
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
+
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     if (day && month) {
@@ -51,6 +62,17 @@ export const HomeScreen = () => {
     setViewType(selectedType)
   }
 
+  const handleRefresh = () => {
+    if (day && month) {
+      setIsRefreshing(true)
+      fetchAllEvents({ day, month })
+        .unwrap()
+        .finally(() => {
+          setIsRefreshing(false)
+        })
+    }
+  }
+
   return (
     <>
       <HomeScreenHeader scrollY={scrollY} />
@@ -72,6 +94,18 @@ export const HomeScreen = () => {
             data={allTypesData?.selected}
             initialNumToRender={16}
             renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
+            refreshControl={
+              <RefreshControl
+                onRefresh={handleRefresh}
+                refreshing={!!isRefreshing}
+                size={36}
+                tintColor={colors.teal}
+                colors={[colors.teal, colors.primary]}
+                title={t('pullToRefresh')}
+                titleColor={colors.teal}
+                progressBackgroundColor={colors.teal}
+              />
+            }
           />
         </Container>
       </Loader>

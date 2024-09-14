@@ -18,6 +18,7 @@
       "success": ""
     }
   },
+  "pullToRefresh": "Pull to refresh",
   "refetch": "Retry",
   "screenTitles": {
     "favorites": "Favorites",
