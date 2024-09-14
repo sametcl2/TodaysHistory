@@ -41,7 +41,7 @@ const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }
       flexDirection: 'row',
       justifyContent: 'center',
       borderRadius: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [40, 40])),
-      top: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [0, -40]))
+      top: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [0, -36]))
     }),
     [isActive]
   )
@@ -53,7 +53,7 @@ const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }
       height: 80,
       borderRadius: 40,
       transform: [{ scale: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [0, 1])) }],
-      top: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [0, -64])),
+      top: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [0, -60])),
       backgroundColor: withTiming(interpolateColor(isActive ? 1 : 0, [0, 1], [colors.white, colors.teal])),
       shadowColor: isActive ? colors.grayDark : colors.transparent,
       shadowOffset: {
