@@ -22,7 +22,8 @@
   "refetch": "Retry",
   "screenTitles": {
     "favorites": "Favorites",
-    "selectedEvents": "Selected Events"
+    "selectedEvents": "Selected Events",
+    "settings": "Settings"
   },
   "todayPrefix": "Today is",
   "welcome": "Welcome"
