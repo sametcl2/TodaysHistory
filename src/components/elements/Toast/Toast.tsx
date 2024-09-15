@@ -16,7 +16,7 @@ export const Toast = () => {
     theme: { colors }
   } = useTheme()
 
-  const { title, subTitle, show, type } = toast
+  const { title, subTitle, show, type, duration } = toast
 
   const styles = useToastStyles({ type })
 
@@ -24,13 +24,13 @@ export const Toast = () => {
     if (show) {
       const timeout = setTimeout(() => {
         dispatch(hideToast())
-      }, 2000)
+      }, duration ?? 3000)
 
       return () => {
         clearTimeout(timeout)
       }
     }
-  }, [dispatch, show])
+  }, [dispatch, duration, show])
 
   const handleTouch = () => {
     dispatch(hideToast())
