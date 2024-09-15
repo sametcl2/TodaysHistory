@@ -3,6 +3,8 @@ import { ToastTypes } from 'types/toast'
 
 export const useToastStyles = createStyles(({ colors, gaps }, { type }: { type: ToastTypes }) => ({
   commonToastStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
     height: 72,
     borderRadius: 8,
     margin: gaps.xs,
@@ -19,6 +21,13 @@ export const useToastStyles = createStyles(({ colors, gaps }, { type }: { type: 
     right: 0,
     left: 0,
     zIndex: 100,
-    backgroundColor: type === 'success' ? colors.gray : colors.errorBG
+    backgroundColor: type === 'success' ? colors.gray : colors.primary
+  },
+  textContainer: {
+    marginLeft: gaps.md
+  },
+  title: {
+    marginBottom: gaps.xxxs,
+    fontWeight: '500'
   }
 }))
