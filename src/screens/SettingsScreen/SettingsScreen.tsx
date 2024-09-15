@@ -3,6 +3,7 @@ import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native
 import { AppScreenHeader } from 'components/AppScreenHeader'
 import { Container } from 'components/Container'
 import { ViewTypeSelector } from 'components/ViewTypeSelector'
+import { DividerTitle } from 'components/elements/DividerTitle'
 import { useSettingsScreenStyles } from './SettingsScreen.styles'
 
 export const SettingsScreen = () => {
@@ -22,14 +23,16 @@ export const SettingsScreen = () => {
     <>
       <AppScreenHeader scrollY={scrollY} title={t('screenTitles.settings')} />
       <Container>
-        <ViewTypeSelector title={t('screenTitles.settings')} hideViewType />
         <Animated.ScrollView
           scrollEventThrottle={16}
           onScroll={scrollHandler}
           style={styles.cardList}
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
-        />
+        >
+          <ViewTypeSelector title={t('viewType')} containerStyle={styles.viewTypeSelector} />
+          <DividerTitle size={20} direction='horizontal' dividerColor='grayLight' />
+        </Animated.ScrollView>
       </Container>
     </>
   )

@@ -7,5 +7,9 @@ export const useSettingsScreenStyles = createStyles(() => ({
   },
   cardList: {
     flex: 1
+  },
+  viewTypeSelector: {
+    top: 0,
+    marginBottom: 0
   }
 }))

@@ -1,8 +1,9 @@
+import { useTheme } from '@rneui/themed'
 import { StatusBar, StatusBarProps } from 'expo-status-bar'
 import { PropsWithChildren, useMemo } from 'react'
-import { ScrollView, ScrollViewProps, StyleProp, View, ViewStyle } from 'react-native'
+import { ScrollViewProps, StyleProp, View, ViewStyle } from 'react-native'
+import Animated from 'react-native-reanimated'
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context'
-import { useTheme } from '@rneui/themed'
 import { useContainerStyles } from './Container.styles'
 
 type AppScreenContainerProps = PropsWithChildren<{
@@ -32,9 +33,12 @@ export const Container: React.FC<AppScreenContainerProps> = ({
   const ContainerComponent = useMemo(() => {
     const containerElement: React.FC<PropsWithChildren> = ({ children }) =>
       scrollable ? (
-        <ScrollView contentContainerStyle={[styles.scrollContent, contentContainerStyles]} {...scrollViewProps}>
+        <Animated.ScrollView
+          contentContainerStyle={[styles.scrollContent, contentContainerStyles]}
+          {...scrollViewProps}
+        >
           {children}
-        </ScrollView>
+        </Animated.ScrollView>
       ) : (
         <View style={styles.container}>{children}</View>
       )

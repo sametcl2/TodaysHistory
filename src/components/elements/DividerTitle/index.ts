@@ -1,0 +1,1 @@
+export { DividerTitle } from './DividerTitle'
