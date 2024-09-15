@@ -3,22 +3,23 @@ import { useTheme } from '@rneui/themed'
 import { View, Pressable } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import { Typography } from 'components/elements/Typography'
+import { ViewTypes } from 'constants/view'
+import { useDispatch, useSelector } from 'store'
+import { selectCurrentViewType, setCurrentViewType } from 'store/viewType'
+import { saveToLocalStorage } from 'utils/storage'
+import { LocalStorageKeys } from 'constants/storage'
 import { useViewTypeSelectorStyles } from './ViewTypeSelector.styles'
 
-export enum ViewTypes {
-  Grid = 'Grid',
-  List = 'List'
-}
-
 type ViewTypeSelectorProps = {
-  viewType: ViewTypes
-  onChange: (selectedType: ViewTypes) => void
   title?: string
   hideViewType?: boolean
 }
 
-export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, onChange, title, hideViewType }) => {
+export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ title, hideViewType }) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+
+  const viewType = useSelector(selectCurrentViewType)
 
   const {
     theme: { colors }
@@ -26,8 +27,9 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ viewType, on
 
   const styles = useViewTypeSelectorStyles()
 
-  const handleViewTypeChange = (selectedType: ViewTypes) => {
-    onChange(selectedType)
+  const handleViewTypeChange = async (selectedType: ViewTypes) => {
+    await saveToLocalStorage(LocalStorageKeys.ViewType, selectedType)
+    dispatch(setCurrentViewType(selectedType))
   }
 
   return (

@@ -9,6 +9,8 @@ import { TabBarNavigation } from 'routes/TabBarNavigation'
 import { useDispatch } from 'store'
 import { setCurrentLanguage } from 'store/language'
 import { getValueFromLocalStorage } from 'utils/storage'
+import { ViewTypes } from 'constants/view'
+import { setCurrentViewType } from 'store/viewType'
 import { useAppInitializerStyles } from './AppInitializer.styles'
 
 export const AppInitializer = () => {
@@ -21,6 +23,7 @@ export const AppInitializer = () => {
   const { isLoading: isFavoritesLoading } = useLoadFavorites()
 
   const [isLanguageLoading, setIsLanguageLoading] = useState(true)
+  const [isViewTypeLoading, setIsViewTypeLoading] = useState(true)
 
   const getSavedLanguage = async () => {
     try {
@@ -37,12 +40,26 @@ export const AppInitializer = () => {
     }
   }
 
+  const getSelectedViewType = async () => {
+    try {
+      const selectedVariant = await getValueFromLocalStorage<ViewTypes>(LocalStorageKeys.ViewType)
+      if (selectedVariant) {
+        dispatch(setCurrentViewType(selectedVariant))
+      }
+    } catch (error) {
+      console.error('Error getting view type from LocalStorage')
+    } finally {
+      setIsViewTypeLoading(false)
+    }
+  }
+
   useEffect(() => {
     getSavedLanguage()
+    getSelectedViewType()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (isLanguageLoading || isFavoritesLoading) {
+  if (isLanguageLoading || isFavoritesLoading || isViewTypeLoading) {
     return (
       <Container contentContainerStyles={styles.contentContainer}>
         <Loading />

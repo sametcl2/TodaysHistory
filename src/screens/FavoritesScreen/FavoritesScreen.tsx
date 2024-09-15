@@ -2,13 +2,15 @@ import { useState } from 'react'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { useTranslation } from 'react-i18next'
 import { Container } from 'components/Container'
-import { ViewTypes, ViewTypeSelector } from 'components/ViewTypeSelector'
+import { ViewTypeSelector } from 'components/ViewTypeSelector'
 import { useDispatch, useSelector } from 'store'
 import { selectCurrentFavorites } from 'store/favorites'
 import { AppScreenHeader } from 'components/AppScreenHeader'
 import { WebDrawer } from 'drawer/WebDrawer'
 import { setCurrentPages } from 'store/data'
 import { PageType } from 'types/events'
+import { selectCurrentViewType } from 'store/viewType'
+import { ViewTypes } from 'constants/view'
 import { FavoriteCard } from './FavoriteCard'
 import { useFavoritesScreenStyles } from './FavoritesScreen.styles'
 
@@ -22,8 +24,7 @@ export const FavoritesScreen = () => {
   const styles = useFavoritesScreenStyles()
 
   const favorites = useSelector(selectCurrentFavorites)
-
-  const [viewType, setViewType] = useState(ViewTypes.List)
+  const viewType = useSelector(selectCurrentViewType)
 
   const scrollY = useSharedValue(0)
 
@@ -32,10 +33,6 @@ export const FavoritesScreen = () => {
       scrollY.value = event.contentOffset.y
     }
   })
-
-  const handleViewTypeChange = (selectedType: ViewTypes) => {
-    setViewType(selectedType)
-  }
 
   const onPress = (pages?: PageType[]) => {
     const urls: { url: string; title: string }[] = []
@@ -48,12 +45,13 @@ export const FavoritesScreen = () => {
     <>
       <AppScreenHeader scrollY={scrollY} title={t('screenTitles.favorites')} />
       <Container>
-        <ViewTypeSelector viewType={viewType} onChange={handleViewTypeChange} title={t('screenTitles.favorites')} />
+        <ViewTypeSelector title={t('screenTitles.favorites')} />
         <Animated.FlatList
           key={viewType}
           scrollEventThrottle={16}
           onScroll={scrollHandler}
           style={styles.cardList}
+          contentContainerStyle={styles.contentContainer}
           numColumns={viewType === ViewTypes.Grid ? 2 : 1}
           showsVerticalScrollIndicator={false}
           data={favorites}

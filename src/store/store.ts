@@ -8,6 +8,7 @@ import language from './language'
 import data from './data'
 import date from './date'
 import favorites from './favorites'
+import viewType from './viewType'
 
 const combinedReducer = combineReducers({
   language,
@@ -15,6 +16,7 @@ const combinedReducer = combineReducers({
   data,
   date,
   favorites,
+  viewType,
   [featuredApi.reducerPath]: featuredApi.reducer,
   [onThisDayApi.reducerPath]: onThisDayApi.reducer
 })
