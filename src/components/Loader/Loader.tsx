@@ -32,7 +32,7 @@ export const Loader: React.FC<LoaderProps> = ({ error, isError, isFetching, onRe
   if (isError && error) {
     return (
       <Container>
-        <Typography variant='bodyLarge' align='center' style={styles.errorMessage}>
+        <Typography variant='bodyLarge' align='center' style={styles.errorMessage} color='primary'>
           {t('error')}
         </Typography>
         <Typography variant='body' align='center' style={styles.errorMessage}>
