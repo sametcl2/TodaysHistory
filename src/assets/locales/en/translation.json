@@ -26,5 +26,6 @@
     "settings": "Settings"
   },
   "todayPrefix": "Today is",
+  "viewType": "Display Style",
   "welcome": "Welcome"
 }

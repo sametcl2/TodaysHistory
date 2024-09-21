@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { ToastTypes } from 'types/toast'
 // eslint-disable-next-line import/no-cycle
@@ -9,6 +9,7 @@ type InitialStateType = {
   subTitle: string
   show: boolean
   type?: ToastTypes
+  duration?: number
 }
 
 export const initialState: InitialStateType = {
@@ -22,17 +23,19 @@ const toast = createSlice({
   name: 'error',
   initialState,
   reducers: {
-    showToast: (state, { payload }) => {
+    showToast: (state, { payload }: PayloadAction<InitialStateType>) => {
       state.title = payload.title
       state.subTitle = payload.subTitle
       state.show = payload.show
       state.type = payload.type
+      state.duration = payload.duration
     },
     hideToast: (state) => {
       state.title = ''
       state.subTitle = ''
       state.show = false
       state.type = undefined
+      state.duration = undefined
     }
   }
 })

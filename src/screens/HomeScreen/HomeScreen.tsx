@@ -13,7 +13,9 @@ import { useDispatch, useSelector } from 'store'
 import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
 import { PageType } from 'types/events'
-import { ViewTypes, ViewTypeSelector } from 'components/ViewTypeSelector'
+import { ViewTypeSelector } from 'components/ViewTypeSelector'
+import { selectCurrentViewType } from 'store/viewType'
+import { ViewTypes } from 'constants/view'
 import { useHomeScreenStyles } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
@@ -28,7 +30,7 @@ export const HomeScreen = () => {
 
   const styles = useHomeScreenStyles()
 
-  const [viewType, setViewType] = useState(ViewTypes.List)
+  const viewType = useSelector(selectCurrentViewType)
 
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
 
@@ -58,10 +60,6 @@ export const HomeScreen = () => {
     setIsDrawerVisible(true)
   }
 
-  const handleViewTypeChange = (selectedType: ViewTypes) => {
-    setViewType(selectedType)
-  }
-
   const handleRefresh = () => {
     if (day && month) {
       setIsRefreshing(true)
@@ -83,12 +81,13 @@ export const HomeScreen = () => {
         onRefetch={() => fetchAllEvents({ day: day!, month: month! })}
       >
         <Container>
-          <ViewTypeSelector viewType={viewType} onChange={handleViewTypeChange} />
+          <ViewTypeSelector />
           <Animated.FlatList
             key={viewType}
             scrollEventThrottle={16}
             onScroll={scrollHandler}
             style={styles.cardList}
+            contentContainerStyle={styles.contentContainer}
             numColumns={viewType === ViewTypes.Grid ? 2 : 1}
             showsVerticalScrollIndicator={false}
             data={allTypesData?.selected}
