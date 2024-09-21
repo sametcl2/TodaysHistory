@@ -14,11 +14,14 @@ const favorites = createSlice({
   reducers: {
     setCurrentFavorites: (state, { payload: currentFavorites }: PayloadAction<FavoriteType[]>) => {
       state.currentFavorites = currentFavorites
+    },
+    clearCurrentFavorites: (state) => {
+      state.currentFavorites = []
     }
   }
 })
 
-export const { setCurrentFavorites } = favorites.actions
+export const { setCurrentFavorites, clearCurrentFavorites } = favorites.actions
 
 export default favorites.reducer
 

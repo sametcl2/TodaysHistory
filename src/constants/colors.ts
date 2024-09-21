@@ -17,6 +17,9 @@ export const colors = {
   white: '#ffffff',
   lineThrough: '#676666',
   drawer: '#f5f6f8',
+  gray2: '#f0f0f0',
+  gray10: '#f0f2ef',
+  gray13: '#2c3f5c',
 
   //Categorical
   transparent: 'rgba(0, 0, 0, 0)', // should be in rgba format to support animated styles
@@ -26,7 +29,7 @@ export const colors = {
   warningBGDark: '#e5dad5',
   warningFG: '#af3d08',
   errorBG: '#fff8f8',
-  errorFG: '#bb0000',
+  errorFG: '#ff4d4d',
   infoBG: '#eaf3e9',
   successFG: '#21691a',
 
@@ -36,5 +39,7 @@ export const colors = {
 
   // Typogrphy
   textWhite: '#fdfdfd',
-  textBlack: '#3c3c3c'
+  textBlack: '#3c3c3c',
+
+  buttonPrimary: '#0359e8'
 }

@@ -4,6 +4,7 @@ import { AppScreenHeader } from 'components/AppScreenHeader'
 import { Container } from 'components/Container'
 import { ViewTypeSelector } from 'components/ViewTypeSelector'
 import { DividerTitle } from 'components/elements/DividerTitle'
+import { RemoveAllFavroitesButton } from 'components/RemoveAllFavroitesButton'
 import { useSettingsScreenStyles } from './SettingsScreen.styles'
 
 export const SettingsScreen = () => {
@@ -32,6 +33,7 @@ export const SettingsScreen = () => {
         >
           <ViewTypeSelector title={t('viewType')} containerStyle={styles.viewTypeSelector} />
           <DividerTitle size={20} direction='horizontal' dividerColor='grayLight' />
+          <RemoveAllFavroitesButton />
         </Animated.ScrollView>
       </Container>
     </>
