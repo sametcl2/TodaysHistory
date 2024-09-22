@@ -20,9 +20,10 @@ import { useFavoritesScreenHeaderStyles } from './AppScreenHeader.styles'
 type AppScreenHeaderProps = {
   scrollY: SharedValue<number>
   title: string
+  showDate?: boolean
 }
 
-export const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({ title, scrollY }) => {
+export const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({ title, scrollY, showDate = true }) => {
   const { t } = useTranslation()
 
   const {
@@ -85,22 +86,24 @@ export const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({ title, scrollY
       <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}>
         <View style={styles.innerContainer}>
           <Animated.View style={fadeOutStyle}>
-            <Typography variant='bodyBoldLarge' color={'textWhite'}>
+            <Typography variant={showDate ? 'bodyBoldLarge' : 'h3Bold'} color={'textWhite'}>
               {title}
             </Typography>
           </Animated.View>
-          <View style={styles.textContainer}>
-            <Animated.View style={[fadeOutStyle, styles.todayTitle]}>
-              <Typography variant='h3Bold' color='textWhite'>
-                {t('todayPrefix')}
-              </Typography>
-            </Animated.View>
-            <Animated.View style={dateTextStyle}>
-              <Typography variant='h3Bold' color='textWhite' isAnimated style={[animatedDateStyle]}>
-                {displayValue}
-              </Typography>
-            </Animated.View>
-          </View>
+          {showDate && (
+            <View style={styles.textContainer}>
+              <Animated.View style={[fadeOutStyle, styles.todayTitle]}>
+                <Typography variant='h3Bold' color='textWhite'>
+                  {t('todayPrefix')}
+                </Typography>
+              </Animated.View>
+              <Animated.View style={dateTextStyle}>
+                <Typography variant='h3Bold' color='textWhite' isAnimated style={[animatedDateStyle]}>
+                  {displayValue}
+                </Typography>
+              </Animated.View>
+            </View>
+          )}
         </View>
       </LinearGradient>
     </Animated.View>

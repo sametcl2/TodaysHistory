@@ -22,7 +22,7 @@ export const SettingsScreen = () => {
 
   return (
     <>
-      <AppScreenHeader scrollY={scrollY} title={t('screenTitles.settings')} />
+      <AppScreenHeader scrollY={scrollY} title={t('screenTitles.settings')} showDate={false} />
       <Container>
         <Animated.ScrollView
           scrollEventThrottle={16}
