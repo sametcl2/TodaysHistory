@@ -15,7 +15,7 @@
     "translation:ci": "npx i18next --config i18next-parser.config.ci.js",
     "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "madge:circular": "npx madge --circular App.tsx",
+    "madge:circular": "madge --circular  src/App.tsx",
     "prepare": "husky install",
     "tsc": "npx tsc --noEmit",
     "clean:watchman": "watchman watch-del-all",
