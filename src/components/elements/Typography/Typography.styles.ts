@@ -1,8 +1,8 @@
 import { TextStyle } from 'react-native'
 
 import { Theme } from '@rneui/themed'
-import { get } from 'utils/common'
 import { createStyles } from 'theme'
+import { get } from 'utils/common'
 import { AppColors } from 'types/color'
 
 export type Variant =
@@ -44,7 +44,7 @@ type VariantStyles = {
 const typographyVariantsStyles = {
   h1: {
     size: 'heading.lg',
-    font: 'bold',
+    font: 'medium',
     lineHeight: 'heading.lg'
   },
   h2: {
@@ -54,7 +54,7 @@ const typographyVariantsStyles = {
   },
   h2Bold: {
     size: 'heading.md',
-    font: 'bold',
+    font: 'medium',
     lineHeight: 'heading.md'
   },
   h3: {
@@ -64,7 +64,7 @@ const typographyVariantsStyles = {
   },
   h3Bold: {
     size: 'heading.sm',
-    font: 'bold',
+    font: 'medium',
     lineHeight: 'heading.sm'
   },
   h4: {
@@ -74,7 +74,7 @@ const typographyVariantsStyles = {
   },
   h4Bold: {
     size: 'heading.xs',
-    font: 'bold',
+    font: 'medium',
     lineHeight: 'heading.xs'
   },
   h5: {
