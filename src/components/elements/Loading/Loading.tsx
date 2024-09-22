@@ -38,6 +38,7 @@ const Ring: React.FC<RingProps> = ({ delay }) => {
         false
       )
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return <Animated.View style={[styles.ring, ringStyle]} />
 }
