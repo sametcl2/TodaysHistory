@@ -14,5 +14,8 @@ export const useConfirmationDrawerStyles = createStyles(({ gaps, colors }) => ({
   },
   subtitle: {
     marginBottom: gaps.lg
+  },
+  header: {
+    backgroundColor: colors.teal
   }
 }))

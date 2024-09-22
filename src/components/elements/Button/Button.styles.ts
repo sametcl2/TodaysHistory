@@ -5,7 +5,7 @@ import { createStyles, gaps } from 'theme'
 import { ButtonColorType, ButtonTypes } from 'types/button'
 
 const backgroundColor: ButtonColorType = {
-  primary: 'buttonPrimary',
+  primary: 'teal',
   secondary: 'primary',
   secondaryNew: 'white',
   dark: 'black',

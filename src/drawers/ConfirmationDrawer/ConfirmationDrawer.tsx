@@ -44,6 +44,8 @@ export const ConfirmationDrawer: React.FC<ConfirmationDrawerProps> = ({
       onDismiss={onDecline}
       enableDismissOnClose
       contentContainerStyle={styles.contentContainer}
+      headerStyle={styles.header}
+      handleStyle={styles.header}
       additionalTopElement={
         <View style={styles.titleContainer}>
           <Typography variant='bodyBoldLarge' color='gray10' align='center'>
