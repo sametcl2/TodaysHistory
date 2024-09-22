@@ -2,11 +2,27 @@ import { OptionsType } from 'types/option'
 import { t } from 'utils/common'
 
 export enum HomeSegmentedTabTypes {
-  Featured = 'selected',
-  Events = 'events',
-  Births = 'births',
-  Deaths = 'deaths',
-  Holidays = 'holidays'
+  Featured = 'Featured',
+  Events = 'Events',
+  Births = 'Births',
+  Deaths = 'Deaths',
+  Holidays = 'Holidays'
+}
+
+export enum EventFilterTypes {
+  Featured = 'Featured',
+  Events = 'Events',
+  Births = 'Births',
+  Deaths = 'Deaths',
+  Holidays = 'Holidays'
+}
+
+export const eventFilterTypes: Record<HomeSegmentedTabTypes, EventFilterTypes> = {
+  [HomeSegmentedTabTypes.Featured]: EventFilterTypes.Featured,
+  [HomeSegmentedTabTypes.Events]: EventFilterTypes.Events,
+  [HomeSegmentedTabTypes.Births]: EventFilterTypes.Births,
+  [HomeSegmentedTabTypes.Deaths]: EventFilterTypes.Deaths,
+  [HomeSegmentedTabTypes.Holidays]: EventFilterTypes.Holidays
 }
 
 export const homeSegmentedTabOptions: OptionsType<HomeSegmentedTabTypes> = {

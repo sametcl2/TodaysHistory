@@ -1,11 +1,12 @@
+import { EventFilterTypes } from 'constants/homeSegmentedTabs'
 import { PageType } from './events'
 
 export type OnThisDayAllTodayType = {
-  selected: SelectedType[]
-  births: BirthType[]
-  deaths: DeathType[]
-  events: EventType[]
-  holidays: HolidayType[]
+  [EventFilterTypes.Featured]: SelectedType[]
+  [EventFilterTypes.Births]: BirthType[]
+  [EventFilterTypes.Deaths]: DeathType[]
+  [EventFilterTypes.Events]: EventType[]
+  [EventFilterTypes.Holidays]: HolidayType[]
 }
 
 type EventType = {

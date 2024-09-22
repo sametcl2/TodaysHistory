@@ -16,7 +16,7 @@ import { PageType } from 'types/events'
 import { selectCurrentViewType } from 'store/viewType'
 import { ViewTypes } from 'constants/view'
 import { HomeSegmentedTabs } from 'components/HomeSegmentedTabs'
-import { HomeSegmentedTabTypes } from 'constants/homeSegmentedTabs'
+import { eventFilterTypes, HomeSegmentedTabTypes } from 'constants/homeSegmentedTabs'
 import { useHomeScreenStyles } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
@@ -38,6 +38,7 @@ export const HomeScreen = () => {
   const [isRefreshing, setIsRefreshing] = useState(false)
 
   const [selectedTab, setSelectedTab] = useState(HomeSegmentedTabTypes.Featured)
+  const [filterType, setFilterType] = useState(eventFilterTypes.Featured)
 
   useEffect(() => {
     if (day && month) {
@@ -76,6 +77,7 @@ export const HomeScreen = () => {
 
   const handleTabChange = (tab: HomeSegmentedTabTypes) => {
     setSelectedTab(tab)
+    setFilterType(eventFilterTypes[tab])
   }
 
   return (
@@ -90,14 +92,14 @@ export const HomeScreen = () => {
         <Container>
           <HomeSegmentedTabs selectedTab={selectedTab} onTabChange={handleTabChange} />
           <Animated.FlatList
-            key={viewType}
+            key={viewType + selectedTab}
             scrollEventThrottle={16}
             onScroll={scrollHandler}
             style={styles.cardList}
             contentContainerStyle={styles.contentContainer}
             numColumns={viewType === ViewTypes.Grid ? 2 : 1}
             showsVerticalScrollIndicator={false}
-            data={allTypesData?.[selectedTab]}
+            data={allTypesData?.[filterType]}
             initialNumToRender={16}
             renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
             refreshControl={
