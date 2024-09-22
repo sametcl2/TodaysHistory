@@ -8,9 +8,10 @@ export type OnThisDayAllTodayType = {
   holidays: HolidayType[]
 }
 
-// TODO: Get correct type
 type EventType = {
-  title: string
+  text: string
+  pages: PageType[]
+  year: number
 }
 
 export type SelectedType = {
@@ -28,6 +29,7 @@ type BirthType = {
 type HolidayType = {
   text: string
   pages: PageType[]
+  year: number
 }
 
 type DeathType = {
