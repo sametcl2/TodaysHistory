@@ -7,6 +7,13 @@
   },
   "cancel": "Cancel",
   "error": "Error",
+  "homeSegmentedTabs": {
+    "births": "Births",
+    "deaths": "Deaths",
+    "events": "Events",
+    "featured": "Featured",
+    "holidays": "Holidays"
+  },
   "http": {
     "error": "Error",
     "success": "Success"

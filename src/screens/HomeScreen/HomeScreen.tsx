@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { RefreshControl } from 'react-native-gesture-handler'
 import { useTheme } from '@rneui/themed'
@@ -13,9 +13,10 @@ import { useDispatch, useSelector } from 'store'
 import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
 import { PageType } from 'types/events'
-import { ViewTypeSelector } from 'components/ViewTypeSelector'
 import { selectCurrentViewType } from 'store/viewType'
 import { ViewTypes } from 'constants/view'
+import { HomeSegmentedTabs } from 'components/HomeSegmentedTabs'
+import { eventFilterTypes, HomeSegmentedTabTypes } from 'constants/homeSegmentedTabs'
 import { useHomeScreenStyles } from './HomeScreen.styles'
 
 export const HomeScreen = () => {
@@ -35,6 +36,11 @@ export const HomeScreen = () => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
 
   const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const [selectedTab, setSelectedTab] = useState(HomeSegmentedTabTypes.Featured)
+  const [filterType, setFilterType] = useState(eventFilterTypes.Featured)
+
+  const listData = useMemo(() => allTypesData?.[filterType], [allTypesData, filterType])
 
   useEffect(() => {
     if (day && month) {
@@ -71,6 +77,11 @@ export const HomeScreen = () => {
     }
   }
 
+  const handleTabChange = (tab: HomeSegmentedTabTypes) => {
+    setSelectedTab(tab)
+    setFilterType(eventFilterTypes[tab])
+  }
+
   return (
     <>
       <HomeScreenHeader scrollY={scrollY} />
@@ -81,16 +92,16 @@ export const HomeScreen = () => {
         onRefetch={() => fetchAllEvents({ day: day!, month: month! })}
       >
         <Container>
-          <ViewTypeSelector />
+          <HomeSegmentedTabs selectedTab={selectedTab} onTabChange={handleTabChange} />
           <Animated.FlatList
-            key={viewType}
+            key={viewType + selectedTab}
             scrollEventThrottle={16}
             onScroll={scrollHandler}
             style={styles.cardList}
             contentContainerStyle={styles.contentContainer}
             numColumns={viewType === ViewTypes.Grid ? 2 : 1}
             showsVerticalScrollIndicator={false}
-            data={allTypesData?.selected}
+            data={listData}
             initialNumToRender={16}
             renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
             refreshControl={

@@ -10,6 +10,8 @@ type EventCardProps = {
   onPress: () => void
 }
 
+const fallbackImage = require('assets/images/no-image.jpg')
+
 export const EventCard: React.FC<EventCardProps> = ({ item, onPress }) => {
   const uri = useGetThumbnail(item)
 
@@ -17,7 +19,7 @@ export const EventCard: React.FC<EventCardProps> = ({ item, onPress }) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.card}>
-      <ImageBackground source={{ uri }} resizeMode='cover' style={styles.image}>
+      <ImageBackground source={uri ? { uri } : fallbackImage} resizeMode='cover' style={styles.image}>
         <View style={styles.textContainer}>
           <View style={styles.titleContainer}>
             <ToggleFavoriteButton item={item} />
