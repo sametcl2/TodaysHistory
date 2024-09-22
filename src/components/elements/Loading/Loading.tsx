@@ -27,6 +27,7 @@ const Ring: React.FC<RingProps> = ({ delay }) => {
       }
     ]
   }))
+
   useEffect(() => {
     ring.value = withDelay(
       delay,
@@ -40,6 +41,7 @@ const Ring: React.FC<RingProps> = ({ delay }) => {
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   return <Animated.View style={[styles.ring, ringStyle]} />
 }
 
