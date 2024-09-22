@@ -4,18 +4,8 @@ import { Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { useTheme } from '@rneui/themed'
-import Animated, {
-  CurvedTransition,
-  FadeInUp,
-  FadeOutUp,
-  interpolate,
-  interpolateColor,
-  useAnimatedStyle,
-  withTiming
-} from 'react-native-reanimated'
-import { useTranslation } from 'react-i18next'
+import Animated, { interpolate, interpolateColor, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import { BottomTabBarItemType } from 'types/bottomTabs'
-import { Typography } from 'components/elements/Typography'
 import { useBottomTabBarItemStyles } from './BottomTabBarItem.styles'
 
 export type BottomTabBarItemProps<T extends string> = {
@@ -25,7 +15,6 @@ export type BottomTabBarItemProps<T extends string> = {
 }
 
 const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }: BottomTabBarItemProps<T>) => {
-  const { t } = useTranslation()
   const navigation = useNavigation()
 
   const {
@@ -92,13 +81,6 @@ const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }
       <Animated.View style={[animatedStyles]}>
         <Animated.View style={[styles.icon]}>{renderIcon(item.icon)}</Animated.View>
       </Animated.View>
-      {isActive && (
-        <Animated.View entering={FadeInUp} exiting={FadeOutUp} layout={CurvedTransition}>
-          <Typography variant='bodyBold' color='teal'>
-            {t(item.title)}
-          </Typography>
-        </Animated.View>
-      )}
       {!isActive && item.badge}
     </Pressable>
   )
