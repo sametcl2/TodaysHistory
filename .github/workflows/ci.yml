@@ -21,3 +21,5 @@ jobs:
         run: npm i
       - name: eslint
         run: npm run eslint
+      - name: circular
+        run: npm run madge:circular
