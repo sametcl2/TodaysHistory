@@ -40,7 +40,7 @@ export const HomeSegmentedTabs: React.FC<HomeSegmentedTabsProps> = ({ containerS
 
   const handlePress = (selectedTab: HomeSegmentedTabTypes, index: number) => {
     onTabChange(selectedTab)
-    flatListRef.current?.scrollToIndex({ index, animated: true })
+    flatListRef.current?.scrollToIndex({ index, animated: true, viewPosition: 0.5 })
   }
 
   return (

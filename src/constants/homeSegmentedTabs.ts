@@ -10,11 +10,11 @@ export enum HomeSegmentedTabTypes {
 }
 
 export enum EventFilterTypes {
-  Featured = 'Featured',
-  Events = 'Events',
-  Births = 'Births',
-  Deaths = 'Deaths',
-  Holidays = 'Holidays'
+  Featured = 'selected',
+  Events = 'events',
+  Births = 'births',
+  Deaths = 'deaths',
+  Holidays = 'holidays'
 }
 
 export const eventFilterTypes: Record<HomeSegmentedTabTypes, EventFilterTypes> = {
