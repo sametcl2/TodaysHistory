@@ -65,7 +65,10 @@ export const useBottomSheetStyles = createStyles(({ gaps, colors, fontScale }, p
     backgroundColor: colors.white,
     elevation: 16,
     shadowColor: colors[isAndroid ? 'black' : 'grayLight'],
-    shadowOffset: { width: 0, height: -6 },
+    shadowOffset: {
+      width: 0,
+      height: -6
+    },
     shadowOpacity: 0.1,
     shadowRadius: 4
   },

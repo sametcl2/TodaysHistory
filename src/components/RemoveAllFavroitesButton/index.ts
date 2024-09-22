@@ -1,0 +1,1 @@
+export { RemoveAllFavroitesButton } from './RemoveAllFavroitesButton'

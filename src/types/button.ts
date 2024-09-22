@@ -17,7 +17,7 @@ export type ButtonTypes =
   | 'secondaryDarkSolid'
   | 'dark'
   | 'secondaryDark'
-  | 'orange'
+  | 'danger'
 
 export type ButtonColorType = {
   [name in ButtonTypes]: keyof ColorsType
