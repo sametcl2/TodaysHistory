@@ -1,0 +1,23 @@
+name: Todays History CI
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.10.0
+      - name: Fetch The freaking goooood Code
+        uses: 'actions/checkout@v4'
+      - name: install deps
+        run: npm i
+      - name: eslint
+        run: npm run eslint
