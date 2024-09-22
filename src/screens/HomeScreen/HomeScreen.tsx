@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { RefreshControl } from 'react-native-gesture-handler'
 import { useTheme } from '@rneui/themed'
@@ -39,6 +39,8 @@ export const HomeScreen = () => {
 
   const [selectedTab, setSelectedTab] = useState(HomeSegmentedTabTypes.Featured)
   const [filterType, setFilterType] = useState(eventFilterTypes.Featured)
+
+  const listData = useMemo(() => allTypesData?.[filterType], [allTypesData, filterType])
 
   useEffect(() => {
     if (day && month) {
@@ -99,7 +101,7 @@ export const HomeScreen = () => {
             contentContainerStyle={styles.contentContainer}
             numColumns={viewType === ViewTypes.Grid ? 2 : 1}
             showsVerticalScrollIndicator={false}
-            data={allTypesData?.[filterType]}
+            data={listData}
             initialNumToRender={16}
             renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
             refreshControl={
