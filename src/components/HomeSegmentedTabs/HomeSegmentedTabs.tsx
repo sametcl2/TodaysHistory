@@ -3,6 +3,7 @@ import { useTheme } from '@rneui/themed'
 import { View, Pressable, StyleProp, ViewStyle, TouchableOpacity } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import Animated from 'react-native-reanimated'
+import { useRef } from 'react'
 import { Typography } from 'components/elements/Typography'
 import { ViewTypes } from 'constants/view'
 import { useDispatch, useSelector } from 'store'
@@ -20,13 +21,15 @@ type HomeSegmentedTabsProps = {
 
 export const HomeSegmentedTabs: React.FC<HomeSegmentedTabsProps> = ({ containerStyle, onTabChange, selectedTab }) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
-
-  const viewType = useSelector(selectCurrentViewType)
-
   const {
     theme: { colors }
   } = useTheme()
+
+  const dispatch = useDispatch()
+
+  const flatListRef = useRef<Animated.FlatList<unknown>>(null)
+
+  const viewType = useSelector(selectCurrentViewType)
 
   const styles = useHomeSegmentedTabsStyles()
 
@@ -35,8 +38,9 @@ export const HomeSegmentedTabs: React.FC<HomeSegmentedTabsProps> = ({ containerS
     dispatch(setCurrentViewType(selectedType))
   }
 
-  const handlePress = (selectedTab: HomeSegmentedTabTypes) => {
+  const handlePress = (selectedTab: HomeSegmentedTabTypes, index: number) => {
     onTabChange(selectedTab)
+    flatListRef.current?.scrollToIndex({ index, animated: true })
   }
 
   return (
@@ -58,12 +62,13 @@ export const HomeSegmentedTabs: React.FC<HomeSegmentedTabsProps> = ({ containerS
         </Pressable>
       </View>
       <Animated.FlatList
+        ref={flatListRef}
         data={Object.values(homeSegmentedTabOptions)}
         contentContainerStyle={styles.segmentedTabsContainer}
         renderItem={({ item, index }) => (
           <TouchableOpacity
             key={index}
-            onPress={() => handlePress(item.value)}
+            onPress={() => handlePress(item.value, index)}
             style={[
               styles.segmentedTab,
               { backgroundColor: item.value === selectedTab ? colors.teal : colors.primary }
