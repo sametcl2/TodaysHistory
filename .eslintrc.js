@@ -118,5 +118,15 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  overrides: [
+    {
+      "files": ["*.styles.ts"],
+      "rules": {
+        "object-curly-newline": ["error", {
+          "ObjectExpression": { "multiline": true, "minProperties": 1 },
+        }]
+      }
+    },
+  ],
 }

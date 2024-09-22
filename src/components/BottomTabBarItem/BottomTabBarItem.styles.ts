@@ -12,10 +12,21 @@ export const useBottomTabBarItemStyles = createStyles(() => ({
   iconHidden: {
     height: 0,
     opacity: 0,
-    transform: [{ scale: 0 }]
+    transform: [
+      {
+        scale: 0
+      }
+    ]
   },
   badge: {
     position: 'absolute',
-    transform: [{ translateX: 12 }, { translateY: 6 }]
+    transform: [
+      {
+        translateX: 12
+      },
+      {
+        translateY: 6
+      }
+    ]
   }
 }))

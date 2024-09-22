@@ -10,5 +10,7 @@ export const useViewTypeSelectorStyles = createStyles(() => ({
   buttonsContainer: {
     flexDirection: 'row'
   },
-  buttonLast: { marginLeft: 8 }
+  buttonLast: {
+    marginLeft: 8
+  }
 }))

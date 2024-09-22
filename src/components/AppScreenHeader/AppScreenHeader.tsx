@@ -69,6 +69,14 @@ export const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({ title, scrollY
     [isVisible]
   )
 
+  const animatedOnlyTitleStyle = useAnimatedStyle(
+    () => ({
+      color: withTiming(interpolateColor(isVisible ? 1 : 0, [0, 1], [colors.primary, 'rgb(255,255,255)'])),
+      fontSize: 24
+    }),
+    [isVisible]
+  )
+
   const dateTextStyle = useAnimatedStyle(
     () => ({
       transform: [
@@ -85,8 +93,13 @@ export const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({ title, scrollY
       {/* <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}> */}
       <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}>
         <View style={styles.innerContainer}>
-          <Animated.View style={fadeOutStyle}>
-            <Typography variant={showDate ? 'bodyBoldLarge' : 'h3Bold'} color={'textWhite'}>
+          <Animated.View style={showDate ? fadeOutStyle : undefined}>
+            <Typography
+              variant={showDate ? 'bodyBoldLarge' : 'h3Bold'}
+              color={'textWhite'}
+              isAnimated
+              style={showDate ? undefined : animatedOnlyTitleStyle}
+            >
               {title}
             </Typography>
           </Animated.View>

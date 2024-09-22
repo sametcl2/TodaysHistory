@@ -191,7 +191,9 @@ const variantBuilder = (variant: Variant, currentTheme: Theme): TextStyle => {
     fontSize: get(typography.size, variantStyles.size) * fontScale,
     // lineHeight: get(typography.lineHeight, variantStyles.lineHeight) * fontScale,
     fontFamily: get(typography.font, variantStyles.font),
-    ...(variantStyles.uppercase && { textTransform: 'uppercase' }),
+    ...(variantStyles.uppercase && {
+      textTransform: 'uppercase'
+    }),
     ...(variantStyles.textDecorationLine && {
       textDecorationLine: variantStyles.textDecorationLine
     }),

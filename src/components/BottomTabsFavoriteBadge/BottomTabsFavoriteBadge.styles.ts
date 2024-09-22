@@ -3,7 +3,14 @@ import { createStyles } from 'theme'
 export const useBottomTabsFavoriteBadgeStyles = createStyles(({ colors }) => ({
   badge: {
     position: 'absolute',
-    transform: [{ translateX: 18 }, { translateY: -8 }]
+    transform: [
+      {
+        translateX: 18
+      },
+      {
+        translateY: -8
+      }
+    ]
   },
   container: {
     backgroundColor: colors.teal,
