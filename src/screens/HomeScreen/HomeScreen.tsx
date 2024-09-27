@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
-import { RefreshControl } from 'react-native-gesture-handler'
+import Animated, { useAnimatedScrollHandler, useSharedValue, withTiming } from 'react-native-reanimated'
+import { RefreshControl, GestureDetector, Gesture } from 'react-native-gesture-handler'
 import { useTheme } from '@rneui/themed'
 import { useTranslation } from 'react-i18next'
 import { Container } from 'components/Container'
@@ -82,6 +82,30 @@ export const HomeScreen = () => {
     setFilterType(eventFilterTypes[tab])
   }
 
+  const END_POSITION = 200
+
+  const onLeft = useSharedValue(true)
+  const position = useSharedValue(0)
+
+  const panGesture = Gesture.Pan()
+    .onUpdate((e) => {
+      console.log(e)
+      if (onLeft.value) {
+        position.value = e.translationX
+      } else {
+        position.value = END_POSITION + e.translationX
+      }
+    })
+    .onEnd((e) => {
+      if (position.value > END_POSITION / 2) {
+        position.value = withTiming(END_POSITION, { duration: 100 })
+        onLeft.value = false
+      } else {
+        position.value = withTiming(0, { duration: 100 })
+        onLeft.value = true
+      }
+    })
+
   return (
     <>
       <HomeScreenHeader scrollY={scrollY} />
@@ -93,30 +117,34 @@ export const HomeScreen = () => {
       >
         <Container>
           <HomeSegmentedTabs selectedTab={selectedTab} onTabChange={handleTabChange} />
-          <Animated.FlatList
-            key={viewType + selectedTab}
-            scrollEventThrottle={16}
-            onScroll={scrollHandler}
-            style={styles.cardList}
-            contentContainerStyle={styles.contentContainer}
-            numColumns={viewType === ViewTypes.Grid ? 2 : 1}
-            showsVerticalScrollIndicator={false}
-            data={listData}
-            initialNumToRender={16}
-            renderItem={({ item, index }) => <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />}
-            refreshControl={
-              <RefreshControl
-                onRefresh={handleRefresh}
-                refreshing={!!isRefreshing}
-                size={36}
-                tintColor={colors.teal}
-                colors={[colors.teal, colors.primary]}
-                title={t('pullToRefresh')}
-                titleColor={colors.teal}
-                progressBackgroundColor={colors.teal}
-              />
-            }
-          />
+          <GestureDetector gesture={panGesture}>
+            <Animated.FlatList
+              key={viewType + selectedTab}
+              scrollEventThrottle={16}
+              onScroll={scrollHandler}
+              style={styles.cardList}
+              contentContainerStyle={styles.contentContainer}
+              numColumns={viewType === ViewTypes.Grid ? 2 : 1}
+              showsVerticalScrollIndicator={false}
+              data={listData}
+              initialNumToRender={16}
+              renderItem={({ item, index }) => (
+                <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />
+              )}
+              refreshControl={
+                <RefreshControl
+                  onRefresh={handleRefresh}
+                  refreshing={!!isRefreshing}
+                  size={36}
+                  tintColor={colors.teal}
+                  colors={[colors.teal, colors.primary]}
+                  title={t('pullToRefresh')}
+                  titleColor={colors.teal}
+                  progressBackgroundColor={colors.teal}
+                />
+              }
+            />
+          </GestureDetector>
         </Container>
       </Loader>
       {isDrawerVisible && <WebDrawer isOpen={isDrawerVisible} onDismiss={setIsDrawerVisible} />}

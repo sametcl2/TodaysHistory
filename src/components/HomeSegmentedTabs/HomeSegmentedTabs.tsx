@@ -2,7 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useTheme } from '@rneui/themed'
 import { View, Pressable, StyleProp, ViewStyle, TouchableOpacity } from 'react-native'
 import { useTranslation } from 'react-i18next'
-import Animated from 'react-native-reanimated'
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { useRef } from 'react'
 import { Typography } from 'components/elements/Typography'
 import { ViewTypes } from 'constants/view'
@@ -32,6 +32,15 @@ export const HomeSegmentedTabs: React.FC<HomeSegmentedTabsProps> = ({ containerS
   const viewType = useSelector(selectCurrentViewType)
 
   const styles = useHomeSegmentedTabsStyles()
+
+  const scrollValue = useSharedValue(0)
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      console.log(event)
+      scrollValue.value = event.contentOffset.x
+    }
+  })
 
   const handleViewTypeChange = async (selectedType: ViewTypes) => {
     await saveToLocalStorage(LocalStorageKeys.ViewType, selectedType)
@@ -79,6 +88,11 @@ export const HomeSegmentedTabs: React.FC<HomeSegmentedTabsProps> = ({ containerS
             </Typography>
           </TouchableOpacity>
         )}
+        onScroll={scrollHandler}
+        // onMomentumScrollEnd={scrollMomentumEndHandler}
+        decelerationRate='fast'
+        keyboardShouldPersistTaps='handled'
+        scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}
         horizontal
       />
