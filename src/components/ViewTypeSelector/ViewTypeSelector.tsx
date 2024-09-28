@@ -35,7 +35,7 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ containerSty
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Typography variant='h4Bold'>{title ?? t('screenTitles.selectedEvents')}</Typography>
+      {title ? <Typography variant='h4Bold'>{title ?? t('screenTitles.selectedEvents')}</Typography> : <View />}
       {!hideViewType && (
         <View style={styles.buttonsContainer}>
           <Pressable onPress={() => handleViewTypeChange(ViewTypes.Grid)}>

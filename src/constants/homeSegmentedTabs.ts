@@ -1,4 +1,3 @@
-import { OptionsType } from 'types/option'
 import { t } from 'utils/common'
 
 export enum HomeSegmentedTabTypes {
@@ -25,10 +24,36 @@ export const eventFilterTypes: Record<HomeSegmentedTabTypes, EventFilterTypes> =
   [HomeSegmentedTabTypes.Holidays]: EventFilterTypes.Holidays
 }
 
-export const homeSegmentedTabOptions: OptionsType<HomeSegmentedTabTypes> = {
-  [HomeSegmentedTabTypes.Featured]: { title: t('homeSegmentedTabs.featured'), value: HomeSegmentedTabTypes.Featured },
-  [HomeSegmentedTabTypes.Events]: { title: t('homeSegmentedTabs.events'), value: HomeSegmentedTabTypes.Events },
-  [HomeSegmentedTabTypes.Births]: { title: t('homeSegmentedTabs.births'), value: HomeSegmentedTabTypes.Births },
-  [HomeSegmentedTabTypes.Deaths]: { title: t('homeSegmentedTabs.deaths'), value: HomeSegmentedTabTypes.Deaths },
-  [HomeSegmentedTabTypes.Holidays]: { title: t('homeSegmentedTabs.holidays'), value: HomeSegmentedTabTypes.Holidays }
+type HomeSegmentedTabItemType = {
+  title: string
+  value: HomeSegmentedTabTypes
+  filterKey: EventFilterTypes
+}
+
+export const homeSegmentedTabOptions: Record<HomeSegmentedTabTypes, HomeSegmentedTabItemType> = {
+  [HomeSegmentedTabTypes.Featured]: {
+    title: t('homeSegmentedTabs.featured'),
+    value: HomeSegmentedTabTypes.Featured,
+    filterKey: EventFilterTypes.Featured
+  },
+  [HomeSegmentedTabTypes.Events]: {
+    title: t('homeSegmentedTabs.events'),
+    value: HomeSegmentedTabTypes.Events,
+    filterKey: EventFilterTypes.Events
+  },
+  [HomeSegmentedTabTypes.Births]: {
+    title: t('homeSegmentedTabs.births'),
+    value: HomeSegmentedTabTypes.Births,
+    filterKey: EventFilterTypes.Births
+  },
+  [HomeSegmentedTabTypes.Deaths]: {
+    title: t('homeSegmentedTabs.deaths'),
+    value: HomeSegmentedTabTypes.Deaths,
+    filterKey: EventFilterTypes.Deaths
+  },
+  [HomeSegmentedTabTypes.Holidays]: {
+    title: t('homeSegmentedTabs.holidays'),
+    value: HomeSegmentedTabTypes.Holidays,
+    filterKey: EventFilterTypes.Holidays
+  }
 }
