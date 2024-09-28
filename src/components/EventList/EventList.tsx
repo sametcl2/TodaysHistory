@@ -1,8 +1,7 @@
-// import { RefreshControl } from 'react-native-gesture-handler'
+import { RefreshControl } from 'react-native-gesture-handler'
 import Animated, { ScrollHandlerProcessed } from 'react-native-reanimated'
 import { useTheme } from '@rneui/themed'
 import { useTranslation } from 'react-i18next'
-import { RefreshControl } from 'react-native'
 import { EventFilterTypes } from 'constants/homeSegmentedTabs'
 import { ViewTypes } from 'constants/view'
 import { PageType } from 'types/events'
@@ -52,7 +51,6 @@ export const EventList: React.FC<EventListProps> = ({
         <RefreshControl
           onRefresh={onRefresh}
           refreshing={!!isRefreshing}
-          size={36}
           tintColor={colors.teal}
           colors={[colors.teal, colors.primary]}
           title={t('pullToRefresh')}
