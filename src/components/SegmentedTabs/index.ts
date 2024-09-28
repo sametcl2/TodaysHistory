@@ -1,0 +1,1 @@
+export { SegmentedTabsSwitcher } from './SegmentedTabsSwitcher'

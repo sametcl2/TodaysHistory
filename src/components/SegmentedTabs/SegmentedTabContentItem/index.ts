@@ -1,0 +1,1 @@
+export { SegmentedTabContentItem } from './SegmentedTabContentItem'

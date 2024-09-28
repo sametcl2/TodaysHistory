@@ -1,1 +1,0 @@
-export { HomeSegmentedTabs } from './HomeSegmentedTabs'

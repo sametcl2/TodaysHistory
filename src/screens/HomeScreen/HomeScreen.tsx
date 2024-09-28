@@ -1,35 +1,27 @@
 import { useEffect, useMemo, useState } from 'react'
-import Animated, { useAnimatedScrollHandler, useSharedValue, withTiming } from 'react-native-reanimated'
-import { RefreshControl, GestureDetector, Gesture } from 'react-native-gesture-handler'
-import { useTheme } from '@rneui/themed'
 import { useTranslation } from 'react-i18next'
+import { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
 import { Container } from 'components/Container'
-import { EventCard } from 'components/EventCard'
+import { EventList } from 'components/EventList'
 import { HomeScreenHeader } from 'components/HomeScreenHeader'
 import { Loader } from 'components/Loader'
+import { SegmentedTabs } from 'components/SegmentedTabs/SegmentedTabs'
+import { ViewTypeSelector } from 'components/ViewTypeSelector'
+import { homeSegmentedTabOptions, HomeSegmentedTabTypes } from 'constants/homeSegmentedTabs'
 import { WebDrawer } from 'drawers/WebDrawer'
 import { useLazyGetAllEventsTodayQuery } from 'services/onThisDay/getAllEventsToday'
 import { useDispatch, useSelector } from 'store'
 import { setCurrentPages } from 'store/data'
 import { selectCurrentDate } from 'store/date'
-import { PageType } from 'types/events'
 import { selectCurrentViewType } from 'store/viewType'
-import { ViewTypes } from 'constants/view'
-import { HomeSegmentedTabs } from 'components/HomeSegmentedTabs'
-import { eventFilterTypes, HomeSegmentedTabTypes } from 'constants/homeSegmentedTabs'
-import { useHomeScreenStyles } from './HomeScreen.styles'
+import { PageType } from 'types/events'
+import { SegmentTabItemType } from 'types/segmentedTabs'
 
 export const HomeScreen = () => {
   const { t } = useTranslation()
 
-  const {
-    theme: { colors }
-  } = useTheme()
-
   const [fetchAllEvents, { data: allTypesData, isError, error, isFetching }] = useLazyGetAllEventsTodayQuery()
   const { month, day } = useSelector(selectCurrentDate)
-
-  const styles = useHomeScreenStyles()
 
   const viewType = useSelector(selectCurrentViewType)
 
@@ -38,9 +30,6 @@ export const HomeScreen = () => {
   const [isRefreshing, setIsRefreshing] = useState(false)
 
   const [selectedTab, setSelectedTab] = useState(HomeSegmentedTabTypes.Featured)
-  const [filterType, setFilterType] = useState(eventFilterTypes.Featured)
-
-  const listData = useMemo(() => allTypesData?.[filterType], [allTypesData, filterType])
 
   useEffect(() => {
     if (day && month) {
@@ -79,32 +68,27 @@ export const HomeScreen = () => {
 
   const handleTabChange = (tab: HomeSegmentedTabTypes) => {
     setSelectedTab(tab)
-    setFilterType(eventFilterTypes[tab])
   }
 
-  const END_POSITION = 200
-
-  const onLeft = useSharedValue(true)
-  const position = useSharedValue(0)
-
-  const panGesture = Gesture.Pan()
-    .onUpdate((e) => {
-      console.log(e)
-      if (onLeft.value) {
-        position.value = e.translationX
-      } else {
-        position.value = END_POSITION + e.translationX
-      }
-    })
-    .onEnd((e) => {
-      if (position.value > END_POSITION / 2) {
-        position.value = withTiming(END_POSITION, { duration: 100 })
-        onLeft.value = false
-      } else {
-        position.value = withTiming(0, { duration: 100 })
-        onLeft.value = true
-      }
-    })
+  const segmentedTabItems: SegmentTabItemType<HomeSegmentedTabTypes>[] = useMemo(
+    () =>
+      Object.values(homeSegmentedTabOptions).map((option) => ({
+        title: t(option.title),
+        value: option.value,
+        content: (
+          <EventList
+            data={allTypesData}
+            dataKey={option.filterKey}
+            onPress={onPress}
+            isRefreshing={isRefreshing}
+            onRefresh={handleRefresh}
+            scrollHandler={scrollHandler}
+            viewType={viewType}
+          />
+        )
+      })),
+    [allTypesData, viewType]
+  )
 
   return (
     <>
@@ -116,35 +100,8 @@ export const HomeScreen = () => {
         onRefetch={() => fetchAllEvents({ day: day!, month: month! })}
       >
         <Container>
-          <HomeSegmentedTabs selectedTab={selectedTab} onTabChange={handleTabChange} />
-          <GestureDetector gesture={panGesture}>
-            <Animated.FlatList
-              key={viewType + selectedTab}
-              scrollEventThrottle={16}
-              onScroll={scrollHandler}
-              style={styles.cardList}
-              contentContainerStyle={styles.contentContainer}
-              numColumns={viewType === ViewTypes.Grid ? 2 : 1}
-              showsVerticalScrollIndicator={false}
-              data={listData}
-              initialNumToRender={16}
-              renderItem={({ item, index }) => (
-                <EventCard key={index} item={item} onPress={() => onPress(item.pages)} />
-              )}
-              refreshControl={
-                <RefreshControl
-                  onRefresh={handleRefresh}
-                  refreshing={!!isRefreshing}
-                  size={36}
-                  tintColor={colors.teal}
-                  colors={[colors.teal, colors.primary]}
-                  title={t('pullToRefresh')}
-                  titleColor={colors.teal}
-                  progressBackgroundColor={colors.teal}
-                />
-              }
-            />
-          </GestureDetector>
+          <ViewTypeSelector />
+          <SegmentedTabs defaultActiveTab={selectedTab} items={segmentedTabItems} onChange={handleTabChange} />
         </Container>
       </Loader>
       {isDrawerVisible && <WebDrawer isOpen={isDrawerVisible} onDismiss={setIsDrawerVisible} />}
