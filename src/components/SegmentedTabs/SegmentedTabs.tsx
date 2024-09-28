@@ -92,7 +92,7 @@ export const SegmentedTabs = <T extends PropertyKey>({
     onChange?.(selectedItem?.value, selectedIndex)
   }
 
-  const handleSegmentedSwitcherPress = (tabName: T, index: number) => {
+  const handleSegmentedSwitcherPress = (_: T, index: number) => {
     setActiveIndex(index)
     if (isAndroid) {
       handleChange(index)

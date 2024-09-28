@@ -27,5 +27,11 @@ export const useEventCardStyles = createStyles(({ colors }) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8
+  },
+  titleContainerLeft: {
+    flexDirection: 'row'
+  },
+  favButton: {
+    marginRight: 10
   }
 }))

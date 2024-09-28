@@ -1,7 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { useTheme } from '@rneui/themed'
 import { useMemo } from 'react'
-import { Pressable } from 'react-native'
+import { Pressable, StyleProp, ViewStyle } from 'react-native'
 import Animated, { CurvedTransition, StretchInY, StretchOutY, ZoomIn, ZoomOut } from 'react-native-reanimated'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
 import { useAddRemoveFavorites } from 'hooks/useAddRemoveFavorites'
@@ -14,9 +14,10 @@ import { SelectedType } from 'types/onThisDayAllToday'
 type ToggleFavoriteButtonProps = {
   item?: SelectedType
   favoriteItem?: FavoriteType
+  style?: StyleProp<ViewStyle>
 }
 
-export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item, favoriteItem }) => {
+export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item, favoriteItem, style }) => {
   const {
     theme: { colors }
   } = useTheme()
@@ -57,7 +58,11 @@ export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item
   }
 
   return (
-    <Pressable key={isLoading.toString()} onPress={isInFavorites ? handleRemoveFromFavorites : handleAddToFavorites}>
+    <Pressable
+      key={isLoading.toString()}
+      style={style}
+      onPress={isInFavorites ? handleRemoveFromFavorites : handleAddToFavorites}
+    >
       {isInFavorites ? (
         <Animated.View entering={ZoomIn} exiting={ZoomOut} layout={CurvedTransition}>
           <MaterialIcons name={isInFavorites ? 'favorite' : 'favorite-border'} size={24} color={colors.yellow} />

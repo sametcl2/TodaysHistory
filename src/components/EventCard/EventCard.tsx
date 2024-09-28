@@ -3,6 +3,7 @@ import { Typography } from 'components/elements/Typography'
 import { ToggleFavoriteButton } from 'components/ToggleFavoriteButton'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
 import { SelectedType } from 'types/onThisDayAllToday'
+import { ShareButton } from 'components/ShareButton'
 import { useEventCardStyles } from './EventCard.styles'
 
 type EventCardProps = {
@@ -22,7 +23,10 @@ export const EventCard: React.FC<EventCardProps> = ({ item, onPress }) => {
       <ImageBackground source={uri ? { uri } : fallbackImage} resizeMode='cover' style={styles.image}>
         <View style={styles.textContainer}>
           <View style={styles.titleContainer}>
-            <ToggleFavoriteButton item={item} />
+            <View style={styles.titleContainerLeft}>
+              <ToggleFavoriteButton style={styles.favButton} item={item} />
+              <ShareButton item={item} />
+            </View>
             <Typography color='secondary' variant='bodyBoldLarge'>
               {item.year}
             </Typography>

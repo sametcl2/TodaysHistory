@@ -87,6 +87,7 @@ export const HomeScreen = () => {
           />
         )
       })),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [allTypesData, viewType]
   )
 
