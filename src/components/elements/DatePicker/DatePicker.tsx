@@ -1,5 +1,6 @@
 import DateTimePicker, { AndroidNativeProps, IOSNativeProps } from '@react-native-community/datetimepicker'
-import { Platform, View } from 'react-native'
+import { View } from 'react-native'
+import { isIOS } from 'utils/platform'
 import { Typography } from '../Typography'
 
 type DatePickerProps = (IOSNativeProps | AndroidNativeProps) & {
@@ -11,7 +12,7 @@ type DatePickerProps = (IOSNativeProps | AndroidNativeProps) & {
 export const DatePicker: React.FC<DatePickerProps> = ({ title, value, showDatePicker, setShowDatePicker, ...rest }) => (
   <View>
     {!!title && <Typography variant='bodySemiBold'>{title}</Typography>}
-    {Platform.OS === 'ios' ? (
+    {isIOS ? (
       <DateTimePicker display='default' mode='date' value={value} {...rest} />
     ) : (
       showDatePicker && (
