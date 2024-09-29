@@ -4,8 +4,8 @@ export const useViewTypeSelectorStyles = createStyles(() => ({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    top: -40,
-    marginBottom: -20
+    top: -50,
+    marginBottom: -30
   },
   buttonsContainer: {
     flexDirection: 'row'

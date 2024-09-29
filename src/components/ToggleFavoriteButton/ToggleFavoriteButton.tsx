@@ -3,6 +3,7 @@ import { useTheme } from '@rneui/themed'
 import { useMemo } from 'react'
 import { Pressable } from 'react-native'
 import Animated, { CurvedTransition, StretchInY, StretchOutY, ZoomIn, ZoomOut } from 'react-native-reanimated'
+import * as Haptics from 'expo-haptics'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
 import { useAddRemoveFavorites } from 'hooks/useAddRemoveFavorites'
 import { useSelector } from 'store'
@@ -50,10 +51,12 @@ export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item
 
   const handleAddToFavorites = () => {
     addToFavorites(favoriteItem ?? formattedForFavorite)
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
   }
 
   const handleRemoveFromFavorites = () => {
     removeFromFavorites(favoriteItem ?? formattedForFavorite)
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
   }
 
   return (

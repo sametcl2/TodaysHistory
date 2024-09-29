@@ -2,6 +2,7 @@ import Animated, { SharedValue, useAnimatedScrollHandler, useSharedValue } from 
 
 import { StyleProp, ViewStyle } from 'react-native'
 import { useEffect, useRef } from 'react'
+import * as Haptics from 'expo-haptics'
 import { OptionItemType, OptionsType } from 'types/option'
 import { SegmentedTabsSwitcherItem } from './SegmentedTabsSwitcherItem'
 import { useSegmentedTabsSwitcherStyles } from './SegmentedTabsSwitcher.styles'
@@ -34,6 +35,7 @@ export const SegmentedTabsSwitcher = <T extends PropertyKey>({
   const handlePress = (selectedTab: T, index: number) => {
     onTabChange(selectedTab, index)
     flatListRef.current?.scrollToIndex({ index, animated: true, viewPosition: 0.5 })
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
   }
 
   useEffect(() => {

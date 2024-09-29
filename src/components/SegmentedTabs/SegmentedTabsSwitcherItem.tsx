@@ -45,13 +45,9 @@ export const SegmentedTabsSwitcherItem = <T,>({
   )
 
   return (
-    <TouchableWithoutFeedback
-      key={index}
-      onPress={() => onPress(item.value, index)}
-      style={[styles.item, { backgroundColor: colors.primary }]}
-    >
+    <TouchableWithoutFeedback key={index} onPress={() => onPress(item.value, index)} style={styles.item}>
       <Animated.View style={animatedMaskStyles} />
-      <Typography color={'white'} variant='bodyLarge'>
+      <Typography color={'white'} variant='bodyLarge' style={styles.title}>
         {t(item.title)}
       </Typography>
     </TouchableWithoutFeedback>

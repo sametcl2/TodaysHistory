@@ -2,6 +2,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
+import * as Haptics from 'expo-haptics'
 import { FormActionButtons } from 'components/FormActionButtons'
 import { BottomSheetDrawer } from 'components/BottomSheetDrawer'
 import { Typography } from 'components/elements/Typography'
@@ -32,6 +33,7 @@ export const ConfirmationDrawer: React.FC<ConfirmationDrawerProps> = ({
   useEffect(() => {
     if (isOpen) {
       bottomSheetModalRef.current?.present()
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
     } else {
       bottomSheetModalRef.current?.dismiss()
     }

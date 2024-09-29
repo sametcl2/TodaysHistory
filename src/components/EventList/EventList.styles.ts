@@ -1,9 +1,8 @@
 import { SCROLL_PADDING_BOTTOM } from 'constants/scroll'
 import { createStyles } from 'theme'
 
-export const useEventListStyles = createStyles(({ gaps }) => ({
+export const useEventListStyles = createStyles(() => ({
   contentContainer: {
-    paddingBottom: SCROLL_PADDING_BOTTOM,
-    paddingTop: gaps.md
+    paddingBottom: SCROLL_PADDING_BOTTOM
   }
 }))

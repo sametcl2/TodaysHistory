@@ -2,6 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useTheme } from '@rneui/themed'
 import { View, Pressable, StyleProp, ViewStyle } from 'react-native'
 import { useTranslation } from 'react-i18next'
+import * as Haptics from 'expo-haptics'
 import { Typography } from 'components/elements/Typography'
 import { ViewTypes } from 'constants/view'
 import { useDispatch, useSelector } from 'store'
@@ -31,6 +32,7 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ containerSty
   const handleViewTypeChange = async (selectedType: ViewTypes) => {
     await saveToLocalStorage(LocalStorageKeys.ViewType, selectedType)
     dispatch(setCurrentViewType(selectedType))
+    Haptics.selectionAsync()
   }
 
   return (
