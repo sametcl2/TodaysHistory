@@ -1,7 +1,6 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useEffect, useRef, useState } from 'react'
-import { View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, TouchableOpacity } from 'react-native'
 import { WebView } from 'react-native-webview'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useTheme } from '@rneui/themed'

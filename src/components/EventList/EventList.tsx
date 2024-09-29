@@ -51,7 +51,6 @@ export const EventList: React.FC<EventListProps> = ({
         <RefreshControl
           onRefresh={onRefresh}
           refreshing={!!isRefreshing}
-          size={36}
           tintColor={colors.teal}
           colors={[colors.teal, colors.primary]}
           title={t('pullToRefresh')}
