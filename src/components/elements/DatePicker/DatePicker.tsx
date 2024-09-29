@@ -12,11 +12,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({ title, value, showDatePi
   <View>
     {!!title && <Typography variant='bodySemiBold'>{title}</Typography>}
     {Platform.OS === 'ios' ? (
-      <DateTimePicker display={'default'} mode='date' value={value} {...rest} />
+      <DateTimePicker display='default' mode='date' value={value} {...rest} />
     ) : (
       showDatePicker && (
         <DateTimePicker
-          display={'default'}
+          display='default'
           mode='date'
           value={value}
           onTouchStart={() => setShowDatePicker(true)}
