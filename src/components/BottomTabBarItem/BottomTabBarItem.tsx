@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import { useTheme } from '@rneui/themed'
 import Animated, { interpolate, interpolateColor, useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import * as Haptics from 'expo-haptics'
 import { BottomTabBarItemType } from 'types/bottomTabs'
 import { useBottomTabBarItemStyles } from './BottomTabBarItem.styles'
 
@@ -73,6 +74,7 @@ const BottomTabBarItemComponent = <T extends string>({ item, isActive, onPress }
     // @ts-ignore
     navigation.navigate(routeName, { ...item.params })
     onPress(item.routeName)
+    Haptics.selectionAsync()
   }
 
   return (
