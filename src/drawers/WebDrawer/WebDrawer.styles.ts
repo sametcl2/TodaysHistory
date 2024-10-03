@@ -12,10 +12,17 @@ export const useWebDrawerStyles = createStyles(() => ({
   drawerContentContainer: {
     paddingHorizontal: 0
   },
-  button: {
+  buttonPrev: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    justifyContent: 'flex-start'
+  },
+  buttonNext: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
   },
   prevPlaceholder: {
     flex: 1
