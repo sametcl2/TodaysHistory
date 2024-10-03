@@ -5,11 +5,11 @@ import { ThemeProvider } from '@rneui/themed'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import { navigationRef } from 'routes/RootNavigation'
-import { store } from 'store/store'
 import { theme } from 'theme'
 import { initI18N } from 'lang/i18n'
 import { AppInitializer } from 'components/AppInitiliazer'
 import { Toast } from 'components/elements/Toast'
+import store from 'store'
 
 initI18N()
 

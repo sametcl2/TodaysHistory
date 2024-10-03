@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import moment from 'moment'
-import { RootState } from './store'
+import { RootState } from './setup/store'
 
 const today = moment()
 

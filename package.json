@@ -15,7 +15,7 @@
     "translation:ci": "npx i18next --config i18next-parser.config.ci.js",
     "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "madge:circular": "madge --circular  src/App.tsx",
+    "madge:circular": "npx madge --exclude './src/store/*.ts$' --circular --extensions ts,tsx ./src",
     "prepare": "husky install",
     "tsc": "npx tsc --noEmit",
     "clean:watchman": "watchman watch-del-all",
@@ -90,7 +90,7 @@
       "bash -c tsc --noEmit",
       "eslint --ext .js,.jsx,.ts,.tsx --fix --cache",
       "prettier --write",
-      "madge --circular  src/App.tsx"
+      "madge --exclude './src/store/*.ts$' --circular --extensions ts,tsx ./src"
     ]
   }
 }
