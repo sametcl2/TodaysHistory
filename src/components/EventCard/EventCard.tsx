@@ -1,4 +1,5 @@
 import { ImageBackground, TouchableOpacity, View } from 'react-native'
+import { useState } from 'react'
 import { Typography } from 'components/elements/Typography'
 import { ToggleFavoriteButton } from 'components/ToggleFavoriteButton'
 import { useGetThumbnail } from 'hooks/useGetThumbnail'
@@ -16,10 +17,29 @@ const fallbackImage = require('assets/images/no-image.jpg')
 export const EventCard: React.FC<EventCardProps> = ({ item, onPress }) => {
   const uri = useGetThumbnail(item)
 
+  const [isPressed, setIsPressed] = useState(false)
+
   const styles = useEventCardStyles()
 
+  const handlePressItem = () => {
+    onPress()
+  }
+
+  const handlePressIn = () => {
+    setIsPressed(true)
+  }
+
+  const handlePressOut = () => {
+    setIsPressed(false)
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.card}>
+    <TouchableOpacity
+      style={[styles.card, { opacity: isPressed ? 0.4 : 1 }]}
+      onPress={handlePressItem}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+    >
       <ImageBackground source={uri ? { uri } : fallbackImage} resizeMode='cover' style={styles.image}>
         <View style={styles.textContainer}>
           <View style={styles.titleContainer}>
