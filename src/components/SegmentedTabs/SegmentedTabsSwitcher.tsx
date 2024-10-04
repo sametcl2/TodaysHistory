@@ -42,10 +42,18 @@ export const SegmentedTabsSwitcher = <T extends PropertyKey>({
     flatListRef.current?.scrollToIndex({ index: activeIndex, animated: true, viewPosition: 0.5 })
   }, [activeIndex])
 
+  const onScrollFailed = (info: { index: number }) => {
+    const wait = new Promise((resolve) => setTimeout(resolve, 200))
+    wait.then(() => {
+      flatListRef.current?.scrollToIndex({ index: info.index, animated: true })
+    })
+  }
+
   return (
     <Animated.FlatList<OptionItemType<T>>
       ref={flatListRef}
       data={Object.values(data)}
+      onScrollToIndexFailed={onScrollFailed}
       contentContainerStyle={[styles.segmentedTabsContainer, containerStyle]}
       renderItem={({ item, index }) => (
         <SegmentedTabsSwitcherItem<T>

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from './store'
+import { RootState } from './setup/store'
 
 type InitialStateType = {
   currentPages: [{ url: string; title: string }] | []

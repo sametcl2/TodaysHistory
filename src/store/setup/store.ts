@@ -1,14 +1,13 @@
 /* eslint-disable import/no-cycle */
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { featuredApi } from 'services/featured'
 import { onThisDayApi } from 'services/onThisDay'
-import toast from './toast'
-import language from './language'
-import data from './data'
-import date from './date'
-import favorites from './favorites'
-import viewType from './viewType'
+import data from 'store/data'
+import date from 'store/date'
+import favorites from 'store/favorites'
+import language from 'store/language'
+import toast from 'store/toast'
+import viewType from 'store/viewType'
 
 const combinedReducer = combineReducers({
   language,
@@ -35,8 +34,3 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-
-const useAppDispatch = () => useDispatch<AppDispatch>()
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-export { useAppDispatch as useDispatch }
-export { useAppSelector as useSelector }

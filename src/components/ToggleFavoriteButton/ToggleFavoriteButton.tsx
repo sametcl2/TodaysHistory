@@ -33,7 +33,7 @@ export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item
   const formattedForFavorite: FavoriteType = useMemo(
     () =>
       favoriteItem ?? {
-        id: item?.pages[0].tid ?? '',
+        id: item?.pages[0]?.tid ?? '',
         thumbnail,
         text: item?.text ?? '',
         url: '',

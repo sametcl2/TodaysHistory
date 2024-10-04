@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { ToastTypes } from 'types/toast'
 // eslint-disable-next-line import/no-cycle
-import { RootState } from './store'
+import { RootState } from './setup/store'
 
 type InitialStateType = {
   title: string

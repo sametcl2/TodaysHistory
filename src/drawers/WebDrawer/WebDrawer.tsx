@@ -57,7 +57,7 @@ export const WebDrawer: React.FC<WebDrawerProps> = ({ isOpen, onDismiss }) => {
       additionalTopElement={
         <View style={styles.header}>
           {pageIndex !== 0 ? (
-            <TouchableOpacity onPress={handlePrevPage} style={styles.button}>
+            <TouchableOpacity onPress={handlePrevPage} style={styles.buttonPrev}>
               <MaterialIcons name='chevron-left' size={32} color={colors.white} />
               <Typography variant='bodySmall' color='textWhite' numberOfLines={2} ellipsizeMode='tail'>
                 {pages[pageIndex - 1].title}
@@ -67,7 +67,7 @@ export const WebDrawer: React.FC<WebDrawerProps> = ({ isOpen, onDismiss }) => {
             <View style={styles.prevPlaceholder} />
           )}
           {pageIndex < pages.length - 1 && (
-            <TouchableOpacity onPress={handleNextPage} style={styles.button}>
+            <TouchableOpacity onPress={handleNextPage} style={styles.buttonNext}>
               <Typography variant='bodySmall' color='textWhite'>
                 {pages[pageIndex + 1].title}
               </Typography>
