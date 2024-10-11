@@ -119,6 +119,7 @@ export const SegmentedTabs = <T extends PropertyKey>({
         scrollX={scrollValue}
         activeIndex={activeIndex}
         data={switcherItems}
+        contentWidth={contentWidth}
         onTabChange={handleSegmentedSwitcherPress}
         containerStyle={switcherStyles}
       />

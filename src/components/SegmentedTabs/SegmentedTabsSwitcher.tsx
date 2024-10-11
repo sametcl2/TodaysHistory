@@ -11,6 +11,7 @@ type SegmentedTabsSwitcherProps<T extends PropertyKey> = {
   containerStyle?: StyleProp<ViewStyle>
   scrollX: SharedValue<number>
   onTabChange: (selectedTab: T, index: number) => void
+  contentWidth: number
   activeIndex: number
   data: OptionsType<T>
 }
@@ -19,6 +20,8 @@ export const SegmentedTabsSwitcher = <T extends PropertyKey>({
   data,
   onTabChange,
   activeIndex,
+  scrollX,
+  contentWidth,
   containerStyle
 }: SegmentedTabsSwitcherProps<T>) => {
   const styles = useSegmentedTabsSwitcherStyles()
@@ -59,7 +62,10 @@ export const SegmentedTabsSwitcher = <T extends PropertyKey>({
         <SegmentedTabsSwitcherItem<T>
           index={index}
           item={item}
-          isActive={index === activeIndex}
+          scrollX={scrollX}
+          contentWidth={contentWidth}
+          activeIndex={activeIndex}
+          numItems={Object.values(data).length}
           onPress={handlePress}
         />
       )}

@@ -1,7 +1,8 @@
-import Animated, { Easing, interpolate, useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated'
 
 import { useTheme } from '@rneui/themed'
 
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { Typography } from 'components/elements/Typography'
@@ -10,14 +11,20 @@ import { useSegmentedTabsSwitcherItemStyles } from './SegmentedTabsSwitcherItem.
 
 type SegmentedTabsSwitcherItemProps<T> = {
   index: number
-  isActive: boolean
+  activeIndex: number
+  contentWidth: number
+  scrollX: SharedValue<number>
+  numItems: number
   item: OptionItemType<T>
   onPress: (value: T, index: number) => void
 }
 
 export const SegmentedTabsSwitcherItem = <T,>({
   index,
-  isActive,
+  contentWidth,
+  activeIndex,
+  scrollX,
+  numItems,
   item,
   onPress
 }: SegmentedTabsSwitcherItemProps<T>) => {
@@ -28,6 +35,24 @@ export const SegmentedTabsSwitcherItem = <T,>({
 
   const styles = useSegmentedTabsSwitcherItemStyles()
 
+  const isActive = index === activeIndex
+
+  const inputRange = useMemo(
+    () =>
+      Array(numItems)
+        .fill(0)
+        .map((_, index) => index * contentWidth) ?? [],
+    [contentWidth, numItems]
+  )
+
+  const outputRange = useMemo(
+    () =>
+      Array(numItems)
+        .fill(0)
+        .map((_, idx) => (idx === index ? 10 : 0)) ?? [],
+    [index, numItems]
+  )
+
   const animatedMaskStyles = useAnimatedStyle(
     () => ({
       position: 'absolute',
@@ -37,15 +62,13 @@ export const SegmentedTabsSwitcherItem = <T,>({
       left: 0,
       top: 10,
       backgroundColor: colors.teal,
-      transform: [
-        { scale: withTiming(interpolate(isActive ? 1 : 0, [0, 1], [0, 10]), { duration: 300, easing: Easing.ease }) }
-      ]
+      transform: [{ scale: interpolate(scrollX.value, inputRange, outputRange, Extrapolation.CLAMP) }]
     }),
     [isActive]
   )
 
   return (
-    <TouchableWithoutFeedback key={index} onPress={() => onPress(item.value, index)} style={styles.item}>
+    <TouchableWithoutFeedback onPress={() => onPress(item.value, index)} style={styles.item}>
       <Animated.View style={animatedMaskStyles} />
       <Typography color={'white'} variant='bodyLarge' style={styles.title}>
         {t(item.title)}
