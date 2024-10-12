@@ -59,6 +59,7 @@ export const GlobalDatePicker = () => {
       <DateTimePickerModal
         isVisible={isPickerVisible}
         mode='date'
+        date={selectedDate.currentDate}
         onConfirm={handleDateChange}
         onCancel={() => setIsPickerVisible(false)}
       />
