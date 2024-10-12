@@ -16,6 +16,8 @@ import { selectCurrentDate } from 'store/date'
 import { selectCurrentViewType } from 'store/viewType'
 import { PageType } from 'types/events'
 import { SegmentTabItemType } from 'types/segmentedTabs'
+import { MixpanelInstance } from 'analytics/mixpanel'
+import { MixpanelEvents } from 'constants/mixpanel'
 
 export const HomeScreen = () => {
   const { t } = useTranslation()
@@ -53,6 +55,7 @@ export const HomeScreen = () => {
     pages.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
     dispatch(setCurrentPages(urls))
     setIsDrawerVisible(true)
+    MixpanelInstance.track(MixpanelEvents.ViewItem, { urls, pages, isFavorite: true })
   }
 
   const handleRefresh = () => {

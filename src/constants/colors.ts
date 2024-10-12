@@ -18,6 +18,7 @@ export const colors = {
   lineThrough: '#676666',
   drawer: '#f5f6f8',
   gray2: '#f0f0f0',
+  gray3: '#a7a9af',
   gray10: '#f0f2ef',
   gray13: '#2c3f5c',
 

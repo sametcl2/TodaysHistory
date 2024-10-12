@@ -24,7 +24,7 @@ export const FavoriteCard: React.FC<FavoriteCardProps> = ({ item, onPress }) => 
                 {item.day}
               </Typography>
               <Typography color='secondary' variant='bodyBoldLarge' style={styles.dateItem}>
-                {moment(item.month, 'M').format('MMMM')}
+                {moment(item.month, 'M').format('MMM')}
               </Typography>
               <Typography color='secondary' variant='bodyBoldLarge' style={styles.dateItem}>
                 {item.year}

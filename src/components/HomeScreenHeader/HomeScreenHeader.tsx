@@ -43,7 +43,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
     }
   )
 
-  const { displayValue } = useSelector(selectCurrentDate)
+  const { displayValue, todayDisplayValue } = useSelector(selectCurrentDate)
 
   const fadeOutStyle = useAnimatedStyle(
     () => ({
@@ -80,7 +80,6 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
 
   return (
     <Animated.View style={headerStyle} onTouchStart={() => setIsVisible(true)}>
-      {/* <LinearGradient colors={['#3069bf', '#1e55a6', '#104491']} style={styles.gradient}> */}
       <LinearGradient colors={['#1e55a6', 'transparent']} style={styles.gradient}>
         <View style={styles.innerContainer}>
           <Animated.View style={fadeOutStyle}>
@@ -96,7 +95,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({ scrollY }) =
             </Animated.View>
             <Animated.View style={dateTextStyle}>
               <Typography variant='h3Bold' color='textWhite' isAnimated style={[animatedDateStyle]}>
-                {displayValue}
+                {isVisible ? todayDisplayValue : displayValue}
               </Typography>
             </Animated.View>
           </View>

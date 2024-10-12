@@ -11,6 +11,8 @@ import { selectCurrentDate } from 'store/date'
 import { selectCurrentFavorites } from 'store/favorites'
 import { FavoriteType } from 'types/favorite'
 import { SelectedType } from 'types/onThisDayAllToday'
+import { MixpanelInstance } from 'analytics/mixpanel'
+import { MixpanelEvents } from 'constants/mixpanel'
 
 type ToggleFavoriteButtonProps = {
   item?: SelectedType
@@ -53,11 +55,13 @@ export const ToggleFavoriteButton: React.FC<ToggleFavoriteButtonProps> = ({ item
   const handleAddToFavorites = () => {
     addToFavorites(favoriteItem ?? formattedForFavorite)
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+    MixpanelInstance.track(MixpanelEvents.AddFavorite, { item: favoriteItem })
   }
 
   const handleRemoveFromFavorites = () => {
     removeFromFavorites(favoriteItem ?? formattedForFavorite)
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+    MixpanelInstance.track(MixpanelEvents.RemoveFavorite, { item: favoriteItem })
   }
 
   return (

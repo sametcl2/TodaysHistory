@@ -12,6 +12,8 @@ import Animated, {
 
 import { OptionsType } from 'types/option'
 import { isAndroid } from 'utils/platform'
+import { MixpanelInstance } from 'analytics/mixpanel'
+import { MixpanelEvents } from 'constants/mixpanel'
 import { SegmentTabItemType } from '../../types/segmentedTabs'
 import { SegmentedTabContentItem } from './SegmentedTabContentItem'
 import { useSegmentedTabsStyles } from './SegmentedTabs.styles'
@@ -89,11 +91,13 @@ export const SegmentedTabs = <T extends PropertyKey>({
     }
     setActiveIndex(selectedIndex)
     const selectedItem = items[selectedIndex]
+    MixpanelInstance.track(MixpanelEvents.CategorySelect, { category: selectedItem.value })
     onChange?.(selectedItem?.value, selectedIndex)
   }
 
   const handleSegmentedSwitcherPress = (tabName: T, index: number) => {
     setActiveIndex(index)
+    MixpanelInstance.track(MixpanelEvents.CategorySelect, { category: tabName })
     if (isAndroid) {
       handleChange(index)
     }
