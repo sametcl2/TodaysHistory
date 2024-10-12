@@ -1,17 +1,15 @@
 import { createStyles } from 'theme'
 
-export const useLoadingStyles = createStyles(({ gaps, colors }) => ({
-  loadingContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginBottom: gaps.xxlg
-  },
+export const useLoadingStyles = createStyles(({ colors }) => ({
   container: {
-    flex: 1,
+    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'row',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0
   },
   ring: {
     position: 'absolute',
