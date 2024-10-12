@@ -13,13 +13,15 @@ type InitialDateType = {
   day?: string
   month?: string
   displayValue?: string
+  todayDisplayValue?: string
 }
 
 export const initialState: InitialDateType = {
   currentDate: today.toDate(),
   day,
   month,
-  displayValue
+  displayValue,
+  todayDisplayValue: moment().format('MMMM Do')
 }
 
 const date = createSlice({
@@ -33,6 +35,7 @@ const date = createSlice({
       state.day = selectedDate.date().toString()
       state.month = (selectedDate.month() + 1).toString()
       state.displayValue = displayValue
+      state.todayDisplayValue = moment().format('MMMM Do')
     }
   }
 })
