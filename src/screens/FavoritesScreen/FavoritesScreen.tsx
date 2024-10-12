@@ -11,6 +11,8 @@ import { setCurrentPages } from 'store/data'
 import { PageType } from 'types/events'
 import { selectCurrentViewType } from 'store/viewType'
 import { ViewTypes } from 'constants/view'
+import { MixpanelInstance } from 'analytics/mixpanel'
+import { MixpanelEvents } from 'constants/mixpanel'
 import { FavoriteCard } from './FavoriteCard'
 import { useFavoritesScreenStyles } from './FavoritesScreen.styles'
 
@@ -39,6 +41,7 @@ export const FavoritesScreen = () => {
     pages?.map((page) => urls.push({ url: page.content_urls.mobile.page, title: page.titles.normalized }))
     dispatch(setCurrentPages(urls))
     setIsDrawerVisible(true)
+    MixpanelInstance.track(MixpanelEvents.ViewItem, { urls, pages, isFavorite: true })
   }
 
   return (

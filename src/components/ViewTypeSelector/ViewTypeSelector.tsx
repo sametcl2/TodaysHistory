@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'store'
 import { selectCurrentViewType, setCurrentViewType } from 'store/viewType'
 import { saveToLocalStorage } from 'utils/storage'
 import { LocalStorageKeys } from 'constants/storage'
+import { MixpanelInstance } from 'analytics/mixpanel'
+import { MixpanelEvents } from 'constants/mixpanel'
 import { useViewTypeSelectorStyles } from './ViewTypeSelector.styles'
 
 type ViewTypeSelectorProps = {
@@ -33,6 +35,7 @@ export const ViewTypeSelector: React.FC<ViewTypeSelectorProps> = ({ containerSty
     await saveToLocalStorage(LocalStorageKeys.ViewType, selectedType)
     dispatch(setCurrentViewType(selectedType))
     Haptics.selectionAsync()
+    MixpanelInstance.track(MixpanelEvents.ChangeViewType, { viewType: selectedType })
   }
 
   return (

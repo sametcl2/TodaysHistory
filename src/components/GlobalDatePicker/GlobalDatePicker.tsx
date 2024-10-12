@@ -7,6 +7,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import { Button } from 'components/elements/Button'
 import { useDispatch, useSelector } from 'store'
 import { selectCurrentDate, setCurrentDate } from 'store/date'
+import { MixpanelInstance } from 'analytics/mixpanel'
+import { MixpanelEvents } from 'constants/mixpanel'
 import { useGlobalDatePickerStyles } from './GlobalDatePicker.styles'
 
 export const GlobalDatePicker = () => {
@@ -26,6 +28,7 @@ export const GlobalDatePicker = () => {
     if (date) {
       setIsPickerVisible(false)
       dispatch(setCurrentDate({ currentDate: date }))
+      MixpanelInstance.track(MixpanelEvents.SelectDate, { date: date.toString() })
     }
   }
 
@@ -36,11 +39,13 @@ export const GlobalDatePicker = () => {
   const handlePrevious = () => {
     const previousDay = moment(selectedDate.currentDate).startOf('day').subtract(1, 'day')
     dispatch(setCurrentDate({ currentDate: previousDay.toDate() }))
+    MixpanelInstance.track(MixpanelEvents.SelectDate, { date: previousDay.toString() })
   }
 
   const handleNext = () => {
     const nextDay = moment(selectedDate.currentDate).startOf('day').add(1, 'day')
     dispatch(setCurrentDate({ currentDate: nextDay.toDate() }))
+    MixpanelInstance.track(MixpanelEvents.SelectDate, { date: nextDay.toString() })
   }
 
   return (

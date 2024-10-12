@@ -6,6 +6,8 @@ declare global {
       EXPO_PUBLIC_APP_ENV: Environment
 
       EXPO_PUBLIC_BACKEND_URL: string
+
+      EXPO_PUBLIC_MIXPANEL_TOKEN: string
     }
   }
 
